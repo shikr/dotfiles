@@ -1,0 +1,13 @@
+theme = "tokyonight"
+cover_image_refresh_duration_in_ms = 1000
+play_icon = " "
+pause_icon = " "
+liked_icon = "󰣐 "
+border_type = "Rounded"
+progress_bar_type = "Line"
+cover_img_length = 10
+
+[device]
+name = "spotify-player"
+device_type = "speaker"
+volume = 65
