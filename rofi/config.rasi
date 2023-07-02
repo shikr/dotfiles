@@ -1,0 +1,30 @@
+/*****----- Configuration -----*****/
+configuration {
+    modi:                        "drun";
+    show-icons:                  true;
+ /* icon-theme:                  "Papirus"; */
+    matching:                    "normal";
+    drun-match-fields:           "name,generic,exec,categories,keywords";
+    drun-display-format:         "{name}";
+    drun-show-actions:           false;
+    drun-url-launcher:           "xdg-open";
+    scroll-method:               0;
+    terminal:                    "kitty";
+    run-command:                 "{cmd}";
+    run-list-command:            "";
+    run-shell-command:           "{terminal} --start-as=maximized {cmd}";
+    threads:                     0;
+    drun {
+        parse-user:    true;
+        parse-system:  true;
+    }
+    run,drun {
+        fallback-icon: "application-x-addon";
+    }
+    timeout {
+      delay:           10;
+      action:          "kb-cancel";
+    }
+}
+
+@theme "theme"
