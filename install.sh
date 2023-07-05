@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 options=(kitty neovim rofi spotify_player zsh)
-config_dir="$HOME/.config"
+CONFIG_DIR="$HOME/.config"
+CURRENT_DIR="$(dirname "$(readlink -f "$0")")"
 
 color_red="\033[1;31m"
 color_white="\033[0m"
@@ -58,7 +59,7 @@ backup() {
 
 copy_files() {
   if [[ "$symlink" == "true" ]]; then
-    ln -s "$1" "$2"
+    ln -s "${CURRENT_DIR}/$1" "$2"
   else
     cp -r "$1" "$2"
   fi
@@ -79,9 +80,9 @@ finish_progress() {
 
 setup() {
   start_progress "$1"
-  backup "${config_dir}/$1"
+  backup "${CONFIG_DIR}/$1"
   [[ "$silent" != "true" ]] && sleep 0.7
-  copy_files "$1" "$config_dir"
+  copy_files "$1" "$CONFIG_DIR"
   finish_progress "$1"
 }
 
@@ -143,10 +144,10 @@ fi
 
 if [[ "$neovim" != "false" ]]; then
   start_progress neovim
-  backup "${config_dir}/nvim"
+  backup "${CONFIG_DIR}/nvim"
   backup "$HOME/.local/share/nvim"
-  git clone https://github.com/NvChad/NvChad.git "${config_dir}/nvim" --depth=1
-  copy_files nvchad/custom "${config_dir}/nvim/lua"
+  git clone https://github.com/NvChad/NvChad.git "${CONFIG_DIR}/nvim" --depth=1
+  copy_files nvchad/custom "${CONFIG_DIR}/nvim/lua"
   print_progress "Installed neovim" "\n"
 fi
 
