@@ -165,6 +165,7 @@ if [[ "$zsh" != "false" ]]; then
     clone_plugin hlissner          zsh-autopair
     clone_plugin zsh-users         zsh-autosuggestions
     clone_plugin zsh-users         zsh-syntax-highlighting
+    clone_plugin zsh-users         zsh-completions
   fi
 
   copy_files .p10k.zsh "${HOME}"

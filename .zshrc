@@ -84,6 +84,8 @@ fi
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git rust sudo command-not-found zsh-interactive-cd yarn-extra-completion zsh-npm-scripts-autocomplete zsh-kitty zsh-cargo-completion cd-ls zsh-autosuggestions zsh-autopair zsh-syntax-highlighting)
 
+fpath+=${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
