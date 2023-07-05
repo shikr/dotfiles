@@ -46,7 +46,7 @@ valid_option() {
 }
 
 backup() {
-  if [[ -d "$1" ]]; then
+  if [[ -d "$1" || -f "$1" ]]; then
     [[ "$delete" != "true" ]] && cp -r "$1" "${1}.backup"
     rm -rf "$1"
   fi
