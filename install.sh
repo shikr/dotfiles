@@ -45,10 +45,6 @@ valid_option() {
   send_error "Invalid option: $1"
 }
 
-clone_plugin() {
-  [[ ! -d "$ZSH_PLUGINS_DIR/$2" ]] && git clone "https://github.com/${1}/${2}.git" "$ZSH_PLUGINS_DIR/$2"
-}
-
 backup() {
   if [[ -d "$1" ]]; then
     [[ "$delete" != "true" ]] && cp -r "$1" "${1}.backup"
@@ -69,12 +65,17 @@ print_progress() {
 }
 
 start_progress() {
-  print_progress "Installing $1..."
+  print_progress "Installing $1..." "$2"
 }
 
 finish_progress() {
   echo -ne "\r\033[K"
   print_progress "Installed $1" "\n"
+}
+
+clone_plugin() {
+  print_progress "Cloning $2 plugin..." "\n"
+  [[ ! -d "$ZSH_PLUGINS_DIR/$2" ]] && git clone "https://github.com/${1}/${2}.git" "$ZSH_PLUGINS_DIR/$2"
 }
 
 setup() {
@@ -138,7 +139,7 @@ fi
 [[ "$spotify_player" != "false" ]] && setup spotify-player
 
 if [[ "$neovim" != "false" ]]; then
-  start_progress neovim
+  start_progress neovim "\n"
   backup "${CONFIG_DIR}/nvim"
   backup "$HOME/.local/share/nvim"
   git clone https://github.com/NvChad/NvChad.git "${CONFIG_DIR}/nvim" --depth=1
@@ -147,7 +148,7 @@ if [[ "$neovim" != "false" ]]; then
 fi
 
 if [[ "$zsh" != "false" ]]; then
-  start_progress zsh
+  start_progress zsh "\n"
   backup "$HOME/.zshrc"
 
   copy_files .zshrc "${HOME}"
