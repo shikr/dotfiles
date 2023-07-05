@@ -23,6 +23,7 @@
 
 - [FiraCode NerdFont](https://www.nerdfonts.com/font-downloads) for kitty and rofi.
 - [Node.js](https://nodejs.org/es/download), [Yarn](https://classic.yarnpkg.com/lang/en/docs/install/) and [Rust](https://www.rust-lang.org/tools/install) for neovim.
+- [oh my zsh](https://ohmyz.sh/) for zsh.
 
 > Clone this repository
 
@@ -46,7 +47,6 @@ Options:
   -p, --no-zsh-plugins      Don't install zsh plugins
   -S, --symlink             Create symlinks instead of copying files
   -d, --delete, --no-backup Don't create backup files
-      --no-ohmyzsh          Don't install oh-my-zsh
       --no-p10k             Don't install powerlevel10k
   -i, --ignore <OPTIONS>    Don't install specified files (-i zsh,rofi)
                             OPTIONS: kitty, neovim, rofi, spotify_player, zsh

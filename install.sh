@@ -20,7 +20,6 @@ show_help() {
   print_option "-p, --no-zsh-plugins     " "Don't install zsh plugins"
   print_option "-S, --symlink            " "Create symlinks instead of copying files"
   print_option "-d, --delete, --no-backup" "Don't create backup files"
-  print_option "    --no-ohmyzsh         " "Don't install oh-my-zsh"
   print_option "    --no-p10k            " "Don't install powerlevel10k"
   print_option "-i, --ignore <OPTIONS>   " "Don't install specified files (-i zsh,rofi)"
   print_option "-s, --silent             " "Don't show progress messages"
@@ -100,10 +99,6 @@ while [[ $# -gt 0 ]]; do
       delete="true"
       shift
     ;;
-    --no-ohmyzsh)
-      ohmyzsh="false"
-      shift
-    ;;
     --no-p10k)
       p10k="false"
       shift
@@ -154,15 +149,6 @@ fi
 if [[ "$zsh" != "false" ]]; then
   start_progress zsh
   backup "$HOME/.zshrc"
-  if [[ "$ohmyzsh" != "false" ]]; then
-    if command_exists "curl"; then
-      sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    elif command_exists "wget"; then
-      sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    else
-      send_error "\`curl\` or \`wget\` is required to install oh-my-zsh."
-    fi
-  fi
 
   copy_files .zshrc "${HOME}"
 
