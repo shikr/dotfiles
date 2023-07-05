@@ -174,7 +174,7 @@ if [[ "$zsh" != "false" ]]; then
     ZSH_THEMES_DIR="${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}/themes"
     [[ ! -d $ZSH_THEMES_DIR ]] && mkdir -p $ZSH_THEMES_DIR
 
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_THEMES_DIR/powerlevel10k
+    [[ ! -d $ZSH_THEMES_DIR/powerlevel10k ]] && git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_THEMES_DIR/powerlevel10k
   fi
 
   print_progress "Installed zsh" "\n"
