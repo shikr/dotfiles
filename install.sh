@@ -74,8 +74,12 @@ finish_progress() {
 }
 
 clone_plugin() {
-  print_progress "Cloning $2 plugin..." "\n"
-  [[ ! -d "$ZSH_PLUGINS_DIR/$2" ]] && git clone "https://github.com/${1}/${2}.git" "$ZSH_PLUGINS_DIR/$2"
+  if [[ ! -d "$ZSH_PLUGINS_DIR/$2" ]]; then
+    print_progress "Cloning $2 plugin..." "\n"
+    git clone "https://github.com/${1}/${2}.git" "$ZSH_PLUGINS_DIR/$2"
+  else
+    print_progress "Already installed '$2' plugin" "\n"
+  fi
 }
 
 setup() {
