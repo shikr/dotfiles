@@ -161,7 +161,6 @@ if [[ "$zsh" != "false" ]]; then
     ZSH_PLUGINS_DIR="${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}/plugins"
     [[ ! -d $ZSH_PLUGINS_DIR ]] && mkdir -p $ZSH_PLUGINS_DIR
 
-    clone_plugin buonomo           yarn-extra-completion
     clone_plugin grigorii-zander   zsh-npm-scripts-autocomplete
     clone_plugin redxtech          zsh-kitty
     clone_plugin MenkeTechnologies zsh-cargo-completion
