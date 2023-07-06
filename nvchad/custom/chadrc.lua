@@ -18,8 +18,17 @@ M.ui = {
   },
 }
 
+local projects_dir
+
+if vim.fn.executable 'xdg-user-dir' then
+  projects_dir = vim.trim(vim.fn.system 'xdg-user-dir DOCUMENTS') .. '/projects'
+else
+  projects_dir = '~/projects'
+end
+
 M.lazy_nvim = {
   dev = {
+    path = projects_dir,
     patterns = { 'nvterm' },
   },
 }
