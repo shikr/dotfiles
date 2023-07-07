@@ -111,24 +111,55 @@ M.gitsigns = {
   current_line_blame = true,
 }
 
+local function icon_multiple_filenames(filenames, opts)
+  local overrides = {}
+  for _, file in ipairs(filenames) do
+    overrides[file] = opts
+  end
+  return overrides
+end
+
+local function filenames_list(filename, extensions)
+  local filenames = {}
+  for _, ext in ipairs(extensions) do
+    table.insert(filenames, filename .. '.' .. ext)
+  end
+  return filenames
+end
+
 M.devicons = {
-  override_by_filename = {
-    ['yarn.lock'] = {
-      icon = '',
-      color = '#0288D1',
-      name = 'Yarn',
+  override_by_filename = vim.tbl_extend(
+    'force',
+    {
+      ['yarn.lock'] = {
+        icon = '',
+        color = '#0288D1',
+        name = 'Yarn',
+      },
     },
-    ['tailwind.config.js'] = {
-      icon = '󱏿',
-      color = '#4DB6AC',
-      name = 'tailwind',
-    },
-    ['vite.config.js'] = {
+    icon_multiple_filenames(
+      filenames_list('tailwind.config', { 'js', 'cjs', 'ts', 'cts' }),
+      {
+        icon = '󱏿',
+        color = '#4DB6AC',
+        name = 'tailwind',
+      }
+    ),
+    icon_multiple_filenames(filenames_list('vite.config', { 'js', 'cjs', 'ts', 'cts' }), {
       icon = '󱐋',
       color = '#FFAB00',
       name = 'ViteJS',
-    },
-  },
+    }),
+    icon_multiple_filenames(
+      filenames_list('.eslintrc', { 'js', 'cjs', 'yaml', 'yml', 'json' }),
+      {
+        icon = '',
+        color = '#4b32c3',
+        cterm_color = '56',
+        name = 'Eslintrc',
+      }
+    )
+  ),
 }
 
 M.cmp = function(_, opts)
