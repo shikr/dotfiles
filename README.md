@@ -28,7 +28,7 @@
 > Clone this repository
 
 ```sh
-git clone https://github.com/S4bier/dotfiles.git
+git clone https://github.com/shikr/dotfiles.git
 cd dotfiles
 ```
 
@@ -42,7 +42,7 @@ cd dotfiles
 
 Usage: `./install.sh [OPTIONS...]`
 
-```sh
+```
 Options:
   -p, --no-zsh-plugins      Don't install zsh plugins
   -S, --symlink             Create symlinks instead of copying files
