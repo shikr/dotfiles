@@ -63,11 +63,6 @@ local plugins = {
     opts = overrides.cmp,
     dependencies = {
       'hrsh7th/cmp-emoji',
-      {
-        'jcdickinson/codeium.nvim',
-        opts = {},
-        commit = 'b1ff0d6c993e3d87a4362d2ccd6c660f7444599f',
-      },
     },
   },
 

@@ -170,7 +170,6 @@ M.cmp = function(_, opts)
   end
   vim.list_extend(opts.sources, {
     { name = 'emoji' },
-    { name = 'codeium' },
   })
 
   return opts
