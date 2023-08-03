@@ -1,5 +1,6 @@
 ---@type MappingsTable
 local M = {}
+local bufdelete = require('custom.configs.bufferline').bufdelete
 
 M.general = {
   i = {
@@ -9,7 +10,9 @@ M.general = {
   n = {
     [';'] = { ':', 'enter command mode', opts = { nowait = true } },
     ['<C-q>'] = {
-      '<cmd>bdelete!<cr>',
+      function()
+        bufdelete(vim.api.nvim_get_current_buf())
+      end,
       'close buffer',
     },
     ['<C-v>'] = { 'p', 'Paste' },

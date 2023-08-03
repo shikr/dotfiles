@@ -1,4 +1,5 @@
 local overrides = require 'custom.configs.overrides'
+local bufdelete = require('custom.configs.bufferline').bufdelete
 
 return {
   {
@@ -16,6 +17,7 @@ return {
       width_multiplier = 6,
       window_border = 'solid',
       screen_bounds = 'background',
+      exclude_filetypes = { 'veil' },
     },
     config = function(_, opts)
       local codewindow = require 'codewindow'
@@ -30,7 +32,7 @@ return {
     'dstein64/nvim-scrollview',
     event = 'VeryLazy',
     opts = {
-      exclude_filetypes = { 'NvimTree' },
+      excluded_filetypes = { 'NvimTree', 'veil' },
       signs_on_startup = { 'diagnostics', 'search', 'cursor' },
       diagnostics_hint_symbol = '',
       diagnostics_error_symbol = '',
@@ -104,7 +106,9 @@ return {
           local icon = level:match 'error' and ' ' or ' '
           return ' ' .. icon .. count
         end,
-        middle_mouse_command = 'bdelete! %d',
+        close_command = bufdelete,
+        middle_mouse_command = bufdelete,
+        right_mouse_command = 'vertical sbuffer %d',
         offsets = {
           {
             filetype = 'NvimTree',
