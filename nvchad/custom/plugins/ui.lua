@@ -78,8 +78,26 @@ return {
           local icon = level:match 'error' and ' ' or ' '
           return ' ' .. icon .. count
         end,
+        middle_mouse_command = 'bdelete! %d',
+        offsets = {
+          {
+            filetype = 'NvimTree',
+            text = 'File Explorer',
+            text_align = 'center',
+            separator = true,
+          },
+        },
+        hover = {
+          enabled = true,
+          delay = 100,
+          reveal = { 'close' },
+        },
       },
     },
+    config = function(_, opts)
+      require('bufferline').setup(opts)
+      require('core.utils').load_mappings 'bufferline'
+    end,
     enabled = not vim.g.vscode,
   },
 }

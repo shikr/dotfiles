@@ -43,6 +43,14 @@ M.cybu = {
   },
 }
 
+M.bufferline = {
+  plugin = true,
+  n = {
+    ['<M-Left>'] = { '<cmd>BufferLineMovePrev<cr>', 'move tab to the left' },
+    ['<M-Right>'] = { '<cmd>BufferLineMoveNext<cr>', 'move tab to the right' },
+  },
+}
+
 M.comment = {
   plugin = true,
   n = {
