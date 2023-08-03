@@ -28,7 +28,7 @@ M.treesitter = {
     enable = not vim.g.vscode,
   },
   rainbow = {
-    enable = true,
+    enable = not vim.g.vscode,
     hlgroups = {
       'TSRainbow1',
       'TSRainbow2',
