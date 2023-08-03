@@ -4,6 +4,7 @@ local M = {}
 M.general = {
   i = {
     ['<C-s>'] = { '<cmd>w<cr>', 'save file' },
+    ['<C-v>'] = { '<ESC>pa', 'Paste' },
   },
   n = {
     [';'] = { ':', 'enter command mode', opts = { nowait = true } },
@@ -11,8 +12,15 @@ M.general = {
       '<cmd>bdelete!<cr>',
       'close buffer',
     },
+    ['<C-v>'] = { 'p', 'Paste' },
     ['<C-x>'] = { '<cmd>q<cr>', 'close neovim' },
     ['<leader>fp'] = { '<cmd>Telescope projects<cr>', 'projects' },
+  },
+  v = {
+    ['<C-c>'] = { 'y', 'Copy' },
+  },
+  c = {
+    ['<C-v>'] = { '<C-R>+', 'Paste' },
   },
 }
 
@@ -20,6 +28,11 @@ if vim.g.vscode then
   local call = require('vscode-neovim').call
   M.vscode = {
     n = {
+      [';'] = {
+        function()
+          call 'workbench.action.gotoLine'
+        end,
+      },
       ['grn'] = {
         function()
           call 'editor.action.rename'
