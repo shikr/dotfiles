@@ -24,14 +24,12 @@ return {
     opts = overrides.cmp,
     dependencies = {
       'hrsh7th/cmp-emoji',
-    },
-    enabled = not vim.g.vscode,
-  },
-
-  {
-    'roobert/tailwindcss-colorizer-cmp.nvim',
-    opts = {
-      color_square_width = 2,
+      {
+        'roobert/tailwindcss-colorizer-cmp.nvim',
+        opts = {
+          color_square_width = 2,
+        },
+      },
     },
     enabled = not vim.g.vscode,
   },
