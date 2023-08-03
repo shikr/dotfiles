@@ -8,9 +8,16 @@ return {
   },
 
   {
-    'lewis6991/satellite.nvim',
+    'dstein64/nvim-scrollview',
     event = 'VeryLazy',
-    config = true,
+    opts = {
+      exclude_filetypes = { 'NvimTree' },
+      signs_on_startup = { 'diagnostics', 'search', 'cursor' },
+      diagnostics_hint_symbol = '',
+      diagnostics_error_symbol = '',
+      diagnostics_warn_symbol = '',
+      diagnostics_info_symbol = '',
+    },
     enabled = not vim.g.vscode,
   },
 
