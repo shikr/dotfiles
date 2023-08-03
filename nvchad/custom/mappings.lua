@@ -17,19 +17,65 @@ M.general = {
 }
 
 if vim.g.vscode then
+  local call = require('vscode-neovim').call
   M.vscode = {
     n = {
+      ['grn'] = {
+        function()
+          call 'editor.action.rename'
+        end,
+      },
+      ['gcc'] = {
+        function()
+          call 'editor.action.commentLine'
+        end,
+      },
+      ['gbc'] = {
+        function()
+          call 'editor.action.blockComment'
+        end,
+      },
       ['<leader>ff'] = {
         function()
-          require('vscode-neovim').call 'workbench.action.quickOpen'
+          call 'workbench.action.quickOpen'
         end,
         'open file',
       },
+      ['<leader>fm'] = {
+        function()
+          call 'editor.action.formatDocument'
+        end,
+        'Format Document',
+      },
       ['<leader>e'] = {
         function()
-          require('vscode-neovim').call 'workbench.files.action.focusFilesExplorer'
+          call 'workbench.files.action.focusFilesExplorer'
         end,
         'focus file explorer',
+      },
+      ['<leader>h'] = {
+        function()
+          call 'workbench.action.createTerminalEditorSide'
+        end,
+        'new horizontal terminal',
+      },
+      ['<leader>v'] = {
+        function()
+          call 'workbench.action.terminal.new'
+        end,
+        'new vertical terminal',
+      },
+    },
+    x = {
+      ['gc'] = {
+        function()
+          call 'editor.action.commentLine'
+        end,
+      },
+      ['gb'] = {
+        function()
+          call 'editor.action.blockComment'
+        end,
       },
     },
   }

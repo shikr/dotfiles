@@ -12,6 +12,11 @@ return {
   },
 
   {
+    'numToStr/Comment.nvim',
+    enabled = not vim.g.vscode,
+  },
+
+  {
     'nvim-tree/nvim-web-devicons',
     opts = overrides.devicons,
   },
