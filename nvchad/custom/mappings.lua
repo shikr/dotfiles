@@ -16,6 +16,25 @@ M.general = {
   },
 }
 
+if vim.g.vscode then
+  M.vscode = {
+    n = {
+      ['<leader>ff'] = {
+        function()
+          require('vscode-neovim').call 'workbench.action.quickOpen'
+        end,
+        'open file',
+      },
+      ['<leader>e'] = {
+        function()
+          require('vscode-neovim').call 'workbench.files.action.focusFilesExplorer'
+        end,
+        'focus file explorer',
+      },
+    },
+  }
+end
+
 M.cybu = {
   plugin = true,
   n = {
