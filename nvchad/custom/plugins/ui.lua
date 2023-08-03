@@ -8,6 +8,25 @@ return {
   },
 
   {
+    'gorbit99/codewindow.nvim',
+    event = 'VeryLazy',
+    opts = {
+      minimap_width = 10,
+      auto_enable = true,
+      width_multiplier = 6,
+      window_border = 'solid',
+      screen_bounds = 'background',
+    },
+    config = function(_, opts)
+      local codewindow = require 'codewindow'
+      codewindow.setup(opts)
+      codewindow.apply_default_keybinds()
+      vim.api.nvim_set_hl(0, 'CodewindowBoundsBackground', { bg = '#15171f' })
+    end,
+    enabled = not vim.g.vscode and vim.g.neovide or false,
+  },
+
+  {
     'dstein64/nvim-scrollview',
     event = 'VeryLazy',
     opts = {
@@ -18,7 +37,7 @@ return {
       diagnostics_warn_symbol = '',
       diagnostics_info_symbol = '',
     },
-    enabled = not vim.g.vscode,
+    enabled = not vim.g.neovide and not vim.g.vscode,
   },
 
   {
