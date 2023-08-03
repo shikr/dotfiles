@@ -26,6 +26,9 @@ return {
     },
     opts = {
       display_time = 500,
+      style = {
+        border = 'rounded',
+      },
     },
     enabled = not vim.g.vscode,
   },
