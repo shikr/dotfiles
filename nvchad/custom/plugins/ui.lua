@@ -23,7 +23,7 @@ return {
       local codewindow = require 'codewindow'
       codewindow.setup(opts)
       codewindow.apply_default_keybinds()
-      vim.api.nvim_set_hl(0, 'CodewindowBoundsBackground', { bg = '#15171f' })
+      vim.api.nvim_set_hl(0, 'CodewindowBoundsBackground', { link = 'Visual' })
     end,
     enabled = not vim.g.vscode and vim.g.neovide or false,
   },
