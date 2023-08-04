@@ -34,7 +34,7 @@ return {
     opts = {
       excluded_filetypes = { 'NvimTree', 'veil' },
       signs_on_startup = { 'diagnostics', 'search', 'cursor' },
-      diagnostics_hint_symbol = '',
+      diagnostics_hint_symbol = '󰌵',
       diagnostics_error_symbol = '',
       diagnostics_warn_symbol = '',
       diagnostics_info_symbol = '',
