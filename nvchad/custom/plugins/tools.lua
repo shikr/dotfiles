@@ -43,6 +43,13 @@ return {
       symbol_in_winbar = {
         enable = false,
       },
+      ui = {
+        code_action = '󰌵',
+        border = 'rounded',
+      },
+      outline = {
+        win_position = 'left',
+      },
     },
     enabled = not vim.g.vscode,
     dependencies = {
