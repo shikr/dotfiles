@@ -30,14 +30,12 @@ return {
 
   {
     'dstein64/nvim-scrollview',
-    event = 'VeryLazy',
+    init = function()
+      require('core.utils').lazy_load 'nvim-scrollview'
+    end,
     opts = {
       excluded_filetypes = { 'NvimTree', 'veil' },
       signs_on_startup = { 'diagnostics', 'search', 'cursor' },
-      diagnostics_hint_symbol = '󰌵',
-      diagnostics_error_symbol = '',
-      diagnostics_warn_symbol = '',
-      diagnostics_info_symbol = '',
     },
     enabled = not vim.g.neovide and not vim.g.vscode,
   },
