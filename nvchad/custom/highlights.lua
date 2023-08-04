@@ -24,6 +24,7 @@ M.add = {
   TSRainbow4 = { fg = '#2ae604', nocombine = true },
   TSRainbow5 = { fg = '#9a06db', nocombine = true },
   TSRainbow6 = { fg = '#ee06e0', nocombine = true },
+  FoldColumn = { link = 'Normal' },
 }
 
 return M

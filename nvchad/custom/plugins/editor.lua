@@ -88,6 +88,32 @@ return {
   },
 
   {
+    'kevinhwang91/nvim-ufo',
+    dependencies = {
+      'kevinhwang91/promise-async',
+      {
+        'luukvbaal/statuscol.nvim',
+        opts = function()
+          local builtin = require 'statuscol.builtin'
+          return {
+            relculright = true,
+            segments = {
+              { text = { builtin.foldfunc }, click = 'v:lua.ScFa' },
+              { text = { '%s' }, click = 'v:lua.ScSa' },
+              { text = { builtin.lnumfunc, ' ' }, click = 'v:lua.ScLa' },
+            },
+          }
+        end,
+      },
+    },
+    init = function()
+      require('core.utils').lazy_load 'nvim-ufo'
+    end,
+    opts = true,
+    enabled = not vim.g.vscode,
+  },
+
+  {
     'nacro90/numb.nvim',
     init = function()
       require('core.utils').lazy_load 'numb.nvim'

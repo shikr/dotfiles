@@ -3,6 +3,11 @@ local capabilities = require('plugins.configs.lspconfig').capabilities
 
 local lspconfig = require 'lspconfig'
 
+capabilities.textDocument.foldingRange = {
+  dynamicRegistration = false,
+  lineFoldingOnly = true,
+}
+
 local function on_attach(client, bufnr)
   local function buf_set_option(...)
     vim.api.nvim_buf_set_option(bufnr, ...)
