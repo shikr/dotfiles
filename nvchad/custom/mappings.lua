@@ -76,13 +76,13 @@ if vim.g.vscode then
       },
       ['<leader>h'] = {
         function()
-          call 'workbench.action.createTerminalEditorSide'
+          call 'workbench.action.terminal.new'
         end,
         'new horizontal terminal',
       },
       ['<leader>v'] = {
         function()
-          call 'workbench.action.terminal.new'
+          call 'workbench.action.createTerminalEditorSide'
         end,
         'new vertical terminal',
       },
