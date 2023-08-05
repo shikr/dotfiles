@@ -11,6 +11,14 @@ return {
           require 'custom.configs.null-ls'
         end,
       },
+      {
+        'ray-x/lsp_signature.nvim',
+        event = 'LspAttach',
+        opts = {
+          noice = true,
+          max_height = 5,
+        },
+      },
     },
     config = function()
       require 'plugins.configs.lspconfig'

@@ -7,6 +7,10 @@ return {
     dependencies = {
       'windwp/nvim-ts-autotag',
       'HiPhish/nvim-ts-rainbow2',
+      {
+        'm-demare/hlargs.nvim',
+        opts = {},
+      },
     },
     enabled = not vim.g.vscode,
   },
