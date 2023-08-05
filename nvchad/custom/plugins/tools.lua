@@ -66,7 +66,9 @@ return {
     init = function()
       require('telescope').load_extension 'projects'
     end,
-    config = true,
+    config = function()
+      require('project_nvim').setup()
+    end,
     enabled = not vim.g.vscode,
   },
 
