@@ -4,6 +4,8 @@ local M = {}
 -- Path to overriding theme and highlights files
 local highlights = require 'custom.highlights'
 
+vim.o.wrap = true -- doesn't work in init.lua
+
 M.ui = {
   theme = 'onedark',
   theme_toggle = { 'onedark', 'tokyodark' },
