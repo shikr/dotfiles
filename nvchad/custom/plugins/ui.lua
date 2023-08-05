@@ -56,6 +56,19 @@ return {
           enabled = false,
         },
       },
+      routes = {
+        {
+          filter = {
+            event = 'lsp',
+            kind = 'progress',
+            cond = function(messages)
+              local client = vim.tbl_get(messages.opts, 'progress', 'client')
+              return client == 'null-ls'
+            end,
+          },
+          opts = { skip = true },
+        },
+      },
     },
     enabled = not vim.g.vscode,
   },
