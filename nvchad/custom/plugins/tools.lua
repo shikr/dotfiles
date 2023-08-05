@@ -39,18 +39,20 @@ return {
     init = function()
       require('core.utils').load_mappings 'lspsaga'
     end,
-    opts = {
-      symbol_in_winbar = {
-        enable = false,
-      },
-      ui = {
-        code_action = '󰌵',
-        border = 'rounded',
-      },
-      outline = {
-        win_position = 'left',
-      },
-    },
+    opts = function()
+      return {
+        symbol_in_winbar = {
+          enable = false,
+        },
+        ui = {
+          code_action = vim.fn.sign_getdefined('DiagnosticSignHint')[1].text,
+          border = 'rounded',
+        },
+        outline = {
+          win_position = 'left',
+        },
+      }
+    end,
     enabled = not vim.g.vscode,
     dependencies = {
       { 'nvim-tree/nvim-web-devicons' },

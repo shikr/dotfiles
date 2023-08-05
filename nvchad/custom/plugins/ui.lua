@@ -149,7 +149,9 @@ return {
         separator_style = 'thick',
         diagnostics = 'nvim_lsp',
         diagnostics_indicator = function(count, level, diagnostics_dict, context)
-          local icon = level:match 'error' and ' ' or ' '
+          local icon = level:match 'error'
+              and vim.fn.sign_getdefined('DiagnosticSignError')[1].text
+            or vim.fn.sign_getdefined('DiagnosticSignWarn')[1].text
           return ' ' .. icon .. count
         end,
         close_command = bufdelete,
