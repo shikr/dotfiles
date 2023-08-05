@@ -1,4 +1,5 @@
 local overrides = require 'custom.configs.overrides'
+local lspconfig = require 'custom.configs.lspconfig'
 
 return {
   {
@@ -17,6 +18,16 @@ return {
         opts = {
           noice = true,
           max_height = 5,
+        },
+      },
+      {
+        'jose-elias-alvarez/typescript.nvim',
+        opts = {
+          disable_commands = false,
+          server = {
+            on_attach = lspconfig.on_attach,
+            capabilities = lspconfig.capabilities,
+          },
         },
       },
     },
