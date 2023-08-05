@@ -66,11 +66,7 @@ return {
     init = function()
       require('telescope').load_extension 'projects'
     end,
-    config = function()
-      require('project_nvim').setup {
-        exclude_dirs = { '~/.config/nvim/*' },
-      }
-    end,
+    config = true,
     enabled = not vim.g.vscode,
   },
 
