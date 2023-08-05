@@ -51,6 +51,11 @@ if vim.g.vscode then
           call 'editor.action.blockComment'
         end,
       },
+      ['ga'] = {
+        function()
+          call 'editor.action.quickFix'
+        end,
+      },
       ['<leader>ff'] = {
         function()
           call 'workbench.action.quickOpen'
