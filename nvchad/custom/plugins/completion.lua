@@ -22,7 +22,7 @@ return {
     },
     config = function()
       require 'plugins.configs.lspconfig'
-      require 'custom.configs.lspconfig'
+      require 'custom.configs.lspload'
     end, -- Override to setup mason-lspconfig
     enabled = not vim.g.vscode,
   },
