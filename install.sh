@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-options=(kitty neovim rofi spotify_player zsh)
+options=(kitty neovim rofi spotify_player zsh starship)
 CONFIG_DIR="$HOME/.config"
 CURRENT_DIR="$(dirname "$(readlink -f "$0")")"
 
@@ -167,4 +167,11 @@ if [[ "$zsh" != "false" ]]; then
   fi
 
   print_progress "Installed zsh" "\n"
+fi
+
+if [[ "$starship" != "false" ]]; then
+  start_progress starship "\n"
+  backup "$HOME/.config/starship.toml"
+  copy_files starship.toml "${HOME}/.config"
+  print_progress "Installed starship" "\n"
 fi
