@@ -21,6 +21,7 @@ show_help() {
   print_option "-S, --symlink            " "Create symlinks instead of copying files"
   print_option "-d, --delete, --no-backup" "Don't create backup files"
   print_option "-i, --ignore <OPTIONS>   " "Don't install specified files (-i zsh,rofi)"
+  print_option "                         " "OPTIONS: kitty, neovim, rofi, spotify_player, zsh, starship"
   print_option "-s, --silent             " "Don't show progress messages"
   print_option "-h, --help               " "Show this help message"
 }
