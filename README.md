@@ -48,7 +48,7 @@ Options:
   -S, --symlink             Create symlinks instead of copying files
   -d, --delete, --no-backup Don't create backup files
   -i, --ignore <OPTIONS>    Don't install specified files (-i zsh,rofi)
-                            OPTIONS: kitty, neovim, rofi, spotify_player, zsh
+                            OPTIONS: kitty, neovim, rofi, spotify_player, zsh, starship
   -s, --silent              Don't show progress messages
   -h, --help                Show this help message
 ```
