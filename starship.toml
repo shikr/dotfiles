@@ -52,7 +52,6 @@ vimcmd_replace_one_symbol = "[▶](bold green)"
 [cmd_duration]
 format = "[ $duration]($style) "
 style = "wheat"
-show_notifications = true
 
 [deno]
 format = "[$symbol($version)]($style) "
