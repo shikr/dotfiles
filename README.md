@@ -47,7 +47,6 @@ Options:
   -p, --no-zsh-plugins      Don't install zsh plugins
   -S, --symlink             Create symlinks instead of copying files
   -d, --delete, --no-backup Don't create backup files
-      --no-p10k             Don't install powerlevel10k
   -i, --ignore <OPTIONS>    Don't install specified files (-i zsh,rofi)
                             OPTIONS: kitty, neovim, rofi, spotify_player, zsh
   -s, --silent              Don't show progress messages
