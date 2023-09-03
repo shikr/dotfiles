@@ -1,0 +1,177 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+[╭─](lines) \
+$os\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$fill \
+$all\
+[╰─](lines)\
+$character\
+"""
+continuation_prompt = "[➜](lines) "
+add_newline = true
+
+palette = 'default'
+
+[palettes.default]
+lines = '238'
+wheat = '101'
+dodgeblue = '27'
+skyblue = '117'
+golden = '136'
+gold = '178'
+path = '31'
+root = '39'
+grey = '244'
+orange = '202'
+
+[bun]
+format = "[$symbol($version)]($style) "
+version_format = "${raw}"
+
+[c]
+format = "[$symbol($version(-$name))]($style) "
+version_format = "${raw}"
+symbol = " "
+style = "dodgeblue bold"
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+vimcmd_symbol = "[❮](bold green)"
+vimcmd_visual_symbol = "[V](bold green)"
+vimcmd_replace_symbol = "[▶](bold green)"
+vimcmd_replace_one_symbol = "[▶](bold green)"
+
+[cmd_duration]
+format = "[ $duration]($style) "
+style = "wheat"
+show_notifications = true
+
+[deno]
+format = "[$symbol($version)]($style) "
+style = "black bold"
+version_format = "${raw}"
+
+[directory]
+format = "[ ](path)[$path]($style)[$read_only]($read_only_style) "
+style = "root"
+truncation_length = 3
+read_only = " "
+read_only_style = "golden"
+truncate_to_repo = true
+before_repo_root_style = "path"
+repo_root_format = """
+[ $before_root_path]($before_repo_root_style)\
+[$repo_root]($repo_root_style)\
+[$path]($style)\
+[$read_only]($read_only_style) \
+"""
+repo_root_style = "root bold"
+fish_style_pwd_dir_length = 2
+
+[docker_context]
+format = "[$symbol$context]($style) "
+symbol = " "
+
+[fill]
+symbol = "─"
+style = "lines"
+
+[git_branch]
+format = "[$symbol$branch]($style) "
+style = "bold green"
+only_attached = true
+
+[git_commit]
+format = "[ ]($style)@[$hash]($style) "
+commit_hash_length = 6
+only_detached = true
+
+[git_status]
+format = "([$ahead_behind](green)$all_status )"
+conflicted = "[~$count](red)"
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+untracked = "[?$count](39)"
+stashed = "[*$count](green)"
+modified = "[!$count](gold)"
+staged = "[+$count](gold)"
+renamed = "[»$count](gold)"
+deleted = "[✘$count](gold)"
+ignore_submodules = true
+
+[golang]
+format = "[$symbol($version)]($style) "
+version_format = "${raw}"
+symbol = " "
+style = "skyblue bold"
+
+[lua]
+format = "[$symbol($version)]($style) "
+version_format = "${raw}"
+symbol = " "
+style = "dodgeblue bold"
+
+[nix_shell]
+format = "[$symbol$state]($style) "
+symbol = "󱄅 "
+style = "dodgeblue bold"
+
+[nodejs]
+format = "[$symbol($version)]($style) "
+version_format = "${raw}"
+symbol = " "
+
+[os]
+disabled = false
+
+[os.symbols]
+Alpine = " "
+Amazon = "󰆧 "
+Android = " "
+Arch = " "
+Artix = " "
+CentOS = " "
+Debian = " "
+EndeavourOS = " "
+Fedora = " "
+FreeBSD = " "
+Gentoo = " "
+Illumos = " "
+Linux = " "
+Macos = " "
+Manjaro = " "
+Mint = " "
+NixOS = " "
+OpenBSD = " "
+openSUSE = " "
+Pop = " "
+Raspbian = " "
+Redhat = " "
+RedHatEnterprise = " "
+Solus = " "
+Ubuntu = " "
+Windows = " "
+
+[package]
+format = "[$symbol$version]($style) "
+version_format = "${raw}"
+
+[python]
+format = "[$symbol($version)]($style) "
+version_format = "${raw}"
+symbol = " "
+
+[rust]
+format = "[$symbol($version)]($style) "
+version_format = "${raw}"
+symbol = " "
+style = "orange bold"
