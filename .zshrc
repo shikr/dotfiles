@@ -42,30 +42,3 @@ alias la="ls -a"
 export NPM_CONFIG_PREFIX=~/.npm-global
 
 command -v starship >/dev/null && eval "$(starship init zsh)"
-
-zle-line-init() {
-  [[ $CONTEXT == start ]] || return 0
-
-  (( $+zle_bracketed_paste )) && print -r -n - $zle_bracketed_paste[1]
-  zle .recursive-edit
-  local -i ret=$?
-  (( $+zle_bracketed_paste )) && print -r -n - $zle_bracketed_paste[2]
-
-  local old_prompt=$PROMPT
-  local old_rprompt=$RPROMPT
-  PROMPT=$(starship module character)
-  RPROMPT=""
-
-  zle .reset-prompt
-  [[ $ret == 0 && $KEYS == $'\4' ]] && exit
-
-  PROMPT=$old_prompt
-  RPROMPT=$old_rprompt
-
-  if (( ret )); then
-    zle .send-break
-  else
-    zle .accept-line
-  fi
-  return ret
-}
