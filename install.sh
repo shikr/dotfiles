@@ -171,8 +171,8 @@ if [[ "$zsh" != "false" ]]; then
 fi
 
 if [[ "$starship" != "false" ]]; then
-  start_progress starship "\n"
+  start_progress starship
   backup "$HOME/.config/starship.toml"
   copy_files starship.toml "${HOME}/.config"
-  print_progress "Installed starship" "\n"
+  finish_progress starship
 fi
