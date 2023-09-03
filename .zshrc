@@ -106,3 +106,5 @@ command -v lsd >/dev/null && alias ls="lsd"
 alias la="ls -a"
 
 export NPM_CONFIG_PREFIX=~/.npm-global
+
+command -v starship >/dev/null && eval "$(starship init zsh)"
