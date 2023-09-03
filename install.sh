@@ -20,7 +20,6 @@ show_help() {
   print_option "-p, --no-zsh-plugins     " "Don't install zsh plugins"
   print_option "-S, --symlink            " "Create symlinks instead of copying files"
   print_option "-d, --delete, --no-backup" "Don't create backup files"
-  print_option "    --no-p10k            " "Don't install powerlevel10k"
   print_option "-i, --ignore <OPTIONS>   " "Don't install specified files (-i zsh,rofi)"
   print_option "-s, --silent             " "Don't show progress messages"
   print_option "-h, --help               " "Show this help message"
@@ -104,10 +103,6 @@ while [[ $# -gt 0 ]]; do
       delete="true"
       shift
     ;;
-    --no-p10k)
-      p10k="false"
-      shift
-    ;;
     -i | --ignore)
       [[ -z $2 ]] && send_error "a value is required for 'ignore'" || ignore="$2"
       shift 2
@@ -169,15 +164,6 @@ if [[ "$zsh" != "false" ]]; then
     clone_plugin zsh-users         zsh-autosuggestions
     clone_plugin zsh-users         zsh-syntax-highlighting
     clone_plugin zsh-users         zsh-completions
-  fi
-
-  copy_files .p10k.zsh "${HOME}"
-
-  if [[ "$p10k" != "false" ]]; then
-    ZSH_THEMES_DIR="${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}/themes"
-    [[ ! -d $ZSH_THEMES_DIR ]] && mkdir -p $ZSH_THEMES_DIR
-
-    [[ ! -d $ZSH_THEMES_DIR/powerlevel10k ]] && git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_THEMES_DIR/powerlevel10k
   fi
 
   print_progress "Installed zsh" "\n"
