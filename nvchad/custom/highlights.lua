@@ -18,12 +18,12 @@ M.add = {
   IndentRainbow2 = { fg = '#7fff7f', nocombine = true },
   IndentRainbow3 = { fg = '#ff7fff', nocombine = true },
   IndentRainbow4 = { fg = '#4fecec', nocombine = true },
-  TSRainbow1 = { fg = '#15a8f2', nocombine = true },
-  TSRainbow2 = { fg = '#e60707', nocombine = true },
-  TSRainbow3 = { fg = '#dce703', nocombine = true },
-  TSRainbow4 = { fg = '#2ae604', nocombine = true },
-  TSRainbow5 = { fg = '#9a06db', nocombine = true },
-  TSRainbow6 = { fg = '#ee06e0', nocombine = true },
+  RainbowDelimiter1 = { fg = '#15a8f2', nocombine = true },
+  RainbowDelimiter2 = { fg = '#e60707', nocombine = true },
+  RainbowDelimiter3 = { fg = '#dce703', nocombine = true },
+  RainbowDelimiter4 = { fg = '#2ae604', nocombine = true },
+  RainbowDelimiter5 = { fg = '#9a06db', nocombine = true },
+  RainbowDelimiter6 = { fg = '#ee06e0', nocombine = true },
   FoldColumn = { link = 'Normal' },
 }
 

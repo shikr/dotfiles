@@ -9,17 +9,16 @@ return {
       {
         'HiPhish/rainbow-delimiters.nvim',
         opts = {
-          -- TODO: update highlights
           highlight = {
-            'TSRainbow1',
-            'TSRainbow2',
-            'TSRainbow3',
-            'TSRainbow4',
-            'TSRainbow5',
-            'TSRainbow6',
+            'RainbowDelimiter1',
+            'RainbowDelimiter2',
+            'RainbowDelimiter3',
+            'RainbowDelimiter4',
+            'RainbowDelimiter5',
+            'RainbowDelimiter6',
           },
         },
-        config = function (_, opts)
+        config = function(_, opts)
           require('rainbow-delimiters.setup').setup(opts)
         end,
       },
