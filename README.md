@@ -23,7 +23,7 @@
 
 - [FiraCode NerdFont](https://www.nerdfonts.com/font-downloads) for kitty and rofi.
 - [Node.js](https://nodejs.org/es/download), [Yarn](https://classic.yarnpkg.com/lang/en/docs/install/) and [Rust](https://www.rust-lang.org/tools/install) for neovim.
-- [oh my zsh](https://ohmyz.sh/) for zsh.
+- [oh my zsh](https://ohmyz.sh/) and [fzf](https://github.com/junegunn/fzf) for zsh.
 
 > Clone this repository
 
