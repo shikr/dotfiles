@@ -6,7 +6,23 @@ return {
     opts = overrides.treesitter,
     dependencies = {
       'windwp/nvim-ts-autotag',
-      'HiPhish/nvim-ts-rainbow2',
+      {
+        'HiPhish/rainbow-delimiters.nvim',
+        opts = {
+          -- TODO: update highlights
+          highlight = {
+            'TSRainbow1',
+            'TSRainbow2',
+            'TSRainbow3',
+            'TSRainbow4',
+            'TSRainbow5',
+            'TSRainbow6',
+          },
+        },
+        config = function (_, opts)
+          require('rainbow-delimiters.setup').setup(opts)
+        end,
+      },
       {
         'm-demare/hlargs.nvim',
         opts = {},

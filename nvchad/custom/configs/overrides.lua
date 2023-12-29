@@ -27,24 +27,6 @@ M.treesitter = {
   highlight = {
     enable = not vim.g.vscode,
   },
-  rainbow = {
-    enable = not vim.g.vscode,
-    hlgroups = {
-      'TSRainbow1',
-      'TSRainbow2',
-      'TSRainbow3',
-      'TSRainbow4',
-      'TSRainbow5',
-      'TSRainbow6',
-    },
-    query = {
-      'rainbow-parens',
-      html = 'rainbow-tags',
-      javascript = 'rainbow-tags-react',
-      tsx = 'rainbow-tags',
-    },
-    -- colors = { '#15a8f2', '#e60707', '#dce703', '#2ae604', '#9a06db', '#ee06e0' },
-  },
   autotag = {
     enable = not vim.g.vscode,
   },
