@@ -21,14 +21,30 @@ return {
         },
       },
       {
-        'jose-elias-alvarez/typescript.nvim',
+        'pmizio/typescript-tools.nvim',
+        dependencies = 'nvim-lua/plenary.nvim',
         opts = {
-          disable_commands = false,
-          server = {
-            on_attach = lspconfig.on_attach,
-            capabilities = lspconfig.capabilities,
+          on_attach = lspconfig.on_attach,
+          complete_function_calls = true,
+          expose_as_code_action = {
+            'add_missing_imports',
+            'remove_unused',
+            'remove_unused_imports',
+            'organize_imports',
           },
         },
+        -- TODO: disable tsserver path warn
+        config = function(_, opts)
+          local mason_registry = require 'mason-registry'
+          local tsserver_path =
+            mason_registry.get_package('typescript-language-server'):get_install_path()
+
+          require('typescript-tools').setup(vim.tbl_deep_extend('force', opts, {
+            settings = {
+              tsserver_path = tsserver_path .. '/node_modules/typescript/lib/tsserver.js',
+            },
+          }))
+        end,
       },
     },
     config = function()

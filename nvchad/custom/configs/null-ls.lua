@@ -15,7 +15,6 @@ local sources = {
         .. '/lua/custom/.prettierrc.json',
     },
   },
-  require 'typescript.extensions.null-ls.code-actions',
 
   -- rust
   b.formatting.rustfmt.with {

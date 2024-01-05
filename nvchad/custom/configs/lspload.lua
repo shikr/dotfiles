@@ -3,7 +3,6 @@ local load_servers = require('custom.configs.lspconfig').load_servers
 local servers = {
   'html',
   'cssls',
-  'tsserver',
   'taplo',
   'pyright',
   {
