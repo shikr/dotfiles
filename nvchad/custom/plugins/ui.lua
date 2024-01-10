@@ -162,10 +162,29 @@ return {
         separator_style = 'thick',
         diagnostics = 'nvim_lsp',
         diagnostics_indicator = function(count, level, diagnostics_dict, context)
-          local icon = level:match 'error'
-              and vim.fn.sign_getdefined('DiagnosticSignError')[1].text
-            or vim.fn.sign_getdefined('DiagnosticSignWarn')[1].text
-          return ' ' .. icon .. count
+          local function get_sign(sign)
+            return vim.fn.sign_getdefined(sign)[1].text
+          end
+          local icons = {
+            error = get_sign 'DiagnosticSignError',
+            warning = get_sign 'DiagnosticSignWarn',
+            info = get_sign 'DiagnosticSignInfo',
+            hint = get_sign 'DiagnosticSignHint',
+          }
+
+          local s = ' '
+          local current = 0
+          for e, n in pairs(diagnostics_dict) do
+            local sym = icons[e] or ''
+            s = s .. n .. sym
+            current = current + n
+
+            if current ~= count then
+              s = s .. ' '
+            end
+          end
+
+          return s
         end,
         close_command = bufdelete,
         middle_mouse_command = bufdelete,
