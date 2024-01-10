@@ -119,13 +119,11 @@ end
 M.devicons = {
   override_by_filename = vim.tbl_extend(
     'force',
-    {
-      ['yarn.lock'] = {
-        icon = '',
-        color = '#0288D1',
-        name = 'Yarn',
-      },
-    },
+    icon_multiple_filenames({ 'yarn.lock', '.yarnrc.yml', '.yarnrc.yaml' }, {
+      icon = '',
+      color = '#0288D1',
+      name = 'Yarn',
+    }),
     icon_multiple_filenames(
       filenames_list('tailwind.config', { 'js', 'cjs', 'ts', 'cts' }),
       {
