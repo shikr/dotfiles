@@ -3,6 +3,9 @@ local overrides = require 'custom.configs.overrides'
 return {
   {
     'williamboman/mason.nvim',
+    init = function()
+      require('core.utils').lazy_load 'mason.nvim'
+    end,
     opts = overrides.mason,
     enabled = not vim.g.vscode,
   },
