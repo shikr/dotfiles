@@ -58,8 +58,11 @@ M.mason = {
   },
 }
 
--- git support in nvimtree
 M.nvimtree = {
+  filters = {
+    git_ignored = false,
+  },
+
   git = {
     enable = true,
   },
