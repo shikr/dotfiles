@@ -63,12 +63,6 @@ return {
   },
 
   {
-    'lukas-reineke/lsp-format.nvim',
-    config = true,
-    enabled = not vim.g.vscode,
-  },
-
-  {
     'samodostal/image.nvim',
     opts = {
       render = {
