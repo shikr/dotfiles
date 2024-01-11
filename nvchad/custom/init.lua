@@ -1,5 +1,3 @@
-vim.opt.runtimepath:prepend(vim.fn.expand '~/.config/nvim/lua/custom/ftplugin')
-
 vim.opt.list = true
 vim.opt.listchars:append 'space:⋅'
 vim.opt.listchars:append 'trail:⬩'
