@@ -7,8 +7,17 @@ return {
     dependencies = {
       {
         'stevearc/conform.nvim',
-        opts = function ()
+        opts = function()
           return require 'custom.configs.conform'
+        end,
+      },
+      {
+        'mfussenegger/nvim-lint',
+        opts = function()
+          return require 'custom.configs.linting'
+        end,
+        config = function(_, opts)
+          require('lint').linters_by_ft = opts
         end,
       },
       {
