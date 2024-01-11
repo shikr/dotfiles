@@ -6,6 +6,12 @@ return {
     'neovim/nvim-lspconfig',
     dependencies = {
       {
+        'stevearc/conform.nvim',
+        opts = function ()
+          return require 'custom.configs.conform'
+        end,
+      },
+      {
         'ray-x/lsp_signature.nvim',
         event = 'LspAttach',
         opts = {
