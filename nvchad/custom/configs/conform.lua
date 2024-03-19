@@ -42,26 +42,4 @@ M.formatters.prettierd = {
   },
 }
 
-M.formatters.rustfmt = {
-  prepend_args = function(self, ctx)
-    for _, root in ipairs(vim.lsp.buf.list_workspace_folders()) do
-      if string.sub(ctx.dirname, 1, #root) == root then
-        local Path = require 'plenary.path'
-        local cargo_toml = Path:new(root .. '/Cargo.toml')
-
-        if cargo_toml:exists() and cargo_toml:is_file() then
-          for _, line in ipairs(cargo_toml:readlines()) do
-            local edition = line:match [[^edition%s*=%s*%"(%d+)%"]]
-            if edition then
-              return { '--edition=' .. edition }
-            end
-          end
-        end
-      end
-    end
-
-    return { '--edition=2021' }
-  end,
-}
-
 return M
