@@ -5,6 +5,7 @@ local servers = {
   'cssls',
   'taplo',
   'pyright',
+  'eslint',
   {
     'rust_analyzer',
     opts = {

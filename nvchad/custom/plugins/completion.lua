@@ -12,15 +12,6 @@ return {
         end,
       },
       {
-        'mfussenegger/nvim-lint',
-        opts = function()
-          return require 'custom.configs.linting'
-        end,
-        config = function(_, opts)
-          require('lint').linters_by_ft = opts
-        end,
-      },
-      {
         'ray-x/lsp_signature.nvim',
         event = 'LspAttach',
         opts = {

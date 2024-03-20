@@ -47,7 +47,7 @@ M.mason = {
     'tailwindcss-language-server',
     'json-lsp',
     'prettierd',
-    'eslint_d',
+    'eslint-lsp',
 
     -- rust
     'rust-analyzer',
