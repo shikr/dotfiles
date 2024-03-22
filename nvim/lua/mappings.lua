@@ -1,4 +1,4 @@
-require "nvchad.mappings"
+require 'nvchad.mappings'
 local bufdelete = require('configs.bufferline').bufdelete
 
 -- add yours here
@@ -7,7 +7,7 @@ local map = vim.keymap.set
 
 map({ 'n', 'i' }, '<C-s>', '<cmd>w<cr>', { desc = 'Save file' })
 map('i', '<C-v>', '<ESC>pa', { desc = 'Paste' })
-map("n", ";", ":", { desc = "CMD enter command mode" })
+map('n', ';', ':', { desc = 'CMD enter command mode' })
 map('n', '<C-q>', function()
   bufdelete(vim.api.nvim_get_current_buf())
 end, { desc = 'Close current buffer' })
@@ -22,10 +22,10 @@ map({ 'n', 'i' }, '<A-i>', function()
   require('nvchad.term').toggle { pos = 'float', id = 'float' }
 end, { desc = 'Toggle floating terminal' })
 map({ 'n', 'i' }, '<A-h>', function()
-  require('nvchad.nvterm').toggle { pos = 'sp', id = 'sp' }
+  require('nvchad.term').toggle { pos = 'sp', id = 'sp' }
 end, { desc = 'Toggle split terminal' })
 map({ 'n', 'i' }, '<A-v>', function()
-  require('nvchad.nvterm').toggle { pos = 'vsp', id = 'vsp' }
+  require('nvchad.term').toggle { pos = 'vsp', id = 'vsp' }
 end, { desc = 'Toggle vsplit terminal' })
 
 if vim.g.vscode then
