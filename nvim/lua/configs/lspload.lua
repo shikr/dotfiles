@@ -1,4 +1,4 @@
-local load_servers = require('custom.configs.lspconfig').load_servers
+local load_servers = require('configs.lspconfig').load_servers
 
 local servers = {
   'html',

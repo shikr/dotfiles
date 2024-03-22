@@ -1,5 +1,5 @@
-local overrides = require 'custom.configs.overrides'
-local bufdelete = require('custom.configs.bufferline').bufdelete
+local overrides = require 'configs.overrides'
+local bufdelete = require('configs.bufferline').bufdelete
 
 return {
   {
@@ -30,9 +30,7 @@ return {
 
   {
     'dstein64/nvim-scrollview',
-    init = function()
-      require('core.utils').lazy_load 'nvim-scrollview'
-    end,
+    event = 'VeryLazy',
     opts = {
       excluded_filetypes = { 'NvimTree', 'veil' },
       signs_on_startup = { 'diagnostics', 'search', 'cursor' },
@@ -154,9 +152,11 @@ return {
   {
     'akinsho/bufferline.nvim',
     version = '*',
-    init = function()
-      require('core.utils').lazy_load 'bufferline.nvim'
-    end,
+    event = 'VeryLazy',
+    keys = {
+      { '<M-Left>',  '<cmd>BufferLineMovePrev<cr>', desc = 'Move tab to left' },
+      { '<M-Right>', '<cmd>BufferLineMoveNext<cr>', desc = 'Move tab to right' },
+    },
     opts = {
       options = {
         separator_style = 'thick',
@@ -206,7 +206,6 @@ return {
     },
     config = function(_, opts)
       require('bufferline').setup(opts)
-      require('core.utils').load_mappings 'bufferline'
     end,
     enabled = not vim.g.vscode,
   },

@@ -1,4 +1,4 @@
-local overrides = require 'custom.configs.overrides'
+local overrides = require 'configs.overrides'
 
 return {
   {
@@ -32,6 +32,23 @@ return {
 
   {
     'numToStr/Comment.nvim',
+    keys = {
+      {
+        'gcc',
+        function()
+          require('Comment.api').toggle.linewise.current()
+        end,
+        desc = 'Comment line'
+      },
+      {
+        'gc',
+        function()
+          require('Comment.api').toggle.linewise(vim.fn.visualmode())
+        end,
+        desc = 'Comment line',
+        mode = 'v'
+      },
+    },
     enabled = not vim.g.vscode,
   },
 
@@ -78,19 +95,45 @@ return {
   {
     'willothy/moveline.nvim',
     build = 'make',
-    init = function()
-      local utils = require 'core.utils'
-      utils.lazy_load 'moveline.nvim'
-      utils.load_mappings 'moveline'
-    end,
+    keys = {
+      {
+        '<M-up>',
+        function()
+          require('moveline').up()
+        end,
+        desc = 'Move line up'
+      },
+      {
+        '<M-down>',
+        function()
+          require('moveline').down()
+        end,
+        desc = 'Move line down'
+      },
+      {
+        '<M-up>',
+        function()
+          require('moveline').block_up()
+        end,
+        mode = 'v',
+        desc = 'Move block up'
+      },
+      {
+        '<M-down>',
+        function()
+          require('moveline').block_down()
+        end,
+        mode = 'v',
+        desc = 'Move block down'
+      },
+    },
+    event = 'VeryLazy',
     enabled = not vim.g.vscode,
   },
 
   {
     'declancm/cinnamon.nvim',
-    init = function()
-      require('core.utils').lazy_load 'cinnamon.nvim'
-    end,
+    event = 'VeryLazy',
     opts = {
       extra_keymaps = true,
       extended_keymaps = true,
@@ -111,26 +154,22 @@ return {
           return {
             relculright = true,
             segments = {
-              { text = { builtin.foldfunc }, click = 'v:lua.ScFa' },
-              { text = { '%s' }, click = 'v:lua.ScSa' },
+              { text = { builtin.foldfunc },      click = 'v:lua.ScFa' },
+              { text = { '%s' },                  click = 'v:lua.ScSa' },
               { text = { builtin.lnumfunc, ' ' }, click = 'v:lua.ScLa' },
             },
           }
         end,
       },
     },
-    init = function()
-      require('core.utils').lazy_load 'nvim-ufo'
-    end,
+    event = 'VeryLazy',
     opts = true,
     enabled = not vim.g.vscode,
   },
 
   {
     'nacro90/numb.nvim',
-    init = function()
-      require('core.utils').lazy_load 'numb.nvim'
-    end,
+    event = 'VeryLazy',
     config = true,
     enabled = not vim.g.vscode,
   },

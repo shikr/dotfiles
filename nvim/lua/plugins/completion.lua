@@ -1,5 +1,5 @@
-local overrides = require 'custom.configs.overrides'
-local lspconfig = require 'custom.configs.lspconfig'
+local overrides = require 'configs.overrides'
+local lspconfig = require 'configs.lspconfig'
 
 return {
   {
@@ -8,7 +8,7 @@ return {
       {
         'stevearc/conform.nvim',
         opts = function()
-          return require 'custom.configs.conform'
+          return require 'configs.conform'
         end,
       },
       {
@@ -39,8 +39,8 @@ return {
       },
     },
     config = function()
-      require 'plugins.configs.lspconfig'
-      require 'custom.configs.lspload'
+      require 'nvchad.configs.lspconfig'.defaults()
+      require 'configs.lspload'
     end, -- Override to setup mason-lspconfig
     enabled = not vim.g.vscode,
   },

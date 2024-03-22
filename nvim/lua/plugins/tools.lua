@@ -1,11 +1,9 @@
-local overrides = require 'custom.configs.overrides'
+local overrides = require 'configs.overrides'
 
 return {
   {
     'williamboman/mason.nvim',
-    init = function()
-      require('core.utils').lazy_load 'mason.nvim'
-    end,
+    event = 'VeryLazy',
     opts = overrides.mason,
     enabled = not vim.g.vscode,
   },
@@ -20,12 +18,9 @@ return {
     'ghillb/cybu.nvim',
     branch = 'main',
     dependencies = { 'nvim-tree/nvim-web-devicons', 'nvim-lua/plenary.nvim' },
-    init = function()
-      require('core.utils').load_mappings 'cybu'
-    end,
     keys = {
-      { '<plug>(CybuLastusedNext)' },
-      { '<plug>(CybuLastusedPrev)' },
+      { '<C-tab>',   '<plug>(CybuLastusedNext)', desc = 'Last used tab' },
+      { '<C-S-tab>', '<plug>(CybuLastusedPrev)', desc = 'Last used prev tab' },
     },
     opts = {
       display_time = 500,
@@ -39,9 +34,14 @@ return {
   {
     'glepnir/lspsaga.nvim',
     event = 'LspAttach',
-    init = function()
-      require('core.utils').load_mappings 'lspsaga'
-    end,
+    keys = {
+      { 'ga',  '<cmd>Lspsaga code_action<cr>',             desc = 'Code Action' },
+      { 'grn', '<cmd>Lspsaga rename<cr>',                  desc = 'Rename' },
+      { 'gp',  '<cmd>Lspsaga peek_definition<cr>',         desc = 'Peek Definition' },
+      { 'gd',  '<cmd>Lspsaga goto_definition<cr>',         desc = 'Goto Definition' },
+      { 'gh',  '<cmd>Lspsaga hover_doc<cr>',               desc = 'Hover' },
+      { 'gl',  '<cmd>Lspsaga show_cursor_diagnostics<cr>', desc = 'Line Diagnostics' },
+    },
     opts = function()
       return {
         symbol_in_winbar = {
@@ -78,9 +78,9 @@ return {
   {
     'ziontee113/color-picker.nvim',
     cmd = { 'PickColor', 'PickColorInsert' },
-    init = function()
-      require('core.utils').load_mappings 'colorpicker'
-    end,
+    keys = {
+      { '<leader>cl', '<cmd>PickColor<cr>', desc = 'Pick Color' },
+    },
     opts = {
       keymap = {
         ['<S-Left>'] = '<Plug>ColorPickerSlider10Decrease',
@@ -110,9 +110,7 @@ return {
   {
     'folke/todo-comments.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
-    init = function()
-      require('core.utils').lazy_load 'todo-comments.nvim'
-    end,
+    event = 'VeryLazy',
     opts = {},
     enabled = not vim.g.vscode,
   },

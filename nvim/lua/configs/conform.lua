@@ -38,7 +38,7 @@ M.formatters = {}
 
 M.formatters.prettierd = {
   env = {
-    PRETTIERD_DEFAULT_CONFIG = vim.fn.stdpath 'config' .. '/lua/custom/.prettierrc.json',
+    PRETTIERD_DEFAULT_CONFIG = vim.fn.stdpath 'config' .. '/.prettierrc.json',
   },
 }
 

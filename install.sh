@@ -138,14 +138,7 @@ fi
 
 [[ "$spotify_player" != "false" ]] && setup spotify-player
 
-if [[ "$neovim" != "false" ]]; then
-  start_progress neovim "\n"
-  backup "${CONFIG_DIR}/nvim"
-  backup "$HOME/.local/share/nvim"
-  git clone https://github.com/NvChad/NvChad.git "${CONFIG_DIR}/nvim" --depth=1
-  copy_files nvchad/custom "${CONFIG_DIR}/nvim/lua"
-  print_progress "Installed neovim" "\n"
-fi
+[[ "$neovim" != "false" ]] && setup nvim
 
 if [[ "$zsh" != "false" ]]; then
   start_progress zsh "\n"

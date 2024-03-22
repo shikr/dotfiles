@@ -1,5 +1,6 @@
-local default_on_attach = require('plugins.configs.lspconfig').on_attach
-local capabilities = require('plugins.configs.lspconfig').capabilities
+local default_on_attach = require('nvchad.configs.lspconfig').on_attach
+local capabilities = require('nvchad.configs.lspconfig').capabilities
+local on_init = require('nvchad.configs.lspconfig').on_init
 
 local lspconfig = require 'lspconfig'
 
@@ -32,11 +33,13 @@ local function load_servers(servers)
       lspconfig[lsp].setup {
         on_attach = on_attach,
         capabilities = capabilities,
+        on_init = on_init,
       }
     else
       local opts = vim.tbl_deep_extend('force', {
         on_attach = on_attach,
         capabilities = capabilities,
+        on_init = on_init,
       }, format_opts(lsp.opts))
 
       lspconfig[lsp[1]].setup(opts)
