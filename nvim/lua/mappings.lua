@@ -18,13 +18,13 @@ map('v', '<C-c>', 'y', { desc = 'Copy to clipboard' })
 map('c', '<C-c>', '<C-R>+', { desc = 'Paste' })
 
 -- Terminal
-map({ 'n', 'i' }, '<A-i>', function()
+map({ 'n', 't' }, '<A-i>', function()
   require('nvchad.term').toggle { pos = 'float', id = 'float' }
 end, { desc = 'Toggle floating terminal' })
-map({ 'n', 'i' }, '<A-h>', function()
+map({ 'n', 't' }, '<A-h>', function()
   require('nvchad.term').toggle { pos = 'sp', id = 'sp' }
 end, { desc = 'Toggle split terminal' })
-map({ 'n', 'i' }, '<A-v>', function()
+map({ 'n', 't' }, '<A-v>', function()
   require('nvchad.term').toggle { pos = 'vsp', id = 'vsp' }
 end, { desc = 'Toggle vsplit terminal' })
 
