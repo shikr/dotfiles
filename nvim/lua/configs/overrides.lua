@@ -18,6 +18,7 @@ M.treesitter = {
     'rust',
     'toml',
     'http',
+    'sql',
   },
   indent = {
     enable = true,
