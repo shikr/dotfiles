@@ -94,12 +94,12 @@ M.nvimtree = {
 M.blankline = {
   indent = {
     highlight = {
-    'IndentRainbow1',
-    'IndentRainbow2',
-    'IndentRainbow3',
-    'IndentRainbow4',
+      'IndentRainbow1',
+      'IndentRainbow2',
+      'IndentRainbow3',
+      'IndentRainbow4',
+    },
   },
-  }
 }
 
 M.gitsigns = {
