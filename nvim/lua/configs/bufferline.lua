@@ -8,14 +8,23 @@ local function has_bufnr(elements, bufnr)
   return false
 end
 
-local function bufdelete(bufnr)
+local function close(bufnr, win)
+  local layout = vim.fn.winlayout()[1]
+  if win ~= nil and layout ~= 'leaf' then
+    vim.api.nvim_win_close(win, true)
+  end
+
+  vim.api.nvim_buf_delete(bufnr, { force = true })
+end
+
+local function bufdelete(bufnr, window)
   local elements = require('bufferline').get_elements().elements
 
-  if #elements >= 1 then
+  if vim.api.nvim_buf_get_option(bufnr, 'filetype') ~= 'veil' then
     if #elements == 1 and has_bufnr(elements, bufnr) then
       vim.cmd 'Veil'
     end
-    vim.cmd('bd! ' .. bufnr)
+    close(bufnr, window)
   end
 end
 
