@@ -28,18 +28,20 @@ return {
         dependencies = 'nvim-lua/plenary.nvim',
         opts = {
           on_attach = lspconfig.on_attach,
-          complete_function_calls = true,
-          expose_as_code_action = {
-            'add_missing_imports',
-            'remove_unused',
-            'remove_unused_imports',
-            'organize_imports',
+          settings = {
+            complete_function_calls = true,
+            expose_as_code_action = {
+              'add_missing_imports',
+              'remove_unused',
+              'remove_unused_imports',
+              'organize_imports',
+            },
           },
         },
       },
     },
     config = function()
-      require 'nvchad.configs.lspconfig'.defaults()
+      require('nvchad.configs.lspconfig').defaults()
       require 'configs.lspload'
     end, -- Override to setup mason-lspconfig
     enabled = not vim.g.vscode,
