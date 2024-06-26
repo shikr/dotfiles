@@ -26,12 +26,6 @@ M.treesitter = {
     --   "python"
     -- },
   },
-  highlight = {
-    enable = not vim.g.vscode,
-  },
-  autotag = {
-    enable = not vim.g.vscode,
-  },
 }
 
 M.mason = {

@@ -5,7 +5,10 @@ return {
     'nvim-treesitter/nvim-treesitter',
     opts = overrides.treesitter,
     dependencies = {
-      'windwp/nvim-ts-autotag',
+      {
+        'windwp/nvim-ts-autotag',
+        opts = {},
+      },
       {
         'HiPhish/rainbow-delimiters.nvim',
         opts = {
@@ -38,7 +41,7 @@ return {
         function()
           require('Comment.api').toggle.linewise.current()
         end,
-        desc = 'Comment line'
+        desc = 'Comment line',
       },
       {
         'gc',
@@ -46,7 +49,7 @@ return {
           require('Comment.api').toggle.linewise(vim.fn.visualmode())
         end,
         desc = 'Comment line',
-        mode = 'v'
+        mode = 'v',
       },
     },
     enabled = not vim.g.vscode,
@@ -101,14 +104,14 @@ return {
         function()
           require('moveline').up()
         end,
-        desc = 'Move line up'
+        desc = 'Move line up',
       },
       {
         '<M-down>',
         function()
           require('moveline').down()
         end,
-        desc = 'Move line down'
+        desc = 'Move line down',
       },
       {
         '<M-up>',
@@ -116,7 +119,7 @@ return {
           require('moveline').block_up()
         end,
         mode = 'v',
-        desc = 'Move block up'
+        desc = 'Move block up',
       },
       {
         '<M-down>',
@@ -124,7 +127,7 @@ return {
           require('moveline').block_down()
         end,
         mode = 'v',
-        desc = 'Move block down'
+        desc = 'Move block down',
       },
     },
     event = 'VeryLazy',
@@ -154,8 +157,8 @@ return {
           return {
             relculright = true,
             segments = {
-              { text = { builtin.foldfunc },      click = 'v:lua.ScFa' },
-              { text = { '%s' },                  click = 'v:lua.ScSa' },
+              { text = { builtin.foldfunc }, click = 'v:lua.ScFa' },
+              { text = { '%s' }, click = 'v:lua.ScSa' },
               { text = { builtin.lnumfunc, ' ' }, click = 'v:lua.ScLa' },
             },
           }
