@@ -19,7 +19,7 @@ return {
     branch = 'main',
     dependencies = { 'nvim-tree/nvim-web-devicons', 'nvim-lua/plenary.nvim' },
     keys = {
-      { '<C-tab>',   '<plug>(CybuLastusedNext)', desc = 'Last used tab' },
+      { '<C-tab>', '<plug>(CybuLastusedNext)', desc = 'Last used tab' },
       { '<C-S-tab>', '<plug>(CybuLastusedPrev)', desc = 'Last used prev tab' },
     },
     opts = {
@@ -35,12 +35,12 @@ return {
     'glepnir/lspsaga.nvim',
     event = 'LspAttach',
     keys = {
-      { 'ga',  '<cmd>Lspsaga code_action<cr>',             desc = 'Code Action' },
-      { 'grn', '<cmd>Lspsaga rename<cr>',                  desc = 'Rename' },
-      { 'gp',  '<cmd>Lspsaga peek_definition<cr>',         desc = 'Peek Definition' },
-      { 'gd',  '<cmd>Lspsaga goto_definition<cr>',         desc = 'Goto Definition' },
-      { 'gh',  '<cmd>Lspsaga hover_doc<cr>',               desc = 'Hover' },
-      { 'gl',  '<cmd>Lspsaga show_cursor_diagnostics<cr>', desc = 'Line Diagnostics' },
+      { 'ga', '<cmd>Lspsaga code_action<cr>', desc = 'Code Action' },
+      { 'grn', '<cmd>Lspsaga rename<cr>', desc = 'Rename' },
+      { 'gp', '<cmd>Lspsaga peek_definition<cr>', desc = 'Peek Definition' },
+      { 'gd', '<cmd>Lspsaga goto_definition<cr>', desc = 'Goto Definition' },
+      { 'gh', '<cmd>Lspsaga hover_doc<cr>', desc = 'Hover' },
+      { 'gl', '<cmd>Lspsaga show_cursor_diagnostics<cr>', desc = 'Line Diagnostics' },
     },
     opts = function()
       return {
@@ -92,18 +92,6 @@ return {
         ['c'] = '<Plug>ColorPickerChangeOutputType',
       },
     },
-    enabled = not vim.g.vscode,
-  },
-
-  {
-    'rest-nvim/rest.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    config = function()
-      require('rest-nvim').setup()
-      vim.api.nvim_create_user_command('Rest', 'lua require("rest-nvim").run()', {})
-    end,
-    cmd = 'Rest',
-    ft = 'http',
     enabled = not vim.g.vscode,
   },
 
