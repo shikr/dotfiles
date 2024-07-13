@@ -162,14 +162,11 @@ return {
         separator_style = 'thick',
         diagnostics = 'nvim_lsp',
         diagnostics_indicator = function(count, level, diagnostics_dict, context)
-          local function get_sign(sign)
-            return vim.fn.sign_getdefined(sign)[1].text
-          end
           local icons = {
-            error = get_sign 'DiagnosticSignError',
-            warning = get_sign 'DiagnosticSignWarn',
-            info = get_sign 'DiagnosticSignInfo',
-            hint = get_sign 'DiagnosticSignHint',
+            error = ' ',
+            warning = ' ',
+            info = ' ',
+            hint = ' ',
           }
 
           local s = ' '

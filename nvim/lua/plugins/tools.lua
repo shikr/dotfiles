@@ -48,7 +48,7 @@ return {
           enable = false,
         },
         ui = {
-          code_action = vim.fn.sign_getdefined('DiagnosticSignHint')[1].text,
+          code_action = ' ',
           border = 'rounded',
         },
         outline = {
