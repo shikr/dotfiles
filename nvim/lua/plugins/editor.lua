@@ -83,15 +83,9 @@ return {
   },
 
   {
-    'samodostal/image.nvim',
-    opts = {
-      render = {
-        foreground_color = true,
-        background_color = true,
-      },
-    },
-    dependencies = { 'nvim-lua/plenary.nvim', 'm00qek/baleia.nvim' },
-    event = 'BufAdd *.{jpeg,jpg,png,bmp,webp,tiff,tif,gif}',
+    '3rd/image.nvim',
+    opts = {},
+    event = 'BufAdd *.{jpeg,jpg,png,webp,gif,avif}',
     enabled = not vim.g.vscode,
   },
 

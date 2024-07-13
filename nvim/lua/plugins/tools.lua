@@ -15,6 +15,15 @@ return {
   },
 
   {
+    'vhyrro/luarocks.nvim',
+    lazy = false,
+    priority = 1001,
+    opts = {
+      rocks = { 'magick' },
+    },
+  },
+
+  {
     'ghillb/cybu.nvim',
     branch = 'main',
     dependencies = { 'nvim-tree/nvim-web-devicons', 'nvim-lua/plenary.nvim' },
