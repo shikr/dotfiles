@@ -90,6 +90,12 @@ return {
   },
 
   {
+    'MeanderingProgrammer/markdown.nvim',
+    ft = 'markdown',
+    opts = {},
+  },
+
+  {
     'willothy/moveline.nvim',
     build = 'make',
     keys = {
