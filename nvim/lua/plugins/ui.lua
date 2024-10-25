@@ -154,7 +154,7 @@ return {
     version = '*',
     event = 'VeryLazy',
     keys = {
-      { '<M-Left>',  '<cmd>BufferLineMovePrev<cr>', desc = 'Move tab to left' },
+      { '<M-Left>', '<cmd>BufferLineMovePrev<cr>', desc = 'Move tab to left' },
       { '<M-Right>', '<cmd>BufferLineMoveNext<cr>', desc = 'Move tab to right' },
     },
     opts = {
