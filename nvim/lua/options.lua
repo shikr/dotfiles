@@ -19,7 +19,6 @@ o.foldenable = true
 if vim.g.neovide then
   o.guifont = 'FiraCode Nerd Font:h12'
   vim.g.neovide_cursor_vfx_mode = 'railgun'
-  vim.g.neovide_fullscreen = true
 
   if vim.env.HOME ~= nil then
     vim.fn.chdir(vim.env.HOME)
