@@ -131,7 +131,42 @@ return {
       },
     },
     event = 'VeryLazy',
-    enabled = not vim.g.vscode,
+    enabled = not vim.g.vscode and not vim.fn.has 'win32',
+  },
+
+  {
+    'fedepujol/move.nvim',
+    opts = {
+      word = {
+        enable = false,
+      },
+    },
+    keys = {
+      {
+        '<M-up>',
+        '<cmd>MoveLine(-1)<cr>',
+        desc = 'Move line up',
+      },
+      {
+        '<M-down>',
+        '<cmd>MoveLine(1)<cr>',
+        desc = 'Move line down',
+      },
+      {
+        '<M-up>',
+        ':MoveBlock(-1)<cr>',
+        mode = 'v',
+        desc = 'Move block up',
+      },
+      {
+        '<M-down>',
+        ':MoveBlock(1)<cr>',
+        mode = 'v',
+        desc = 'Move block down',
+      },
+    },
+    event = 'VeryLazy',
+    enabled = not vim.g.vscode and vim.fn.has 'win32',
   },
 
   {
