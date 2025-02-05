@@ -25,4 +25,11 @@ M.add = {
   FoldColumn = { link = 'Normal' },
 }
 
-return M
+for name, value in pairs(M.override) do
+  local curr = vim.api.nvim_get_hl(0, { name = name })
+  vim.api.nvim_set_hl(0, name, vim.tbl_deep_extend('force', curr, value))
+end
+
+for name, value in pairs(M.add) do
+  vim.api.nvim_set_hl(0, name, value)
+end
