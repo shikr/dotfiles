@@ -173,10 +173,10 @@ return {
     'declancm/cinnamon.nvim',
     event = 'VeryLazy',
     opts = {
-      extra_keymaps = true,
-      extended_keymaps = true,
-      always_scroll = true,
-      -- hide_cursor = true,
+      keymaps = {
+        basic = true,
+        extra = true,
+      },
     },
     enabled = not vim.g.vscode,
   },
