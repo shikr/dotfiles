@@ -21,7 +21,7 @@
 
 ### Required Dependencies
 
-- [FiraCode NerdFont](https://www.nerdfonts.com/font-downloads) for kitty and rofi.
+- [FiraCode NerdFont](https://www.nerdfonts.com/font-downloads), [Inter Font](https://rsms.me/inter/) and [Symbols NerdFont](https://www.nerdfonts.com/font-downloads) for kitty and rofi.
 - [Lua 5.1](https://www.lua.org/download.html), [ripgrep](https://github.com/BurntSushi/ripgrep#installation), [ImageMagick](https://imagemagick.org/script/download.php), [Node.js](https://nodejs.org/es/download), [Yarn](https://classic.yarnpkg.com/lang/en/docs/install/) and [Rust](https://www.rust-lang.org/tools/install) for neovim.
 - [oh my zsh](https://ohmyz.sh/) and [fzf](https://github.com/junegunn/fzf) for zsh.
 
