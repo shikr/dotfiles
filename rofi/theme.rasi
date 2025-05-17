@@ -8,8 +8,8 @@
 
 /*****----- Global Properties -----*****/
 * {
-    font:                        "Montserrat 10";
-    icon-font:                   "FiraCode Nerd Font 13";
+    font:                        "Inter 10";
+    icon-font:                   "Symbols Nerd Font 13";
     background:                  #101010E6;
     background-alt:              #252525;
     foreground:                  #FFFFFF;
