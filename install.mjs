@@ -229,7 +229,7 @@ async function installConfig(config) {
       process.platform
     )
 
-  spinner(chalk.blue(`Installing ${config.name}...`), async () => {
+  await spinner(chalk.blue(`Installing ${config.name}...`), async () => {
     if (config.dependencies) {
       for (const dependency of config.dependencies) {
         if (!commandExists(dependency)) {
@@ -248,33 +248,50 @@ async function installConfig(config) {
       const installPath = targetDir ?? CONFIG_DIR
       const destination = path.join(installPath, path.parse(configPath).base)
 
-      if (fs.existsSync(destination)) {
-        if (backup) {
-          let backupNum = 1
-          while (fs.existsSync(`${destination}${'.bak'.repeat(backupNum)}`)) {
-            backupNum++
-          }
-          fs.renameSync(destination, `${destination}${'.bak'.repeat(backupNum)}`)
-        } else {
-          error('%s already exists. Backup is disabled.', destination)
-          const answer = await confirmation('Do you want to overwrite it?', false)
-          if (answer) {
-            fs.rmSync(destination, { recursive: true, force: true })
-          } else return
-        }
-      }
-
-      if (symlink) {
-        fs.symlinkSync(realpath, destination)
-      } else {
-        fs.cpSync(realpath, destination, { recursive: true })
-      }
+      await copyOrLink(realpath, destination)
     }
 
     if (config.postInstall) {
       await config.postInstall()
     }
   })
+}
+
+/**
+ * Copies or links the target to the destination.
+ * @param {string} target The target to copy or link.
+ * @param {string} destination The destination to copy or link to.
+ */
+async function copyOrLink(target, destination) {
+  await backupPath(destination)
+
+  if (symlink) {
+    fs.symlinkSync(target, destination)
+  } else {
+    fs.cpSync(target, destination, { recursive: true })
+  }
+}
+
+/**
+ * Backs up the given path.
+ * @param {string} path The path to backup.
+ */
+async function backupPath(path) {
+  if (fs.existsSync(path)) {
+    if (backup) {
+      let backupNum = 1
+      while (fs.existsSync(`${path}${'.bak'.repeat(backupNum)}`)) {
+        backupNum++
+      }
+      fs.renameSync(path, `${path}${'.bak'.repeat(backupNum)}`)
+    } else {
+      error('%s already exists. Backup is disabled.', path)
+      const answer = await confirmation('Do you want to overwrite it?', false)
+      if (answer) {
+        fs.rmSync(path, { recursive: true, force: true })
+      } else return
+    }
+  }
 }
 
 /**
