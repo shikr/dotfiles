@@ -93,6 +93,7 @@ return {
     'MeanderingProgrammer/markdown.nvim',
     ft = 'markdown',
     opts = {},
+    enabled = not vim.g.vscode,
   },
 
   {
@@ -192,8 +193,8 @@ return {
           return {
             relculright = true,
             segments = {
-              { text = { builtin.foldfunc }, click = 'v:lua.ScFa' },
-              { text = { '%s' }, click = 'v:lua.ScSa' },
+              { text = { builtin.foldfunc },      click = 'v:lua.ScFa' },
+              { text = { '%s' },                  click = 'v:lua.ScSa' },
               { text = { builtin.lnumfunc, ' ' }, click = 'v:lua.ScLa' },
             },
           }
