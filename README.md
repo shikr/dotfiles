@@ -34,23 +34,34 @@ cd dotfiles
 
 > Run installation script
 
+Using npx
+
 ```sh
-./install.sh
+./install.mjs
+```
+
+Or with [pnpm](https://pnpm.io/).
+
+```sh
+pnpm install
+pnpm start
 ```
 
 ### Customize your installation
 
-Usage: `./install.sh [OPTIONS...]`
+Usage: `./install.mjs [OPTIONS...]`
 
 ```
 Options:
-  -p, --no-zsh-plugins      Don't install zsh plugins
-  -S, --symlink             Create symlinks instead of copying files
-  -d, --delete, --no-backup Don't create backup files
-  -i, --ignore <OPTIONS>    Don't install specified files (-i zsh,rofi)
-                            OPTIONS: kitty, neovim, rofi, spotify_player, zsh, starship
-  -s, --silent              Don't show progress messages
-  -h, --help                Show this help message
+  -p, --zsh-plugins      Install zsh plugins. (default: true)
+  -S, --symlink          Create symlinks instead of copying files. (default: true)
+  -b, --backup           Backup existing files. (default: true)
+  -I, --install          Install all configurations. If disabled, the script will only do a dry run. (default: true)
+  -i, --ignore <OPTIONS> Ignore configurations. (-i zsh,rofi)
+                         OPTIONS: zsh, kitty, rofi, spotify_player, nvim, starship
+
+  -s, --silent           Suppress output.
+  -h, --help             Show this help message.
 ```
 
 ## Credits
