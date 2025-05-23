@@ -40,7 +40,7 @@ Using npx
 ./install.mjs
 ```
 
-Or with [pnpm](https://pnpm.io/).
+Or with [pnpm](https://pnpm.io/)
 
 ```sh
 pnpm install
