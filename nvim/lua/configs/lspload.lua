@@ -6,6 +6,7 @@ local servers = {
   'taplo',
   'pyright',
   'eslint',
+  'bashls',
   {
     'rust_analyzer',
     opts = {

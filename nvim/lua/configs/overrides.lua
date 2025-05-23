@@ -19,6 +19,7 @@ M.treesitter = {
     'toml',
     'http',
     'sql',
+    'bash',
   },
   indent = {
     enable = true,
@@ -51,6 +52,9 @@ M.mason = {
 
     -- python
     'pyright',
+
+    -- Bash
+    'bash-language-server',
   },
 }
 
