@@ -1,0 +1,127 @@
+{
+  "layer": "bottom",
+  "position": "top",
+  "height": 42,
+  "margin": 10,
+  "spacing": 6,
+  "modules-left": ["wlr/taskbar"],
+  "modules-right": [
+    "tray",
+    "custom/wallpaper",
+    "network",
+    "group/audio",
+    "battery",
+    "custom/notification",
+    "clock",
+    "group/group-power"
+  ],
+  "reload_style_on_change": true,
+  "tray": {
+    "icon-size": 20,
+    "spacing": 10
+  },
+  "custom/wallpaper": {
+    "format": "",
+    "tooltip": false,
+    "on-click": "sh -c $HOME/.local/bin/set_wallpaper.sh"
+  },
+  "network": {
+    "format-ethernet": "󰈀",
+    "format-wifi": "{icon}",
+    "format-linked": "󰌹",
+    "format-disconnected": "󰲛",
+    "format-icons": ["󰤟", "󰤢", "󰤥", "󰤨"],
+    "tooltip": false,
+    "on-click": "nm-connection-editor"
+  },
+  "group/audio": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 200,
+      "children-class": "not-pulse",
+      "transition-left-to-right": false
+    },
+    "modules": ["pulseaudio", "pulseaudio/slider"]
+  },
+  "pulseaudio": {
+    "format": "{icon}{format_source}",
+    "format-bluetooth": "{icon}{format_source}",
+    "format-bluetooth-muted": "󰝟{format_source}",
+    "format-muted": "󰝟",
+    "format-source": " ",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "󱡏",
+      "headset": "",
+      "phone": "󰘂",
+      "portable": "",
+      "car": "",
+      "default": ["󰕿", "", ""]
+    },
+    "tooltip-format": "{volume}%",
+    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+  },
+  "battery": {
+    "format": "{icon} ",
+    "format-icons": ["", "", "", "", ""],
+    "states": {
+      "warning": 30,
+      "critical": 15
+    }
+  },
+  "clock": {
+    "format": "{:%I:%M %p}",
+    "tooltip-format": "{:%A %d %B %Y}"
+  },
+  "wlr/taskbar": {
+    "icon-size": 28,
+    "on-click": "activate",
+    "on-click-right": "minimize",
+    "format": "{icon}"
+  },
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "<span foreground='red'><sup></sup></span>",
+      "none": "",
+      "dnd-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-none": "",
+      "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "inhibited-none": "",
+      "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-inhibited-none": ""
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+  "group/group-power": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 200,
+      "children-class": "not-power",
+      "transition-left-to-right": false
+    },
+    "modules": ["custom/power", "custom/quit", "custom/reboot"]
+  },
+  "custom/quit": {
+    "format": "󰗼",
+    "tooltip": false,
+    "on-click": "niri msg action quit"
+  },
+  "custom/reboot": {
+    "format": "󰜉",
+    "tooltip": false,
+    "on-click": "reboot"
+  },
+  "custom/power": {
+    "format": "",
+    "tooltip": false,
+    "on-click": "poweroff"
+  }
+}

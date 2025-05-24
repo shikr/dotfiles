@@ -1,0 +1,99 @@
+* {
+  font-family: 'Symbols Nerd Font', Inter, sans-serif;
+  font-size: 15px;
+}
+
+window#waybar {
+  transition-property: background-color;
+  transition-duration: 250ms;
+  background-color: rgba(20, 20, 36, 0.9);
+  border-radius: 12px;
+}
+
+button:hover {
+  background: inherit;
+}
+
+.modules-right {
+  margin-right: 10px;
+}
+
+#custom-reboot,
+#custom-quit {
+  margin-right: 6px;
+}
+
+#custom-reboot,
+#custom-quit,
+#custom-power {
+  font-size: 18px;
+  margin: 6px 0;
+  padding: 0 6px;
+  border-radius: 7px;
+  transition-property: background-color;
+  transition-duration: 250ms;
+}
+
+#custom-notification,
+#custom-wallpaper,
+#network {
+  margin: 6px 0;
+  padding: 0 6px;
+  border-radius: 7px;
+  transition-property: background-color;
+  transition-duration: 250ms;
+}
+
+#network,
+#custom-wallpaper {
+  font-size: 18px;
+}
+
+#custom-reboot:hover,
+#custom-quit:hover,
+#custom-power:hover,
+#custom-notification:hover,
+#custom-wallpaper:hover,
+#network:hover {
+  background-color: rgba(70, 70, 86, 0.95);
+}
+
+#pulseaudio-slider slider {
+  min-height: 0px;
+  min-width: 0px;
+  opacity: 0;
+  background-image: none;
+  border: none;
+  box-shadow: none;
+}
+
+#pulseaudio-slider trough {
+  min-height: 5px;
+  min-width: 80px;
+  border-radius: 4px;
+  background-color: black;
+}
+
+#pulseaudio-slider highlight {
+  min-width: 10px;
+  border-radius: 4px;
+  background-color: rgb(115, 47, 250);
+}
+
+#taskbar button {
+  border-radius: 12px;
+  transition-property: background-color;
+  transition-duration: 200ms;
+}
+
+#taskbar button:hover {
+  background-color: rgba(70, 70, 86, 0.95);
+}
+
+#taskbar button.active {
+  box-shadow: inset 0 0 3px 0.5px #bbb;
+}
+
+#taskbar button.urgent {
+  box-shadow: inset 0 0 3px 0.5px #f7a447;
+}
