@@ -138,6 +138,87 @@ const configs = [
     }
   },
   {
+    name: 'niri',
+    configPath: 'niri',
+    dependencies: [
+      'niri',
+      'waybar',
+      'swww',
+      'swaybg',
+      'swaync',
+      'wpctl',
+      'playerctl',
+      'ffmpeg',
+      'xwayland-satellite'
+    ],
+    platform: 'linux',
+    async postInstall() {
+      const systemd = fs.realpathSync('systemd')
+      const userSystemd = path.join(CONFIG_DIR, 'systemd', 'user')
+      const niriWants = path.join(userSystemd, 'niri.service.wants')
+      const services = fs
+        .readdirSync(systemd, {
+          withFileTypes: true
+        })
+        .filter((x) => x.isFile() && x.name.endsWith('.service'))
+      const systemServices = ['waybar.service']
+
+      if (!fs.existsSync(niriWants)) {
+        fs.mkdirSync(niriWants, { recursive: true })
+      }
+
+      // Copy/Link the systemd services to ~/.config/systemd/user
+      const userServices = await Promise.all(
+        services.map(async (x) => {
+          const source = path.join(systemd, x.name)
+          const destination = path.join(userSystemd, x.name)
+
+          await copyOrLink(source, destination)
+          return destination
+        })
+      )
+
+      // Link the services used by niri to the niri.service.wants directory
+      ;[
+        ...systemServices.map((x) => path.join('/usr/lib/systemd/user', x)),
+        ...userServices
+      ].forEach((service) => {
+        const destination = path.join(niriWants, path.parse(service).base)
+        if (!fs.existsSync(destination)) {
+          fs.symlinkSync(service, destination)
+        }
+      })
+      info(
+        'Niri configuration installed. Please run `systemctl --user daemon-reload` to apply the changes.'
+      )
+    }
+  },
+  {
+    name: 'waybar',
+    configPath: 'waybar',
+    dependencies: ['waybar', 'nm-connection-editor', 'yad'],
+    platform: 'linux',
+    async postInstall() {
+      // Copy/Link the bin files to ~/.local/bin
+      const localBin = path.join(os.homedir(), '.local', 'bin')
+      if (!fs.existsSync(localBin)) {
+        fs.mkdirSync(localBin, { recursive: true })
+      }
+
+      await Promise.all(
+        fs
+          .readdirSync(fs.realpathSync('bin'), { withFileTypes: true })
+          .filter((x) => x.isFile())
+          .map((x) => {
+            const source = path.join(fs.realpathSync('bin'), x.name)
+            const destination = path.join(localBin, x.name)
+
+            return copyOrLink(source, destination)
+          })
+      )
+    }
+  },
+  {
     name: 'kitty',
     configPath: 'kitty',
     dependencies: ['kitty'],
