@@ -20,6 +20,7 @@ M.treesitter = {
     'http',
     'sql',
     'bash',
+    'kdl',
   },
   indent = {
     enable = true,
