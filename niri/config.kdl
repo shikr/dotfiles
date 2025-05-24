@@ -199,6 +199,12 @@ binds {
     Mod+Alt+K     { move-window-up-or-to-workspace-up; }
     Mod+Alt+L     { move-column-right; }
 
+    /// Force windows to move between workspaces ///
+    Mod+Shift+Alt+Down { move-window-to-workspace-down; }
+    Mod+Shift+Alt+Up { move-window-to-workspace-up; }
+    Mod+Shift+Alt+J { move-window-to-workspace-down; }
+    Mod+Shift+Alt+K { move-window-to-workspace-up; }
+
     Mod+Alt+Home  { move-column-to-first; }
     Mod+Alt+End   { move-column-to-last; }
 
@@ -312,8 +318,8 @@ binds {
     Mod+Ctrl+F { expand-column-to-available-width; }
 
     // Finer height adjustments when in column with other windows.
-    Mod+Ctrl+A { set-window-height "-10%"; }
-    Mod+Ctrl+D { set-window-height "+10%"; }
+    Mod+Shift+A { set-window-height "-10%"; }
+    Mod+Shift+D { set-window-height "+10%"; }
 
     /// Floating/Tiling ///
     Mod+V       { toggle-window-floating; }
@@ -332,7 +338,7 @@ binds {
 
     Print { screenshot-screen; }
     Ctrl+Shift+Print { screenshot; }
-    Alt+Print { screenshot-window; }
+    Ctrl+Print { screenshot-window; }
 
     // Applications such as remote-desktop clients and software KVM switches may
     // request that niri stops processing the keyboard shortcuts defined here
