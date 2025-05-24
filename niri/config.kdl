@@ -1,0 +1,359 @@
+spawn-at-startup "xwayland-satellite"
+spawn-at-startup "swaync"
+
+input {
+    keyboard {
+        xkb {
+            layout "latam"
+        }
+
+        // numlock
+    }
+
+    touchpad {
+        // off
+        tap
+        dwt
+        natural-scroll
+        scroll-method "two-finger"
+        // disabled-on-external-mouse
+    }
+
+    mouse {
+        // middle-emulation
+        accel-speed 0.0
+        accel-profile "flat"
+    }
+
+    focus-follows-mouse max-scroll-amount="50%"
+    workspace-auto-back-and-forth
+}
+
+output "HDMI-A-1" {
+    // off
+    mode "1920x1080@119.879"
+    scale 1
+    transform "normal"
+    position x=0 y=0
+}
+
+layout {
+    gaps 16
+    center-focused-column "never"
+
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+
+    // You can also customize the heights that "switch-preset-window-height" (Mod+Shift+R) toggles between.
+    // preset-window-heights { }
+    default-column-width { proportion 0.5; }
+
+    focus-ring {
+        width 1
+        active-gradient from="#f00f" to="#0efa" angle=45 in="oklch longer hue"
+        inactive-color "#505050"
+    }
+
+    border {
+        off
+    }
+    shadow {
+        on
+        draw-behind-window true
+        softness 10
+        spread 5
+        offset x=0 y=0
+        color "#d047"
+        inactive-color "#0005"
+    }
+
+    tab-indicator {
+        width 4
+        gap 4
+        place-within-column
+        gaps-between-tabs 2
+        corner-radius 2
+        active-color "#c041ff"
+        inactive-color "#707070"
+    }
+
+    insert-hint {
+        gradient from="#f00f" to="#0efa" angle=45 in="oklch longer hue" relative-to="workspace-view"
+    }
+
+    struts {
+        left 0
+        right 0
+        top -12
+        bottom 0
+    }
+}
+
+prefer-no-csd
+
+// You can change the path where screenshots are saved.
+// A ~ at the front will be expanded to the home directory.
+// The path is formatted with strftime(3) to give you the screenshot date and time.
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+cursor {
+  xcursor-theme "Banana"
+  xcursor-size 32
+}
+
+overview {
+  workspace-shadow {
+    softness 10
+    spread 2
+    offset x=0 y=0
+    color "#404040"
+  }
+}
+
+animations {
+}
+
+window-rule {
+    geometry-corner-radius 8
+    clip-to-geometry true
+}
+
+window-rule {
+  match app-id=r#"firefox$"#
+  match app-id="code"
+  match app-id="Spotify"
+  match app-id="pcmanfm"
+
+  open-maximized true
+}
+
+// Open the Firefox picture-in-picture player as floating by default.
+window-rule {
+    // This app-id regular expression will work for both:
+    // - host Firefox (app-id is "firefox")
+    // - Flatpak Firefox (app-id is "org.mozilla.firefox")
+    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    match app-id="nm-connection-editor"
+    match app-id="blueman-manager"
+    match app-id="yad"
+
+    open-floating true
+}
+
+window-rule {
+    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+    match app-id=r#"^org\.gnome\.World\.Secrets$"#
+
+    block-out-from "screen-capture"
+}
+
+// Overview wallpaper
+layer-rule {
+  match namespace="^wallpaper$"
+  place-within-backdrop true
+}
+
+binds {
+    Mod+S { show-hotkey-overlay; }
+
+    Mod+Return repeat=false hotkey-overlay-title="Open a Terminal" { spawn "kitty"; }
+    Mod+Space  repeat=false hotkey-overlay-title="Open Rofi" { spawn "rofi" "-show" "drun"; }
+
+    /// Audio ///
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
+    XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+    XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+    XF86AudioPrev        allow-when-locked=true { spawn "playerctl" "previous"; }
+    XF86AudioNext        allow-when-locked=true { spawn "playerctl" "next"; }
+    XF86AudioPlay        allow-when-locked=true { spawn "playerctl" "play-pause"; }
+    XF86AudioStop        allow-when-locked=true { spawn "playerctl" "stop"; }
+
+    Mod+Tab repeat=false { toggle-overview; }
+
+    Mod+W { close-window; }
+
+    /// Focus Columns/Windows ///
+    Mod+Left       { focus-column-left; }
+    Mod+Down       { focus-window-or-workspace-down; }
+    Mod+Up         { focus-window-or-workspace-up; }
+    Mod+Right      { focus-column-right; }
+    Mod+H          { focus-column-left; }
+    Mod+J          { focus-window-or-workspace-down; }
+    Mod+K          { focus-window-or-workspace-up; }
+    Mod+L          { focus-column-right; }
+
+    Mod+Home { focus-column-first; }
+    Mod+End  { focus-column-last; }
+
+    /// Move Columns/Windows ///
+    Mod+Alt+Left  { move-column-left; }
+    Mod+Alt+Down  { move-window-down-or-to-workspace-down; }
+    Mod+Alt+Up    { move-window-up-or-to-workspace-up; }
+    Mod+Alt+Right { move-column-right; }
+    Mod+Alt+H     { move-column-left; }
+    Mod+Alt+J     { move-window-down-or-to-workspace-down; }
+    Mod+Alt+K     { move-window-up-or-to-workspace-up; }
+    Mod+Alt+L     { move-column-right; }
+
+    Mod+Alt+Home  { move-column-to-first; }
+    Mod+Alt+End   { move-column-to-last; }
+
+    /// Focus Monitor ///
+    Mod+Shift+Left  { focus-monitor-left; }
+    Mod+Shift+Down  { focus-monitor-down; }
+    Mod+Shift+Up    { focus-monitor-up; }
+    Mod+Shift+Right { focus-monitor-right; }
+    Mod+Shift+H     { focus-monitor-left; }
+    Mod+Shift+J     { focus-monitor-down; }
+    Mod+Shift+K     { focus-monitor-up; }
+    Mod+Shift+L     { focus-monitor-right; }
+
+    /// Move Columns to Monitor ///
+    Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
+    Mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }
+    Mod+Shift+Ctrl+Up    { move-column-to-monitor-up; }
+    Mod+Shift+Ctrl+Right { move-column-to-monitor-right; }
+    Mod+Shift+Ctrl+H     { move-column-to-monitor-left; }
+    Mod+Shift+Ctrl+J     { move-column-to-monitor-down; }
+    Mod+Shift+Ctrl+K     { move-column-to-monitor-up; }
+    Mod+Shift+Ctrl+L     { move-column-to-monitor-right; }
+
+    // Alternatively, there are commands to move just a single window:
+    // Mod+Shift+Ctrl+Left  { move-window-to-monitor-left; }
+
+    // And you can also move a whole workspace to another monitor:
+    // Mod+Shift+Ctrl+Left  { move-workspace-to-monitor-left; }
+
+    /// More Workspace Focus/Move binds ///
+    Mod+Page_Down          { focus-workspace-down; }
+    Mod+Page_Up            { focus-workspace-up; }
+    Mod+U                  { focus-workspace-down; }
+    Mod+I                  { focus-workspace-up; }
+    Mod+Alt+Ctrl+Page_Down { move-column-to-workspace-down; }
+    Mod+Alt+Ctrl+Page_Up   { move-column-to-workspace-up; }
+    Mod+Alt+Ctrl+U         { move-column-to-workspace-down; }
+    Mod+Alt+Ctrl+I         { move-column-to-workspace-up; }
+
+    // Alternatively, there are commands to move just a single window:
+    // Mod+Ctrl+Page_Down { move-window-to-workspace-down; }
+    // ...
+
+    Mod+Shift+Page_Down { move-workspace-down; }
+    Mod+Shift+Page_Up   { move-workspace-up; }
+    Mod+Shift+U         { move-workspace-down; }
+    Mod+Shift+I         { move-workspace-up; }
+
+    /// Scroll ///
+    Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
+    Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
+    Mod+Alt+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
+    Mod+Alt+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
+
+    Mod+WheelScrollRight      { focus-column-right; }
+    Mod+WheelScrollLeft       { focus-column-left; }
+    Mod+Alt+WheelScrollRight { move-column-right; }
+    Mod+Alt+WheelScrollLeft  { move-column-left; }
+
+    /// Scroll with shift to right-left ///
+    Mod+Ctrl+WheelScrollDown      { focus-column-right; }
+    Mod+Ctrl+WheelScrollUp        { focus-column-left; }
+    Mod+Alt+Ctrl+WheelScrollDown { move-column-right; }
+    Mod+Alt+Ctrl+WheelScrollUp   { move-column-left; }
+
+    /// Focus/Move to workspace by index ///
+    Mod+1 { focus-workspace 1; }
+    Mod+2 { focus-workspace 2; }
+    Mod+3 { focus-workspace 3; }
+    Mod+4 { focus-workspace 4; }
+    Mod+5 { focus-workspace 5; }
+    Mod+6 { focus-workspace 6; }
+    Mod+7 { focus-workspace 7; }
+    Mod+8 { focus-workspace 8; }
+    Mod+9 { focus-workspace 9; }
+    Mod+Alt+1 { move-column-to-workspace 1; }
+    Mod+Alt+2 { move-column-to-workspace 2; }
+    Mod+Alt+3 { move-column-to-workspace 3; }
+    Mod+Alt+4 { move-column-to-workspace 4; }
+    Mod+Alt+5 { move-column-to-workspace 5; }
+    Mod+Alt+6 { move-column-to-workspace 6; }
+    Mod+Alt+7 { move-column-to-workspace 7; }
+    Mod+Alt+8 { move-column-to-workspace 8; }
+    Mod+Alt+9 { move-column-to-workspace 9; }
+
+    // Alternatively, there are commands to move just a single window:
+    // Mod+Ctrl+1 { move-window-to-workspace 1; }
+
+    // Switches focus between the current and the previous workspace.
+    // Mod+Shift+Tab { focus-workspace-previous; }
+
+    /// Consume/Expel window to the side. ///
+    Mod+Q  { consume-or-expel-window-left; }
+    Mod+E { consume-or-expel-window-right; }
+
+    /// Window/Column switch preset ///
+    Mod+R { switch-preset-column-width; }
+    Mod+Shift+R { switch-preset-window-height; }
+    Mod+Ctrl+R { reset-window-height; }
+
+    /// Maximize/Toggle Fullscreen ///
+    Mod+F { maximize-column; }
+    Mod+Shift+F { fullscreen-window; }
+
+    Mod+C { center-column; }
+
+    /// Resize Column/Window ///
+    Mod+A { set-column-width "-10%"; }
+    Mod+D { set-column-width "+10%"; }
+
+    Mod+Ctrl+F { expand-column-to-available-width; }
+
+    // Finer height adjustments when in column with other windows.
+    Mod+Ctrl+A { set-window-height "-10%"; }
+    Mod+Ctrl+D { set-window-height "+10%"; }
+
+    /// Floating/Tiling ///
+    Mod+V       { toggle-window-floating; }
+    Mod+Shift+V { switch-focus-between-floating-and-tiling; }
+
+    /// Tabs ///
+    Mod+T { toggle-column-tabbed-display; }
+
+    // Actions to switch layouts.
+    // Note: if you uncomment these, make sure you do NOT have
+    // a matching layout switch hotkey configured in xkb options above.
+    // Having both at once on the same hotkey will break the switching,
+    // since it will switch twice upon pressing the hotkey (once by xkb, once by niri).
+    // Mod+Space       { switch-layout "next"; }
+    // Mod+Shift+Space { switch-layout "prev"; }
+
+    Print { screenshot-screen; }
+    Ctrl+Shift+Print { screenshot; }
+    Alt+Print { screenshot-window; }
+
+    // Applications such as remote-desktop clients and software KVM switches may
+    // request that niri stops processing the keyboard shortcuts defined here
+    // so they may, for example, forward the key presses as-is to a remote machine.
+    // It's a good idea to bind an escape hatch to toggle the inhibitor,
+    // so a buggy application can't hold your session hostage.
+    //
+    // The allow-inhibiting=false property can be applied to other binds as well,
+    // which ensures niri always processes them, even when an inhibitor is active.
+    Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+
+    /// Exit niri ///
+    Mod+Shift+Q { quit; }
+    Ctrl+Alt+Delete { quit; }
+
+    // Powers off the monitors. To turn them back on, do any input like
+    // moving the mouse or pressing any other key.
+    Mod+Shift+P { power-off-monitors; }
+}
+
+environment {
+  DISPLAY ":0"
+  ELECTRON_OZONE_PLATFORM_HINT "auto"
+}
