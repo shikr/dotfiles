@@ -214,4 +214,18 @@ return {
     end,
     enabled = not vim.g.vscode,
   },
+  {
+    'mcauley-penney/visual-whitespace.nvim',
+    event = 'ModeChanged *:[vV\22]',
+    opts = {
+      match_types = {
+        nbsp = false,
+        lead = false,
+      },
+      list_chars = {
+        space = '⋅',
+        trail = '⬩',
+      },
+    },
+  },
 }

@@ -2,11 +2,7 @@ require 'nvchad.options'
 
 -- add yours here!
 
-local o, opt = vim.o, vim.opt
-
-opt.list = true
-opt.listchars:append 'space:⋅'
-opt.listchars:append 'trail:⬩'
+local o = vim.opt
 
 o.wrap = true
 o.mousemoveevent = true
