@@ -103,6 +103,14 @@ return {
               end,
             },
             {
+              icon = '󰉋',
+              text = 'Navigate',
+              shortcut = 'd',
+              callback = function()
+                vim.cmd 'Triptych'
+              end,
+            },
+            {
               icon = '',
               text = 'Find Word',
               shortcut = 'w',

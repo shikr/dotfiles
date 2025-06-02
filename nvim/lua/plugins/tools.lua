@@ -111,4 +111,17 @@ return {
     opts = {},
     enabled = not vim.g.vscode,
   },
+
+  {
+    'simonmclean/triptych.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    opts = {
+      mappings = {
+        nav_left = { '<BS>', '<Left>', 'h' },
+        nav_right = { '<Right>', 'l' },
+        cd = '<CR>',
+      },
+    },
+    cmd = 'Triptych',
+  },
 }

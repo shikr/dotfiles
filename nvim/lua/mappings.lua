@@ -16,6 +16,9 @@ map('n', '<C-x>', '<cmd>q<cr>', { desc = 'Close neovim' })
 map('n', '<leader>fp', '<cmd>Telescope projects<cr>', { desc = 'Find project' })
 map('v', '<C-c>', 'y', { desc = 'Copy to clipboard' })
 map('c', '<C-c>', '<C-R>+', { desc = 'Paste' })
+map('n', '<leader>fd', function()
+  vim.cmd 'Triptych'
+end)
 
 -- Terminal
 map({ 'n', 't' }, '<A-i>', function()
