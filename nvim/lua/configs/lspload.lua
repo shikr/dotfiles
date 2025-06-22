@@ -8,6 +8,7 @@ local servers = {
   'eslint',
   'bashls',
   'clangd',
+  'cmake',
   {
     'rust_analyzer',
     opts = {

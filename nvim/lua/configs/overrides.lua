@@ -22,7 +22,8 @@ M.treesitter = {
     'bash',
     'kdl',
     'c',
-    'cpp'
+    'cpp',
+    'cmake',
   },
   indent = {
     enable = true,
@@ -60,7 +61,8 @@ M.mason = {
     'bash-language-server',
 
     -- C/C++
-    'clangd'
+    'clangd',
+    'cmake-language-server',
   },
 }
 
