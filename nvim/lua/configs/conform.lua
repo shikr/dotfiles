@@ -26,8 +26,17 @@ local prettier = {
   'handlebars',
 }
 
+local clang_format = {
+  'c',
+  'cpp',
+}
+
 for _, ft in ipairs(prettier) do
   M.formatters_by_ft[ft] = { 'prettierd' }
+end
+
+for _, ft in ipairs(clang_format) do
+  M.formatters_by_ft[ft] = { 'clang-format' }
 end
 
 M.formatters_by_ft.lua = { 'stylua' }

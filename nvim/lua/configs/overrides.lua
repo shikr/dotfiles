@@ -62,6 +62,7 @@ M.mason = {
 
     -- C/C++
     'clangd',
+    'clang-format',
     'cmake-language-server',
   },
 }
