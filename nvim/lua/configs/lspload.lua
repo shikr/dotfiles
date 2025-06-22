@@ -7,6 +7,7 @@ local servers = {
   'pyright',
   'eslint',
   'bashls',
+  'clangd',
   {
     'rust_analyzer',
     opts = {

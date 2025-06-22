@@ -21,6 +21,8 @@ M.treesitter = {
     'sql',
     'bash',
     'kdl',
+    'c',
+    'cpp'
   },
   indent = {
     enable = true,
@@ -56,6 +58,9 @@ M.mason = {
 
     -- Bash
     'bash-language-server',
+
+    -- C/C++
+    'clangd'
   },
 }
 
