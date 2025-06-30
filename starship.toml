@@ -249,8 +249,8 @@ style = "orange bold bg:prev_bg"
 
 [sudo]
 format = "[$symbol]($style) "
-symbol = "󱡄 "
-style = "red bold bg:prev_bg"
+symbol = " "
+style = "yellow bold bg:prev_bg"
 disabled = false
 
 [typst]
