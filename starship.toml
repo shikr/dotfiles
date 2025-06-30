@@ -4,7 +4,7 @@ format = """
 [╭─](lines)\
 [\ue0c7 [ $os ](bg:background)\ue0c6](background) \
 [\ue0c5 ](background)[ $directory](bg:background)\
-[\ue0b1 ](background_dark bg:background)([\
+([\ue0b1 ](background_dark bg:background)[\
 $git_branch\
 $git_commit\
 $git_state\
@@ -110,7 +110,7 @@ style = "black bold bg:prev_bg"
 version_format = "${raw}"
 
 [directory]
-format = "[ ](path)[$path]($style)[$read_only]($read_only_style) "
+format = "[ ](path bg:prev_bg)[$path]($style)[$read_only]($read_only_style) "
 style = "root bg:prev_bg"
 truncation_length = 3
 read_only = " "
