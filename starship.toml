@@ -1,16 +1,18 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-[╭─](lines) \
-$os\
-$directory\
+[╭─](lines)\
+[\ue0c7 [ $os ](bg:background)\ue0c6](background) \
+[\ue0c5 ](background)[ $directory](bg:background)\
+[\ue0b1 ](background_dark bg:background)([\
 $git_branch\
 $git_commit\
 $git_state\
-$git_metrics\
 $git_status\
+](bg:background))\
+[\ue0b0](background) \
 $fill\
-([\ue0c5](background) [ \
+( [\ue0c5](background) [ \
 $package\
 $c\
 $cpp\
@@ -54,6 +56,7 @@ root = '39'
 grey = '244'
 orange = '202'
 background = '235'
+background_dark = '232'
 
 [battery]
 format = "[$symbol$percentage]($style) "
@@ -108,19 +111,19 @@ version_format = "${raw}"
 
 [directory]
 format = "[ ](path)[$path]($style)[$read_only]($read_only_style) "
-style = "root"
+style = "root bg:prev_bg"
 truncation_length = 3
 read_only = " "
-read_only_style = "golden"
+read_only_style = "golden bg:prev_bg"
 truncate_to_repo = true
-before_repo_root_style = "path"
+before_repo_root_style = "path bg:prev_bg"
 repo_root_format = """
 [ $before_root_path]($before_repo_root_style)\
 [$repo_root]($repo_root_style)\
 [$path]($style)\
 [$read_only]($read_only_style) \
 """
-repo_root_style = "root bold"
+repo_root_style = "root bold bg:prev_bg"
 fish_style_pwd_dir_length = 2
 
 [fill]
@@ -129,26 +132,30 @@ style = "lines"
 
 [git_branch]
 format = "[$symbol$branch]($style) "
-style = "bold green"
+style = "bold green bg:background"
 only_attached = true
 
 [git_commit]
 format = "[ ]($style)@[$hash]($style) "
 commit_hash_length = 6
 only_detached = true
+style = "green bold bg:prev_bg"
+
+[git_state]
+style = "bold yellow bg:prev_bg"
 
 [git_status]
-format = "([$ahead_behind](green)$all_status )"
-conflicted = "[~$count](red)"
+format = "([$ahead_behind](green bg:prev_bg)$all_status )"
+conflicted = "[~$count](red bg:prev_bg)"
 ahead = "⇡${count}"
 behind = "⇣${count}"
 diverged = "⇕⇡${ahead_count}⇣${behind_count}"
-untracked = "[?$count](39)"
-stashed = "[*$count](green)"
-modified = "[!$count](gold)"
-staged = "[+$count](gold)"
-renamed = "[»$count](gold)"
-deleted = "[✘$count](gold)"
+untracked = "[?$count](39 bg:prev_bg)"
+stashed = "[*$count](green bg:prev_bg)"
+modified = "[!$count](gold bg:prev_bg)"
+staged = "[+$count](gold bg:prev_bg)"
+renamed = "[»$count](gold bg:prev_bg)"
+deleted = "[✘$count](gold bg:prev_bg)"
 ignore_submodules = true
 
 [gleam]
