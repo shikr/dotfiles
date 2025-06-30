@@ -34,6 +34,7 @@ const CONFIG_DIR =
  * @typedef {Object} Repository
  * @prop {string} name - The name of the repository.
  * @prop {string} author - The author of the repository.
+ * @prop {string} [directory] - The directory to clone the repository into.
  */
 
 /**
@@ -121,11 +122,16 @@ const configs = [
           { author: 'zsh-users', name: 'zsh-completions' },
           { author: 'hlissner', name: 'zsh-autopair' },
           { author: 'redxtech', name: 'zsh-kitty' },
-          { author: 'zshzoo', name: 'cd-ls' }
+          { author: 'zshzoo', name: 'cd-ls' },
+          {
+            author: 'olets',
+            name: 'zsh-transient-prompt',
+            directory: 'transient-prompt'
+          }
         ]
 
-        repositories.forEach(({ author, name }) => {
-          const repoPath = path.join(dir, name)
+        repositories.forEach(({ author, name, directory }) => {
+          const repoPath = path.join(dir, directory ?? name)
           if (!fs.existsSync(repoPath)) {
             info('Cloning %s plugin...', name)
             $$`git clone https://github.com/${author}/${name}.git ${repoPath}`

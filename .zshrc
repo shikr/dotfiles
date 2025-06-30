@@ -2,7 +2,12 @@ export PATH=$PATH:$HOME/.local/bin:/usr/local/bin:$HOME/.cargo/bin:~/.npm-global
 
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="robbyrussell"
+# ZSH_THEME="robbyrussell"
+
+command -v starship >/dev/null && eval "$(starship init zsh)"
+
+TRANSIENT_PROMPT_TRANSIENT_PROMPT='$(starship module character --status="$STARSHIP_CMD_STATUS")'
+TRANSIENT_PROMPT_TRANSIENT_RPROMPT=''
 
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
@@ -22,7 +27,7 @@ ENABLE_CORRECTION="true"
 
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
-plugins=(git rust sudo command-not-found zsh-interactive-cd zsh-npm-scripts-autocomplete zsh-kitty zsh-cargo-completion cd-ls zsh-autosuggestions zsh-autopair zsh-syntax-highlighting)
+plugins=(git rust sudo command-not-found transient-prompt zsh-interactive-cd zsh-npm-scripts-autocomplete zsh-kitty zsh-cargo-completion cd-ls zsh-autosuggestions zsh-autopair zsh-syntax-highlighting)
 
 fpath+=${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
@@ -40,5 +45,3 @@ command -v lsd >/dev/null && alias ls="lsd"
 alias la="ls -a"
 
 export NPM_CONFIG_PREFIX=~/.npm-global
-
-command -v starship >/dev/null && eval "$(starship init zsh)"
