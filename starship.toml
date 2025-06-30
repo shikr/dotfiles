@@ -10,7 +10,27 @@ $git_state\
 $git_metrics\
 $git_status\
 $fill \
-$all\
+([\ue0c5](background) [ \
+$package\
+$c\
+$cpp\
+$cmake\
+$deno\
+$gleam\
+$golang\
+$lua\
+$nodejs\
+$rust\
+$typst\
+$zig\
+$nix_shell\
+$meson\
+$sudo\
+$cmd_duration\
+$jobs\
+$battery\
+](bg:background)) \
+$line_break\
 [╰─](lines)\
 $character\
 """
@@ -30,16 +50,41 @@ path = '31'
 root = '39'
 grey = '244'
 orange = '202'
+background = '235'
+
+[battery]
+format = "[$symbol$percentage]($style) "
+
+[[battery.display]]
+threshold = 10
+style = "red bold bg:prev_bg"
+
+[[battery.display]]
+threshold = 20
+style = "orange bold bg:prev_bg"
 
 [bun]
 format = "[$symbol($version)]($style) "
 version_format = "${raw}"
+style = "bold red bg:prev_bg"
 
 [c]
 format = "[$symbol($version(-$name))]($style) "
 version_format = "${raw}"
 symbol = " "
-style = "dodgeblue bold"
+style = "dodgeblue bold bg:prev_bg"
+
+[cpp]
+format = "[$symbol($version(-$name))]($style) "
+version_format = "${raw}"
+symbol = " "
+style = "dodgeblue bold bg:prev_bg"
+
+[cmake]
+format = "[$symbol($version)]($style) "
+version_format = "${raw}"
+symbol = " "
+style = "197 bold bg:prev_bg"
 
 [character]
 success_symbol = "[❯](bold green)"
@@ -51,11 +96,11 @@ vimcmd_replace_one_symbol = "[▶](bold green)"
 
 [cmd_duration]
 format = "[ $duration]($style) "
-style = "wheat"
+style = "wheat bg:prev_bg"
 
 [deno]
 format = "[$symbol($version)]($style) "
-style = "black bold"
+style = "black bold bg:prev_bg"
 version_format = "${raw}"
 
 [directory]
@@ -74,10 +119,6 @@ repo_root_format = """
 """
 repo_root_style = "root bold"
 fish_style_pwd_dir_length = 2
-
-[docker_context]
-format = "[$symbol$context]($style) "
-symbol = " "
 
 [fill]
 symbol = "─"
@@ -107,30 +148,49 @@ renamed = "[»$count](gold)"
 deleted = "[✘$count](gold)"
 ignore_submodules = true
 
+[gleam]
+format = "[$symbol($version)]($style) "
+version_format = "${raw}"
+symbol = " "
+style = "177 bold bg:prev_bg"
+
 [golang]
 format = "[$symbol($version)]($style) "
 version_format = "${raw}"
 symbol = " "
-style = "skyblue bold"
+style = "skyblue bold bg:prev_bg"
+
+[jobs]
+format = "[$symbol$number]($style) "
+symbol = " "
+style = "bold blue bg:prev_bg"
 
 [lua]
 format = "[$symbol($version)]($style) "
 version_format = "${raw}"
 symbol = " "
-style = "dodgeblue bold"
+style = "dodgeblue bold bg:prev_bg"
+
+[meson]
+format = "[$symbol$project]($style) "
+symbol = "⬢ "
+style = "91 bold bg:prev_bg"
+
 
 [nix_shell]
 format = "[$symbol$state]($style) "
 symbol = "󱄅 "
-style = "dodgeblue bold"
+style = "dodgeblue bold bg:prev_bg"
 
 [nodejs]
 format = "[$symbol($version)]($style) "
 version_format = "${raw}"
 symbol = " "
+style = "green bold bg:prev_bg"
 
 [os]
 disabled = false
+style = "white bold bg:prev_bg"
 
 [os.symbols]
 Alpine = " "
@@ -163,14 +223,34 @@ Windows = " "
 [package]
 format = "[$symbol$version]($style) "
 version_format = "${raw}"
+style = "208 bold bg:prev_bg"
 
 [python]
 format = "[$symbol($version)]($style) "
 version_format = "${raw}"
 symbol = " "
+style = "yellow bold bg:prev_bg"
 
 [rust]
 format = "[$symbol($version)]($style) "
 version_format = "${raw}"
 symbol = " "
-style = "orange bold"
+style = "orange bold bg:prev_bg"
+
+[sudo]
+format = "[$symbol]($style) "
+symbol = "󱡄 "
+style = "red bold bg:prev_bg"
+disabled = false
+
+[typst]
+format = "[$symbol($version)]($style) "
+version_format = "${raw}"
+symbol = " "
+style = "#0093A7 bold bg:prev_bg"
+
+[zig]
+format = "[$symbol($version)]($style) "
+version_format = "${raw}"
+symbol = " "
+style = "yellow bold bg:prev_bg"
