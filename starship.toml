@@ -9,7 +9,7 @@ $git_commit\
 $git_state\
 $git_metrics\
 $git_status\
-$fill \
+$fill\
 ([\ue0c5](background) [ \
 $package\
 $c\
@@ -29,12 +29,15 @@ $sudo\
 $cmd_duration\
 $jobs\
 $battery\
-](bg:background)) \
+[\ue0bc](background)\
+](bg:background))\
+[─╮](lines) \
 $line_break\
 [╰─](lines)\
 $character\
 """
 continuation_prompt = "[➜](lines) "
+right_format = "[─╯](lines)"
 add_newline = true
 
 palette = 'default'
