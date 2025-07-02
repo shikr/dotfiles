@@ -1,15 +1,20 @@
 import { Gtk } from 'ags/gtk4';
-import { createPoll } from 'ags/time';
+import Clock from '../clock/Clock';
 
 function Right() {
-    const time = createPoll('', 1000, 'date');
-
     return (
         <box $type="end" halign={Gtk.Align.END}>
-            <menubutton hexpand>
-                <label label={time} />
-                <popover>
-                    <Gtk.Calendar />
+            <menubutton class="clock" valign={Gtk.Align.CENTER}>
+                <Clock />
+                <popover
+                    $={self => {
+                        self.set_offset(0, 10);
+                    }}
+                    hasArrow={false}
+                >
+                    <box>
+                        <Gtk.Calendar />
+                    </box>
                 </popover>
             </menubutton>
         </box>

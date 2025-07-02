@@ -9,16 +9,24 @@ button:focus {
 .Bar {
     background: transparent;
     color: $fg-color;
-    font-weight: bold;
 
     > centerbox {
         background: $bg-color;
         border-radius: 10px;
-        margin: 6px;
+        margin: 4px;
+        padding: 2px;
     }
 
     button {
         border-radius: 8px;
         margin: 2px;
+    }
+
+    .clock {
+        font-size: 0.7rem;
+
+        button {
+            padding: 2px 6px;
+        }
     }
 }
