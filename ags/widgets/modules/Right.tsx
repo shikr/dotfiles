@@ -1,9 +1,15 @@
 import { Gtk } from 'ags/gtk4';
 import Clock from '../clock/Clock';
+import Battery from '../status/Battery';
 
 function Right() {
     return (
         <box $type="end" halign={Gtk.Align.END}>
+            <button>
+                <box halign={Gtk.Align.CENTER}>
+                    <Battery />
+                </box>
+            </button>
             <menubutton class="clock" valign={Gtk.Align.CENTER}>
                 <Clock />
                 <popover
