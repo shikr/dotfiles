@@ -1,6 +1,8 @@
+import { Accessor } from 'ags';
+
 interface IndicatorProps {
-    iconName: string;
-    tooltip: string;
+    iconName: string | Accessor<string>;
+    tooltip: string | Accessor<string>;
 }
 
 function Indicator(props: IndicatorProps) {
