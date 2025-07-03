@@ -8,7 +8,7 @@ interface IndicatorProps {
 function Indicator(props: IndicatorProps) {
     return (
         <image
-            pixelSize={14}
+            pixelSize={16}
             iconName={props.iconName}
             tooltipText={props.tooltip}
         />
