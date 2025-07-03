@@ -1,12 +1,14 @@
 import { Gtk } from 'ags/gtk4';
 import Clock from '../clock/Clock';
 import Battery from '../status/Battery';
+import Network from '../status/Network';
 
 function Right() {
     return (
         <box $type="end" halign={Gtk.Align.END}>
             <button>
-                <box halign={Gtk.Align.CENTER}>
+                <box halign={Gtk.Align.CENTER} spacing={6}>
+                    <Network />
                     <Battery />
                 </box>
             </button>
