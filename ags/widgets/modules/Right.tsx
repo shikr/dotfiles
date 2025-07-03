@@ -2,6 +2,7 @@ import { Gtk } from 'ags/gtk4';
 import Clock from '../clock/Clock';
 import Battery from '../status/Battery';
 import Network from '../status/Network';
+import Speaker from '../status/Speaker';
 
 function Right() {
     return (
@@ -9,6 +10,7 @@ function Right() {
             <button>
                 <box halign={Gtk.Align.CENTER} spacing={6}>
                     <Network />
+                    <Speaker />
                     <Battery />
                 </box>
             </button>
