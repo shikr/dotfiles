@@ -1,5 +1,6 @@
 import { createBinding, createComputed, With } from 'ags';
 import AstalBattery from 'gi://AstalBattery';
+import Indicator from './Indicator';
 
 const states: Record<AstalBattery.State, string> = {
     [AstalBattery.State.UNKNOWN]: 'Unknown status',
@@ -32,10 +33,9 @@ function Battery() {
                 if (deviceType !== AstalBattery.Type.BATTERY) return false;
 
                 return (
-                    <image
-                        pixelSize={14}
+                    <Indicator
                         iconName={batteryIconName}
-                        tooltipText={states[state]}
+                        tooltip={states[state]}
                     />
                 );
             }}
