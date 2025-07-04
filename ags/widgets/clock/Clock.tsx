@@ -28,6 +28,8 @@ function Clock() {
     const tooltip = createPoll('', 1000, ['date', '+%A %d %B %Y']);
     const [time, setTime] = createState(exec(getFormat(clockFormat.get())));
 
+    clockFormat.subscribe(() => setTime(exec(getFormat(clockFormat.get()))));
+
     setInterval(() => setTime(exec(getFormat(clockFormat.get()))), 1000);
 
     return (
