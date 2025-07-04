@@ -1,8 +1,7 @@
 import { createSettings, createState } from 'ags';
-import { Gtk } from 'ags/gtk4';
-import { exec } from 'ags/process';
 import { createPoll } from 'ags/time';
 import Gio from 'gi://Gio';
+import GLib from 'gi://GLib';
 
 const TIME_FORMAT = {
     '24h': '%R',
@@ -11,38 +10,28 @@ const TIME_FORMAT = {
 
 type TimeKey = keyof typeof TIME_FORMAT;
 
-const getFormat = (format: string) => [
-    'date',
-    '+' +
-        (format in TIME_FORMAT
-            ? TIME_FORMAT[format as TimeKey]
-            : TIME_FORMAT['12h']),
-];
+const getTime = (clockFormat: string) => {
+    const format =
+        clockFormat in TIME_FORMAT
+            ? TIME_FORMAT[clockFormat as TimeKey]
+            : TIME_FORMAT['12h'];
+
+    return GLib.DateTime.new_now_local().format(format)!;
+};
 
 function Clock() {
     const gsettings = Gio.Settings.new('org.gnome.desktop.interface');
     const { clockFormat } = createSettings(gsettings, {
         'clock-format': 's',
     });
-    const date = createPoll('', 1000, ['date', '+%d/%m/%y']);
     const tooltip = createPoll('', 1000, ['date', '+%A %d %B %Y']);
-    const [time, setTime] = createState(exec(getFormat(clockFormat.get())));
+    const [time, setTime] = createState(getTime(clockFormat.get()));
 
-    clockFormat.subscribe(() => setTime(exec(getFormat(clockFormat.get()))));
+    clockFormat.subscribe(() => setTime(getTime(clockFormat.get())));
 
-    setInterval(() => setTime(exec(getFormat(clockFormat.get()))), 1000);
+    setInterval(() => setTime(getTime(clockFormat.get())), 1000);
 
-    return (
-        <box
-            orientation={Gtk.Orientation.VERTICAL}
-            spacing={0}
-            tooltipText={tooltip}
-            class="clock"
-        >
-            <label label={date} />
-            <label label={time} />
-        </box>
-    );
+    return <label label={time} tooltipText={tooltip} class="clock" />;
 }
 
 export default Clock;
