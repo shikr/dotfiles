@@ -36,19 +36,13 @@ function Notification({ notification, close }: Props) {
             </box>
             <Gtk.Separator orientation={Gtk.Orientation.HORIZONTAL} />
             <box hexpand>
-                <label
-                    ellipsize={Pango.EllipsizeMode.END}
-                    hexpand
-                    maxWidthChars={30}
-                    halign={Gtk.Align.START}
-                    label={notification.summary}
-                />
                 {(image => {
                     if (!image) return false;
                     if (new Gtk.IconTheme().has_icon(image))
                         return (
                             <image
-                                halign={Gtk.Align.END}
+                                halign={Gtk.Align.FILL}
+                                hexpand
                                 iconName={image}
                                 iconSize={Gtk.IconSize.LARGE}
                             />
@@ -56,7 +50,8 @@ function Notification({ notification, close }: Props) {
                     if (GLib.file_test(image, GLib.FileTest.EXISTS))
                         return (
                             <image
-                                halign={Gtk.Align.END}
+                                halign={Gtk.Align.FILL}
+                                hexpand
                                 file={image}
                                 overflow={Gtk.Overflow.HIDDEN}
                                 pixelSize={64}
@@ -67,6 +62,13 @@ function Notification({ notification, close }: Props) {
                 })(notification.image)}
             </box>
             <box orientation={Gtk.Orientation.VERTICAL}>
+                <label
+                    ellipsize={Pango.EllipsizeMode.END}
+                    hexpand
+                    maxWidthChars={30}
+                    halign={Gtk.Align.START}
+                    label={notification.summary}
+                />
                 <label
                     maxWidthChars={30}
                     wrap
