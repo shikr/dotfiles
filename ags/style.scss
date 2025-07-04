@@ -26,3 +26,11 @@ $bg-color: #{'@theme_bg_color'};
         }
     }
 }
+
+.Notifications {
+    background: $bg-color;
+    color: $fg-color;
+    border-radius: 8px;
+    padding: 4px;
+    margin: 10px;
+}
