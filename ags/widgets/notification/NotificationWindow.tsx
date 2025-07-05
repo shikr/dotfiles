@@ -23,7 +23,7 @@ function NotificationWindow(gdkmonitor: Gdk.Monitor) {
             source.get_notification(id).urgency === AstalNotifd.Urgency.CRITICAL
         )
             setNotifications(n => {
-                if (n.has(id)) clearInterval(n.get(id)!);
+                if (n.has(id)) clearTimeout(n.get(id)!);
                 return new Map([
                     [id, setTimeout(() => excludeNotification(id), 5000)],
                     ...n.entries(),
@@ -33,13 +33,13 @@ function NotificationWindow(gdkmonitor: Gdk.Monitor) {
 
     const removeNotification = (id: number) =>
         setNotifications(n => {
-            if (n.has(id)) clearInterval(n.get(id)!);
+            if (n.has(id)) clearTimeout(n.get(id)!);
             return new Map(Array.from(n.entries()).filter(([k]) => k !== id));
         });
 
     const clearTimer = (id: number) => {
         const source = notifications.get().get(id);
-        if (source) clearInterval(source);
+        if (source) clearTimeout(source);
     };
 
     const resetTimer = (id: number) =>
