@@ -7,13 +7,26 @@ import NotificationHeader from './layout/NotificationHeader';
 interface Props {
     notification: AstalNotifd.Notification;
     close: () => unknown;
+    clearTimer: (id: number) => unknown;
+    resetTimer: (id: number) => unknown;
 }
 
-function Notification({ notification, close }: Props) {
+function Notification({ notification, close, clearTimer, resetTimer }: Props) {
     const margin = 6;
 
     return (
-        <Gtk.Frame class="app-notification">
+        <Gtk.Frame
+            $={self => {
+                const motion = Gtk.EventControllerMotion.new();
+
+                motion.connect('enter', () => clearTimer(notification.id));
+
+                motion.connect('leave', () => resetTimer(notification.id));
+
+                self.add_controller(motion);
+            }}
+            class="app-notification"
+        >
             <box
                 orientation={Gtk.Orientation.VERTICAL}
                 overflow={Gtk.Overflow.VISIBLE}
