@@ -20,7 +20,6 @@ function NotificationWindow(gdkmonitor: Gdk.Monitor) {
             setNotifications(n => {
                 if (n.has(id)) clearInterval(n.get(id)!);
                 return new Map([
-                    ...n.entries(),
                     [
                         id,
                         setTimeout(
@@ -36,6 +35,7 @@ function NotificationWindow(gdkmonitor: Gdk.Monitor) {
                             5000
                         ),
                     ],
+                    ...n.entries(),
                 ]);
             });
     });
