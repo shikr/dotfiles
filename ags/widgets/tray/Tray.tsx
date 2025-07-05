@@ -46,8 +46,7 @@ function Tray() {
     tray.connect('item-removed', source => setItems(source.items));
 
     return (
-        <menubutton valign={Gtk.Align.CENTER}>
-            <image iconName={icon} />
+        <menubutton cssClasses={['raised', 'image-button']} iconName={icon}>
             <popover
                 $={self => self.set_offset(0, 10)}
                 hasArrow={false}
@@ -70,9 +69,12 @@ function Tray() {
                             }, []);
 
                         return (
-                            <box orientation={Gtk.Orientation.VERTICAL}>
+                            <box
+                                orientation={Gtk.Orientation.VERTICAL}
+                                class="vertical"
+                            >
                                 {items_.map(row => (
-                                    <box>
+                                    <box class="horizontal">
                                         {row.map(item => (
                                             <menubutton
                                                 $={self => {
@@ -94,6 +96,7 @@ function Tray() {
                                                         item.actionGroup
                                                     );
                                                 }}
+                                                class="flat"
                                                 tooltipMarkup={createBinding(
                                                     item,
                                                     'tooltipMarkup'

@@ -3,13 +3,12 @@ import { execAsync } from 'ags/process';
 
 function Left() {
     return (
-        <box $type="start" halign={Gtk.Align.START}>
+        <box $type="start" class="horizontal" halign={Gtk.Align.START}>
             <button
                 onClicked={() => execAsync('echo hello').then(console.log)}
-                hexpand
-            >
-                <image iconName="start-here" />
-            </button>
+                cssClasses={['raised', 'image-button']}
+                iconName="start-here"
+            />
         </box>
     );
 }

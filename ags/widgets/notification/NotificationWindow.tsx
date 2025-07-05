@@ -5,6 +5,7 @@ import AstalNotifd from 'gi://AstalNotifd';
 import GLib from 'gi://GLib';
 import Notification from './Notification';
 
+// TODO: use https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.ToastOverlay.html
 function NotificationWindow(gdkmonitor: Gdk.Monitor) {
     const notifd = AstalNotifd.get_default();
     const [notifications, setNotifications] = createState<
@@ -49,7 +50,7 @@ function NotificationWindow(gdkmonitor: Gdk.Monitor) {
 
     return (
         <window
-            class="Notifications"
+            name="notifications"
             visible={notifications(n => n.size > 0)}
             defaultHeight={-1}
             defaultWidth={-1}
@@ -57,7 +58,7 @@ function NotificationWindow(gdkmonitor: Gdk.Monitor) {
             anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT}
             application={app}
         >
-            <box orientation={Gtk.Orientation.VERTICAL}>
+            <box orientation={Gtk.Orientation.VERTICAL} class="vertical">
                 <For each={notifications(n => Array.from(n.keys()))}>
                     {id => (
                         <Notification

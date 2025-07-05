@@ -1,7 +1,8 @@
 import { Gtk } from 'ags/gtk4';
 import AstalNotifd from 'gi://AstalNotifd';
-import GLib from 'gi://GLib';
-import Pango from 'gi://Pango';
+import NotificationAction from './layout/NotificationAction';
+import NotificationBody from './layout/NotificationBody';
+import NotificationHeader from './layout/NotificationHeader';
 
 interface Props {
     notification: AstalNotifd.Notification;
@@ -9,87 +10,38 @@ interface Props {
 }
 
 function Notification({ notification, close }: Props) {
-    return (
-        <box
-            orientation={Gtk.Orientation.VERTICAL}
-            halign={Gtk.Align.FILL}
-            hexpand
-        >
-            <box halign={Gtk.Align.FILL} hexpand>
-                <image
-                    halign={Gtk.Align.START}
-                    iconSize={Gtk.IconSize.NORMAL}
-                    iconName={notification.appIcon}
-                />
-                <label
-                    label={notification.appName}
-                    halign={Gtk.Align.FILL}
-                    hexpand
-                />
-                <button
-                    halign={Gtk.Align.END}
-                    onClicked={() => close()}
-                    class="close"
-                >
-                    <image iconName="window-close-symbolic" />
-                </button>
-            </box>
-            <Gtk.Separator orientation={Gtk.Orientation.HORIZONTAL} />
-            <box hexpand>
-                {(image => {
-                    if (!image) return false;
-                    if (new Gtk.IconTheme().has_icon(image))
-                        return (
-                            <image
-                                halign={Gtk.Align.FILL}
-                                hexpand
-                                iconName={image}
-                                iconSize={Gtk.IconSize.LARGE}
-                            />
-                        );
-                    if (GLib.file_test(image, GLib.FileTest.EXISTS))
-                        return (
-                            <image
-                                halign={Gtk.Align.FILL}
-                                hexpand
-                                file={image}
-                                overflow={Gtk.Overflow.HIDDEN}
-                                pixelSize={64}
-                            />
-                        );
+    const margin = 6;
 
-                    return false;
-                })(notification.image)}
-            </box>
-            <box orientation={Gtk.Orientation.VERTICAL}>
-                <label
-                    ellipsize={Pango.EllipsizeMode.END}
-                    hexpand
-                    maxWidthChars={30}
-                    halign={Gtk.Align.START}
-                    label={notification.summary}
+    return (
+        <Gtk.Frame class="app-notification">
+            <box
+                orientation={Gtk.Orientation.VERTICAL}
+                overflow={Gtk.Overflow.VISIBLE}
+                class="vertical"
+                marginBottom={margin}
+                marginEnd={margin}
+                marginTop={margin}
+                marginStart={margin}
+                spacing={4}
+            >
+                <NotificationHeader notification={notification} close={close} />
+                <Gtk.Separator
+                    orientation={Gtk.Orientation.HORIZONTAL}
+                    class="horizontal"
                 />
-                <label
-                    maxWidthChars={30}
-                    wrap
-                    hexpand={false}
-                    halign={Gtk.Align.START}
-                    label={notification.body}
-                />
+                <NotificationBody notification={notification} />
+                {notification.actions.length > 0 && (
+                    <box hexpand spacing={4} class="horizontal">
+                        {notification.actions.map(action => (
+                            <NotificationAction
+                                action={action}
+                                notification={notification}
+                            />
+                        ))}
+                    </box>
+                )}
             </box>
-            {notification.actions.length > 0 && (
-                <box hexpand spacing={4}>
-                    {notification.actions.map(({ label, id }) => (
-                        <button
-                            hexpand
-                            onClicked={() => notification.invoke(id)}
-                        >
-                            <label label={label} halign={Gtk.Align.CENTER} />
-                        </button>
-                    ))}
-                </box>
-            )}
-        </box>
+        </Gtk.Frame>
     );
 }
 

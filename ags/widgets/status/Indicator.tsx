@@ -6,13 +6,7 @@ interface IndicatorProps {
 }
 
 function Indicator(props: IndicatorProps) {
-    return (
-        <image
-            pixelSize={16}
-            iconName={props.iconName}
-            tooltipText={props.tooltip}
-        />
-    );
+    return <image iconName={props.iconName} tooltipText={props.tooltip} />;
 }
 
 export default Indicator;

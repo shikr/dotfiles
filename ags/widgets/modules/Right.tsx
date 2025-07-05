@@ -7,16 +7,16 @@ import Tray from '../tray/Tray';
 
 function Right() {
     return (
-        <box $type="end" halign={Gtk.Align.END}>
+        <box $type="end" class="horizontal" halign={Gtk.Align.END} spacing={4}>
             <Tray />
-            <button>
-                <box halign={Gtk.Align.CENTER} spacing={6}>
+            <button class="raised">
+                <box spacing={6} class="horizontal">
                     <Network />
                     <Speaker />
                     <Battery />
                 </box>
             </button>
-            <menubutton class="clock" valign={Gtk.Align.CENTER}>
+            <menubutton class="raised">
                 <Clock />
                 <popover
                     $={self => {
@@ -24,7 +24,10 @@ function Right() {
                     }}
                     hasArrow={false}
                 >
-                    <box>
+                    <box
+                        orientation={Gtk.Orientation.VERTICAL}
+                        class="vertical"
+                    >
                         <Gtk.Calendar />
                     </box>
                 </popover>

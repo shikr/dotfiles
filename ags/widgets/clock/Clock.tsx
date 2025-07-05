@@ -31,7 +31,7 @@ function Clock() {
 
     setInterval(() => setTime(getTime(clockFormat.get())), 1000);
 
-    return <label label={time} tooltipText={tooltip} class="clock" />;
+    return <label label={time} tooltipText={tooltip} class="body" />;
 }
 
 export default Clock;

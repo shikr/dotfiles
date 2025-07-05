@@ -1,4 +1,4 @@
-import { Astal, Gdk } from 'ags/gtk4';
+import { Astal, Gdk, Gtk } from 'ags/gtk4';
 import app from 'ags/gtk4/app';
 import Left from './modules/Left';
 import Right from './modules/Right';
@@ -10,17 +10,18 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
         <window
             visible
             name="bar"
-            class="Bar"
             gdkmonitor={gdkmonitor}
             exclusivity={Astal.Exclusivity.EXCLUSIVE}
             anchor={TOP | LEFT | RIGHT}
             application={app}
         >
-            <centerbox cssName="centerbox">
-                <Left />
-                <box $type="center" />
-                <Right />
-            </centerbox>
+            <Gtk.Frame cssClasses={['background', 'toolbar']}>
+                <centerbox class="horizontal">
+                    <Left />
+                    <box $type="center" />
+                    <Right />
+                </centerbox>
+            </Gtk.Frame>
         </window>
     );
 }
