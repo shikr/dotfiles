@@ -1,4 +1,6 @@
 import { Gtk } from 'ags/gtk4';
+import BarButton from '../bar/BarButton';
+import BarPopover from '../bar/BarPopover';
 import Clock from '../clock/Clock';
 import Battery from '../status/Battery';
 import Network from '../status/Network';
@@ -16,22 +18,17 @@ function Right() {
                     <Battery />
                 </box>
             </button>
-            <menubutton class="raised">
+            <BarButton>
                 <Clock />
-                <popover
-                    $={self => {
-                        self.set_offset(0, 10);
-                    }}
-                    hasArrow={false}
-                >
+                <BarPopover>
                     <box
                         orientation={Gtk.Orientation.VERTICAL}
                         class="vertical"
                     >
                         <Gtk.Calendar />
                     </box>
-                </popover>
-            </menubutton>
+                </BarPopover>
+            </BarButton>
         </box>
     );
 }

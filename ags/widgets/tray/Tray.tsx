@@ -1,6 +1,8 @@
 import { createState, With } from 'ags';
 import { Gtk } from 'ags/gtk4';
 import AstalTray from 'gi://AstalTray';
+import BarButton from '../bar/BarButton';
+import BarPopover from '../bar/BarPopover';
 import TrayItem from './TrayItem';
 
 interface Dimension {
@@ -47,10 +49,8 @@ function Tray() {
     tray.connect('item-removed', source => setItems(source.items));
 
     return (
-        <menubutton cssClasses={['raised', 'image-button']} iconName={icon}>
-            <popover
-                $={self => self.set_offset(0, 10)}
-                hasArrow={false}
+        <BarButton iconName={icon}>
+            <BarPopover
                 onMap={() => setIcon(ICONS.open)}
                 onUnmap={() => setIcon(ICONS.close)}
             >
@@ -85,8 +85,8 @@ function Tray() {
                         );
                     }}
                 </With>
-            </popover>
-        </menubutton>
+            </BarPopover>
+        </BarButton>
     );
 }
 
