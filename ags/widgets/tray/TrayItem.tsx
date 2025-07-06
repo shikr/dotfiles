@@ -23,7 +23,7 @@ function TrayItem({ item }: Props) {
                 self.add_controller(gesture);
                 popover.set_parent(self);
             }}
-            class="flat"
+            cssClasses={['flat', 'image-button']}
             tooltipMarkup={createBinding(item, 'tooltipMarkup')}
             onClicked={() => item.activate(0, 0)}
         >
