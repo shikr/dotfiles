@@ -4,7 +4,7 @@ import Indicator from './Indicator';
 
 const FALLBACK_ICON = 'volume-level-none';
 
-function Speaker() {
+function SpeakerStatus() {
     const wp = AstalWp.get_default()!;
     const icon = wp?.defaultSpeaker.volumeIcon ?? FALLBACK_ICON;
     const volume = wp?.defaultSpeaker.volume ?? 0;
@@ -36,4 +36,4 @@ function Speaker() {
     );
 }
 
-export default Speaker;
+export default SpeakerStatus;

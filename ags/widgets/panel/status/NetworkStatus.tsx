@@ -1,8 +1,8 @@
 import { createBinding } from 'ags';
-import { ShellNetwork } from '../../utils/network';
+import { ShellNetwork } from '../../../utils/network';
 import Indicator from './Indicator';
 
-function Network() {
+function NetworkStatus() {
     const network = ShellNetwork.get_default();
     const state = createBinding(network, 'status');
     const iconName = createBinding(network, 'iconName');
@@ -10,4 +10,4 @@ function Network() {
     return <Indicator iconName={iconName} tooltip={state} />;
 }
 
-export default Network;
+export default NetworkStatus;

@@ -12,7 +12,7 @@ const states: Record<AstalBattery.State, string> = {
     [AstalBattery.State.EMPTY]: 'Empty',
 };
 
-function Battery() {
+function BatteryStatus() {
     const battery = AstalBattery.get_default();
     const c = createComputed(
         [
@@ -43,4 +43,4 @@ function Battery() {
     );
 }
 
-export default Battery;
+export default BatteryStatus;
