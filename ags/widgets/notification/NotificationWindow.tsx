@@ -12,11 +12,6 @@ function NotificationWindow(gdkmonitor: Gdk.Monitor) {
         Map<number, GLib.Source>
     >(new Map());
 
-    const excludeNotification = (id: number) =>
-        setNotifications(
-            n => new Map(Array.from(n.entries()).filter(([k]) => k !== id))
-        );
-
     notifd.connect('notified', (source, id) => {
         if (
             !notifd.dontDisturb ||
@@ -25,7 +20,21 @@ function NotificationWindow(gdkmonitor: Gdk.Monitor) {
             setNotifications(n => {
                 if (n.has(id)) clearTimeout(n.get(id)!);
                 return new Map([
-                    [id, setTimeout(() => excludeNotification(id), 5000)],
+                    [
+                        id,
+                        setTimeout(
+                            () =>
+                                setNotifications(
+                                    n =>
+                                        new Map(
+                                            Array.from(n.entries()).filter(
+                                                ([k]) => k !== id
+                                            )
+                                        )
+                                ),
+                            5000
+                        ),
+                    ],
                     ...n.entries(),
                 ]);
             });
@@ -36,29 +45,6 @@ function NotificationWindow(gdkmonitor: Gdk.Monitor) {
             if (n.has(id)) clearTimeout(n.get(id)!);
             return new Map(Array.from(n.entries()).filter(([k]) => k !== id));
         });
-
-    const clearTimer = (id: number) => {
-        const source = notifications.get().get(id);
-        if (source) clearTimeout(source);
-    };
-
-    const resetTimer = (id: number) =>
-        setNotifications(
-            n =>
-                new Map(
-                    Array.from(n.entries()).map(([k, v]) =>
-                        k === id
-                            ? [
-                                  k,
-                                  setTimeout(
-                                      () => excludeNotification(id),
-                                      5000
-                                  ),
-                              ]
-                            : [k, v]
-                    )
-                )
-        );
 
     notifd.connect('resolved', (_, id) => removeNotification(id));
 
@@ -78,8 +64,6 @@ function NotificationWindow(gdkmonitor: Gdk.Monitor) {
                         <Notification
                             notification={notifd.get_notification(id as number)}
                             close={() => removeNotification(id as number)}
-                            clearTimer={clearTimer}
-                            resetTimer={resetTimer}
                         />
                     )}
                 </For>
