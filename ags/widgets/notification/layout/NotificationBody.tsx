@@ -47,6 +47,7 @@ function NotificationBody({ notification }: Props) {
                     halign={Gtk.Align.START}
                     label={notification.summary}
                     ellipsize={Pango.EllipsizeMode.END}
+                    tooltipText={notification.summary}
                 />
                 {Boolean(notification.body) && (
                     <label
@@ -54,6 +55,7 @@ function NotificationBody({ notification }: Props) {
                         maxWidthChars={30}
                         halign={Gtk.Align.START}
                         label={notification.body}
+                        tooltipMarkup={notification.body}
                     />
                 )}
             </box>
