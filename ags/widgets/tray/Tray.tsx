@@ -1,6 +1,7 @@
-import { createBinding, createState, With } from 'ags';
-import { Gdk, Gtk } from 'ags/gtk4';
+import { createState, With } from 'ags';
+import { Gtk } from 'ags/gtk4';
 import AstalTray from 'gi://AstalTray';
+import TrayItem from './TrayItem';
 
 interface Dimension {
     width: number;
@@ -76,40 +77,7 @@ function Tray() {
                                 {items_.map(row => (
                                     <box class="horizontal">
                                         {row.map(item => (
-                                            <menubutton
-                                                $={self => {
-                                                    const gesture =
-                                                        Gtk.GestureClick.new();
-                                                    gesture.set_button(
-                                                        Gdk.BUTTON_SECONDARY
-                                                    );
-                                                    gesture.connect(
-                                                        'pressed',
-                                                        () => self.popup()
-                                                    );
-
-                                                    self.add_controller(
-                                                        gesture
-                                                    );
-                                                    self.insert_action_group(
-                                                        'dbusmenu',
-                                                        item.actionGroup
-                                                    );
-                                                }}
-                                                class="flat"
-                                                tooltipMarkup={createBinding(
-                                                    item,
-                                                    'tooltipMarkup'
-                                                )}
-                                                menuModel={item.menuModel}
-                                            >
-                                                <image
-                                                    gicon={createBinding(
-                                                        item,
-                                                        'gicon'
-                                                    )}
-                                                />
-                                            </menubutton>
+                                            <TrayItem item={item} />
                                         ))}
                                     </box>
                                 ))}
