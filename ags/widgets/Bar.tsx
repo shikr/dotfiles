@@ -1,5 +1,6 @@
 import { Astal, Gdk, Gtk } from 'ags/gtk4';
 import app from 'ags/gtk4/app';
+import MonitorContext from '../app/MonitorContext';
 import Left from './modules/Left';
 import Right from './modules/Right';
 
@@ -15,13 +16,17 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
             anchor={TOP | LEFT | RIGHT}
             application={app}
         >
-            <Gtk.Frame cssClasses={['background', 'toolbar']}>
-                <centerbox class="horizontal">
-                    <Left />
-                    <box $type="center" />
-                    <Right />
-                </centerbox>
-            </Gtk.Frame>
+            <MonitorContext value={gdkmonitor}>
+                {() => (
+                    <Gtk.Frame cssClasses={['background', 'toolbar']}>
+                        <centerbox class="horizontal">
+                            <Left />
+                            <box $type="center" />
+                            <Right />
+                        </centerbox>
+                    </Gtk.Frame>
+                )}
+            </MonitorContext>
         </window>
     );
 }
