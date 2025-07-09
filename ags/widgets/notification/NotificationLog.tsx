@@ -46,6 +46,7 @@ function NotificationLog() {
                             <box
                                 orientation={Gtk.Orientation.VERTICAL}
                                 class="vertical"
+                                spacing={4}
                             >
                                 {notifications.map(notif => (
                                     <Notification

@@ -58,7 +58,11 @@ function NotificationWindow(gdkmonitor: Gdk.Monitor) {
             anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT}
             application={app}
         >
-            <box orientation={Gtk.Orientation.VERTICAL} class="vertical">
+            <box
+                orientation={Gtk.Orientation.VERTICAL}
+                class="vertical"
+                spacing={4}
+            >
                 <For each={notifications(n => Array.from(n.keys()))}>
                     {id => (
                         <Notification
