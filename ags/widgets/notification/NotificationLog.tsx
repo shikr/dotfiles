@@ -49,10 +49,12 @@ function NotificationLog() {
                                 spacing={4}
                             >
                                 {notifications.map(notif => (
-                                    <Notification
-                                        notification={notif}
-                                        close={() => notif.dismiss()}
-                                    />
+                                    <Gtk.Frame class="osd">
+                                        <Notification
+                                            notification={notif}
+                                            close={() => notif.dismiss()}
+                                        />
+                                    </Gtk.Frame>
                                 ))}
                             </box>
                         </scrolledwindow>

@@ -65,10 +65,14 @@ function NotificationWindow(gdkmonitor: Gdk.Monitor) {
             >
                 <For each={notifications(n => Array.from(n.keys()))}>
                     {id => (
-                        <Notification
-                            notification={notifd.get_notification(id as number)}
-                            close={() => removeNotification(id as number)}
-                        />
+                        <Gtk.Frame class="app-notification">
+                            <Notification
+                                notification={notifd.get_notification(
+                                    id as number
+                                )}
+                                close={() => removeNotification(id as number)}
+                            />
+                        </Gtk.Frame>
                     )}
                 </For>
             </box>
