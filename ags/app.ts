@@ -3,11 +3,11 @@ import style from './style.scss';
 import Bar from './widgets/Bar';
 import NotificationWindow from './widgets/notification/NotificationWindow';
 
+const windows = [Bar, NotificationWindow];
+
 app.start({
     css: style,
     main() {
-        [Bar, NotificationWindow].forEach(win =>
-            app.get_monitors().forEach(m => win(m))
-        );
+        app.get_monitors().forEach(m => windows.forEach(win => win(m)));
     },
 });
