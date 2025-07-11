@@ -3,6 +3,7 @@ import { Gtk } from 'ags/gtk4';
 import AstalNotifd from 'gi://AstalNotifd';
 import Gio from 'gi://Gio';
 import { getIconType } from '../../../utils/theme';
+import EntryIcon from '../../common/EntryIcon';
 
 interface Props {
     notification: AstalNotifd.Notification;
@@ -25,15 +26,14 @@ function NotificationHeader({ notification, close }: Props) {
         notification.appIcon || undefined
     );
 
-    if (wicon === false && notification.desktopEntry) {
-        const icon =
-            Gio.DesktopAppInfo.new_from_filename(notification.desktopEntry)
-                ?.get_icon()
-                ?.to_string() ?? undefined;
-
-        wicon = getWidget(icon);
-    }
-    if (wicon === false && notification.appName) {
+    if (wicon === false && notification.desktopEntry)
+        wicon = (
+            <EntryIcon
+                entry={notification.desktopEntry}
+                iconSize={Gtk.IconSize.LARGE}
+            />
+        );
+    if (!wicon && notification.appName) {
         const apps = Gio.DesktopAppInfo.search(notification.appName).flat();
 
         for (const app of apps) {
