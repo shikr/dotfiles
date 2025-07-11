@@ -1,7 +1,6 @@
 import GObject from 'ags/gobject';
 import { Gtk } from 'ags/gtk4';
 import AstalNotifd from 'gi://AstalNotifd';
-import Gio from 'gi://Gio';
 import { getIconType } from '../../../utils/theme';
 import EntryIcon from '../../common/EntryIcon';
 
@@ -26,28 +25,14 @@ function NotificationHeader({ notification, close }: Props) {
         notification.appIcon || undefined
     );
 
-    if (wicon === false && notification.desktopEntry)
+    if (wicon === false)
         wicon = (
             <EntryIcon
                 entry={notification.desktopEntry}
+                appName={notification.appName}
                 iconSize={Gtk.IconSize.LARGE}
             />
         );
-    if (!wicon && notification.appName) {
-        const apps = Gio.DesktopAppInfo.search(notification.appName).flat();
-
-        for (const app of apps) {
-            const icon =
-                Gio.DesktopAppInfo.new(app)?.get_icon()?.to_string() ??
-                undefined;
-
-            const w = getWidget(icon);
-            if (w !== false) {
-                wicon = w;
-                break;
-            }
-        }
-    }
 
     return (
         <box class="horizontal" hexpand spacing={4}>
