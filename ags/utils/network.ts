@@ -1,4 +1,10 @@
-import GObject, { ParamFlags, property, register } from 'ags/gobject';
+import GObject, {
+    getter,
+    ParamFlags,
+    property,
+    register,
+    setter,
+} from 'ags/gobject';
 import AstalNetwork from 'gi://AstalNetwork';
 
 const STATES: Record<AstalNetwork.State, string> = {
@@ -40,6 +46,19 @@ export class ShellNetwork extends GObject.Object {
     @property(String)
     iconName: string;
 
+    @getter(Boolean)
+    get wifiEnabled(): boolean {
+        return this.network.wifi ? this.network.wifi.enabled : false;
+    }
+
+    @setter(Boolean)
+    set wifiEnabled(value: boolean) {
+        if (this.network.wifi) {
+            this.network.wifi.enabled = value;
+            this._handleChangeWifi();
+        }
+    }
+
     private _callback?: () => unknown;
 
     constructor() {
@@ -63,7 +82,11 @@ export class ShellNetwork extends GObject.Object {
             (_binding, from: AstalNetwork.State) => [true, STATES[from]],
             null
         );
-
+        if (this.network.wifi)
+            this.network.wifi.connect(
+                'notify::enabled',
+                this._handleChangeWifi.bind(this)
+            );
         this._handleChange(this.network);
         this.network.connect('notify::primary', this._handleChange.bind(this));
     }
@@ -73,9 +96,14 @@ export class ShellNetwork extends GObject.Object {
         let connType: 'wifi' | 'wired' | undefined;
 
         if (source.primary === AstalNetwork.Primary.WIRED) connType = 'wired';
-        else if (source.primary === AstalNetwork.Primary.WIFI)
+        else if (source.primary === AstalNetwork.Primary.WIFI) {
             connType = 'wifi';
-        else (this._callback = undefined), (this.iconName = ICON_FALLBACK);
+            this._handleChangeWifi();
+            this.network.wifi.connect(
+                'notify::enabled',
+                this._handleChangeWifi.bind(this)
+            );
+        } else (this._callback = undefined), (this.iconName = ICON_FALLBACK);
 
         if (connType !== undefined) {
             const cb = (conn: { iconName: string }) =>
@@ -91,6 +119,10 @@ export class ShellNetwork extends GObject.Object {
             };
             this.iconName = source[connType].iconName;
         }
+    }
+
+    private _handleChangeWifi() {
+        this.notify('wifi-enabled');
     }
 
     private getIconName() {
