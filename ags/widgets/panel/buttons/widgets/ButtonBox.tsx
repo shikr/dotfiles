@@ -1,4 +1,5 @@
 import { Gtk } from 'ags/gtk4';
+import BluetoothButton from '../BluetoothButton';
 import WifiButton from '../WifiButton';
 import { ButtonProps } from './ButtonProps';
 
@@ -10,6 +11,7 @@ function ButtonBox() {
     return (
         <box class="horizontal" spacing={4}>
             <WifiButton setup={setup} />
+            <BluetoothButton setup={setup} />
         </box>
     );
 }
