@@ -1,38 +1,10 @@
 import { createState, With } from 'ags';
 import { Gtk } from 'ags/gtk4';
 import AstalTray from 'gi://AstalTray';
+import { optimalGeometry } from '../../utils/grid';
 import BarButton from '../bar/BarButton';
 import BarPopover from '../bar/BarPopover';
 import TrayItem from './TrayItem';
-
-interface Dimension {
-    width: number;
-    height: number;
-}
-
-const optimalDimension = (size: number) => {
-    const result: Dimension = {
-        height: 0,
-        width: 0,
-    };
-    let minDiff = size;
-
-    for (let h = 1; h <= Math.sqrt(size); h++) {
-        if (size % h == 0) {
-            const w = Math.floor(size / h);
-            if (w >= h) {
-                const diff = w - h;
-                if (diff < minDiff) {
-                    result.width = w;
-                    result.height = h;
-                    minDiff = diff;
-                }
-            }
-        }
-    }
-
-    return result;
-};
 
 const ICONS = {
     open: 'pan-up-symbolic',
@@ -56,7 +28,7 @@ function Tray() {
             >
                 <With value={items}>
                     {items => {
-                        const dimension = optimalDimension(items.length);
+                        const dimension = optimalGeometry(items.length);
                         const items_ = items
                             .filter(
                                 item => item.status !== AstalTray.Status.PASSIVE
