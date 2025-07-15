@@ -10,6 +10,7 @@ function Panel() {
             spacing={6}
         >
             <ButtonBox />
+            <Gtk.Separator class="spacer" />
             <PlayerList />
         </box>
     );
