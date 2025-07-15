@@ -1,5 +1,6 @@
 import { Gtk } from 'ags/gtk4';
 import BluetoothButton from '../BluetoothButton';
+import DndButton from '../DndButton';
 import WifiButton from '../WifiButton';
 import { ButtonProps } from './ButtonProps';
 
@@ -12,6 +13,7 @@ function ButtonBox() {
         <box class="horizontal" spacing={4}>
             <WifiButton setup={setup} />
             <BluetoothButton setup={setup} />
+            <DndButton setup={setup} />
         </box>
     );
 }
