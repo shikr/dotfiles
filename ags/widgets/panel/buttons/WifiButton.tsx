@@ -10,6 +10,7 @@ function WifiButton({ setup }: ButtonProps) {
     return (
         <With value={createBinding(network, 'networkType')}>
             {(value: AstalNetwork.Primary) => {
+                // TODO: Show a button when a Wi-Fi device is available
                 if (value !== AstalNetwork.Primary.WIFI) return false;
 
                 return (
