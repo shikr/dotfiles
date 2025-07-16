@@ -1,12 +1,40 @@
-import { execAsync } from 'ags/process';
+import { Gtk } from 'ags/gtk4';
+import Gio from 'gi://Gio';
+import { getDisplayName, getPicture } from '../../utils/user';
+import BarButton from '../bar/BarButton';
+import BarPopover from '../bar/BarPopover';
 
 function AppsButton() {
+    const picture = getPicture();
+    const displayName = getDisplayName();
+    const image =
+        picture === null
+            ? Gtk.Image.new_from_icon_name('user-info-symbolic')
+            : Gtk.Image.new_from_file(picture);
+
+    const menu = Gio.Menu.new();
+    menu.append('Shutdown', 'app.shutdown');
+    menu.append('Reboot', 'app.reboot');
+
     return (
-        <button
-            onClicked={() => execAsync('echo hello').then(console.log)}
-            cssClasses={['raised', 'image-button']}
-            iconName="start-here-symbolic"
-        />
+        <BarButton iconName="start-here-symbolic">
+            <BarPopover>
+                <box class="horizontal" spacing={6}>
+                    <button class="flat" hexpand>
+                        <box class="horizontal" spacing={6}>
+                            {image}
+                            <label class="body" label={displayName} />
+                        </box>
+                    </button>
+                    <menubutton
+                        halign={Gtk.Align.END}
+                        iconName="system-shutdown-symbolic"
+                        cssClasses={['flat', 'image-button']}
+                        menuModel={menu}
+                    />
+                </box>
+            </BarPopover>
+        </BarButton>
     );
 }
 
