@@ -6,25 +6,20 @@ import BarButton from '../bar/BarButton';
 import BarPopover from '../bar/BarPopover';
 import TrayItem from './TrayItem';
 
-const ICONS = {
-    open: 'pan-up-symbolic',
-    close: 'pan-down-symbolic',
-};
-
 function Tray() {
     const tray = AstalTray.get_default();
     const [items, setItems] = createState(tray.items);
-    const [icon, setIcon] = createState(ICONS.close);
+    const [icon, setIcon] = createState(Gtk.ArrowType.DOWN);
 
     tray.connect('item-added', source => setItems(source.items));
 
     tray.connect('item-removed', source => setItems(source.items));
 
     return (
-        <BarButton iconName={icon}>
+        <BarButton direction={icon}>
             <BarPopover
-                onMap={() => setIcon(ICONS.open)}
-                onUnmap={() => setIcon(ICONS.close)}
+                onMap={() => setIcon(Gtk.ArrowType.UP)}
+                onUnmap={() => setIcon(Gtk.ArrowType.DOWN)}
             >
                 <With value={items}>
                     {items => {
