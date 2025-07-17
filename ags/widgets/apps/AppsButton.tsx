@@ -1,4 +1,5 @@
 import { Gtk } from 'ags/gtk4';
+import Adw from 'gi://Adw';
 import Gio from 'gi://Gio';
 import { getDisplayName, getPicture } from '../../utils/user';
 import BarButton from '../bar/BarButton';
@@ -8,10 +9,20 @@ import Apps from './Apps';
 function AppsButton() {
     const picture = getPicture();
     const displayName = getDisplayName();
-    const image =
-        picture === null
-            ? Gtk.Image.new_from_icon_name('user-info-symbolic')
-            : Gtk.Image.new_from_file(picture);
+    const image = new Adw.Avatar({
+        size: 24,
+        text: displayName,
+        showInitials: !Boolean(picture),
+        iconName: 'avatar-default-symbolic',
+    });
+    if (picture !== null)
+        image.set_custom_image(
+            Gtk.IconPaintable.new_for_file(
+                Gio.File.new_for_path(picture),
+                24,
+                1
+            )
+        );
 
     const menu = Gio.Menu.new();
     menu.append('Shutdown', 'app.shutdown');
