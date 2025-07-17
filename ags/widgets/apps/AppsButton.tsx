@@ -26,20 +26,21 @@ function AppsButton() {
                     spacing={6}
                 >
                     <Apps />
-                    <box class="horizontal" spacing={6}>
-                        <button class="flat" hexpand>
+                    <centerbox class="horizontal">
+                        <button $type="start" class="flat">
                             <box class="horizontal" spacing={6}>
                                 {image}
                                 <label class="body" label={displayName} />
                             </box>
                         </button>
+                        <box $type="center" />
                         <menubutton
-                            halign={Gtk.Align.END}
+                            $type="end"
                             iconName="system-shutdown-symbolic"
                             cssClasses={['flat', 'image-button']}
                             menuModel={menu}
                         />
-                    </box>
+                    </centerbox>
                 </box>
             </BarPopover>
         </BarButton>
