@@ -33,21 +33,19 @@ function AppList({ list, hide }: Props) {
             ...Object.fromEntries(
                 app.categories
                     .filter(x => x in COMMON_CATEGORIES)
-                    .map(category => [
-                        category,
-                        [...(acc[category] ?? []), app],
-                    ])
+                    .map(category => [category, [...acc[category], app]])
             ),
         }),
-        {}
+        Object.fromEntries(
+            Object.entries(COMMON_CATEGORIES).map(([category]) => [
+                category,
+                [],
+            ])
+        )
     );
-    const other = list.filter(app =>
+    items['Other'] = list.filter(app =>
         app.categories.every(cat => !(cat in COMMON_CATEGORIES))
     );
-
-    if (other.length > 0) {
-        items['Other'] = other;
-    }
 
     const notebook = new Gtk.Notebook({
         tabPos: Gtk.PositionType.LEFT,
@@ -55,6 +53,8 @@ function AppList({ list, hide }: Props) {
     });
 
     for (const item in items) {
+        if (items[item].length === 0) continue;
+
         const listBox = new Gtk.ListBox({
             selectionMode: Gtk.SelectionMode.NONE,
             cssClasses: ['boxed-list'],
@@ -98,7 +98,10 @@ function AppList({ list, hide }: Props) {
                             ]
                         }-symbolic`}
                     />
-                    <label halign={Gtk.Align.START} label={item} />
+                    <label
+                        halign={Gtk.Align.START}
+                        label={item === 'AudioVideo' ? 'Multimedia' : item}
+                    />
                 </box>
             ) as Gtk.Widget
         );
