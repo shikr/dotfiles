@@ -57,8 +57,8 @@ function AppList({ list, hide }: Props) {
 
         const listBox = new Gtk.ListBox({
             selectionMode: Gtk.SelectionMode.NONE,
-            cssClasses: ['boxed-list'],
             activateOnSingleClick: true,
+            showSeparators: true,
         });
 
         // FIXME: Terminal applications should open in a terminal
