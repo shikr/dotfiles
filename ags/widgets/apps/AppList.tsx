@@ -58,26 +58,29 @@ function AppList({ list, hide }: Props) {
         const listBox = new Gtk.ListBox({
             selectionMode: Gtk.SelectionMode.NONE,
             cssClasses: ['boxed-list'],
+            activateOnSingleClick: true,
         });
+
+        // FIXME: Terminal applications should open in a terminal
+        listBox.connect(
+            'row-activated',
+            (_, row) => (hide(), items[item][row.get_index()].launch())
+        );
 
         items[item].forEach(app =>
             listBox.append(
                 (
-                    <button
-                        class="flat"
+                    <box
+                        class="horizontal"
+                        spacing={4}
                         tooltipText={app.description}
-                        // FIXME: Terminal applications should open in a terminal
-                        // TODO: Hide on open
-                        onClicked={() => (hide(), app.launch())}
                     >
-                        <box class="horizontal" spacing={4}>
-                            <image
-                                iconName={app.iconName}
-                                iconSize={Gtk.IconSize.LARGE}
-                            />
-                            <label label={app.name} />
-                        </box>
-                    </button>
+                        <image
+                            iconName={app.iconName}
+                            iconSize={Gtk.IconSize.LARGE}
+                        />
+                        <label label={app.name} />
+                    </box>
                 ) as Gtk.Widget
             )
         );
