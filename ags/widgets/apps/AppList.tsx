@@ -22,9 +22,10 @@ const COMMON_CATEGORIES = {
 
 interface Props {
     list: AstalApps.Application[];
+    hide: () => unknown;
 }
 
-function AppList({ list }: Props) {
+function AppList({ list, hide }: Props) {
     // TODO: Use Object.groupBy when available in tsserver
     const items = list.reduce<Record<string, AstalApps.Application[]>>(
         (acc, app) => ({
@@ -67,7 +68,7 @@ function AppList({ list }: Props) {
                         tooltipText={app.description}
                         // FIXME: Terminal applications should open in a terminal
                         // TODO: Hide on open
-                        onClicked={() => app.launch()}
+                        onClicked={() => (hide(), app.launch())}
                     >
                         <box class="horizontal" spacing={4}>
                             <image

@@ -3,9 +3,10 @@ import AstalApps from 'gi://AstalApps';
 
 interface Props {
     list: AstalApps.Application[];
+    reset: () => unknown;
 }
 
-function AppSearch({ list }: Props) {
+function AppSearch({ list, reset }: Props) {
     return (
         <scrolledwindow propagateNaturalWidth name="app-search">
             <Gtk.ListBox
@@ -16,7 +17,7 @@ function AppSearch({ list }: Props) {
                     <button
                         class="flat"
                         tooltipText={app.description}
-                        onClicked={() => app.launch()}
+                        onClicked={() => (reset(), app.launch())}
                     >
                         <box class="horizontal" spacing={4}>
                             <image

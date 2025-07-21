@@ -28,15 +28,19 @@ function AppsButton() {
     menu.append('Shutdown', 'app.shutdown');
     menu.append('Reboot', 'app.reboot');
 
+    let popover: Gtk.Popover;
+
+    const hide = () => popover.hide();
+
     return (
         <BarButton iconName="start-here-symbolic">
-            <BarPopover>
+            <BarPopover $={self => (popover = self)}>
                 <box
                     orientation={Gtk.Orientation.VERTICAL}
                     class="vertical"
                     spacing={6}
                 >
-                    <Apps />
+                    <Apps hide={hide} />
                     <centerbox class="horizontal">
                         <button $type="start" class="flat">
                             <box class="horizontal" spacing={6}>
