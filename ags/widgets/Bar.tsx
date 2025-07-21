@@ -13,6 +13,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
             name="bar"
             gdkmonitor={gdkmonitor}
             exclusivity={Astal.Exclusivity.EXCLUSIVE}
+            keymode={Astal.Keymode.ON_DEMAND}
             anchor={TOP | LEFT | RIGHT}
             application={app}
         >
