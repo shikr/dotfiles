@@ -50,6 +50,7 @@ function AppList({ list }: Props) {
 
     const notebook = new Gtk.Notebook({
         tabPos: Gtk.PositionType.LEFT,
+        name: 'app-list',
     });
 
     for (const item in items) {
