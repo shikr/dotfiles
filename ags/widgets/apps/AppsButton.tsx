@@ -1,11 +1,15 @@
+import { createBinding, With } from 'ags';
 import { Gtk } from 'ags/gtk4';
 import Adw from 'gi://Adw';
 import Gio from 'gi://Gio';
+import { Settings } from '../../utils/settings';
+import { getIconType } from '../../utils/theme';
 import { getDisplayName, getPicture } from '../../utils/user';
 import BarButton from '../bar/BarButton';
 import BarPopover from '../bar/BarPopover';
 import Apps from './Apps';
 
+// TODO: use AccountsService for icon/real name
 function AppsButton() {
     const picture = getPicture();
     const displayName = getDisplayName();
@@ -27,13 +31,23 @@ function AppsButton() {
     const menu = Gio.Menu.new();
     menu.append('Shutdown', 'app.shutdown');
     menu.append('Reboot', 'app.reboot');
+    const settings = Settings.get_default();
 
     let popover: Gtk.Popover;
 
     const hide = () => popover.hide();
 
     return (
-        <BarButton iconName="start-here-symbolic">
+        <BarButton>
+            <With value={createBinding(settings, 'icon')}>
+                {(icon: string) => {
+                    const iconType = getIconType(icon);
+
+                    if (iconType === 'icon') return <image iconName={icon} />;
+                    if (iconType === 'file') return <image file={icon} />;
+                    return <image iconName="start-here-symbolic" />;
+                }}
+            </With>
             <BarPopover $={self => (popover = self)}>
                 <box
                     orientation={Gtk.Orientation.VERTICAL}
