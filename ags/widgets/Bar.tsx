@@ -7,9 +7,10 @@ import Left from './modules/Left';
 import Right from './modules/Right';
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
-    const { TOP, LEFT, RIGHT } = Astal.WindowAnchor;
+    const { TOP, LEFT, RIGHT, BOTTOM } = Astal.WindowAnchor;
     const settings = Settings.get_default();
     const style = createBinding(settings, 'style');
+    const position = createBinding(settings, 'position');
 
     return (
         <window
@@ -18,7 +19,9 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
             gdkmonitor={gdkmonitor}
             exclusivity={Astal.Exclusivity.EXCLUSIVE}
             keymode={Astal.Keymode.ON_DEMAND}
-            anchor={TOP | LEFT | RIGHT}
+            anchor={position(pos =>
+                pos === 'top' ? TOP | LEFT | RIGHT : BOTTOM | LEFT | RIGHT
+            )}
             application={app}
             cssClasses={style(style =>
                 style === 'floating' ? ['transparent'] : ['toolbar']

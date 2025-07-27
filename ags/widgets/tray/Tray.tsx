@@ -1,25 +1,37 @@
-import { createState, With } from 'ags';
+import { createBinding, createComputed, createState, With } from 'ags';
 import { Gtk } from 'ags/gtk4';
 import AstalTray from 'gi://AstalTray';
 import { optimalGeometry } from '../../utils/grid';
+import { Settings } from '../../utils/settings';
 import BarButton from '../bar/BarButton';
 import BarPopover from '../bar/BarPopover';
 import TrayItem from './TrayItem';
 
 function Tray() {
     const tray = AstalTray.get_default();
+    const settings = Settings.get_default();
     const [items, setItems] = createState(tray.items);
-    const [icon, setIcon] = createState(Gtk.ArrowType.DOWN);
+    const [opened, setOpened] = createState(false);
+    const direction = createComputed(
+        [opened, createBinding(settings, 'position')],
+        (opened, position) => {
+            if (opened)
+                return position === 'top'
+                    ? Gtk.ArrowType.UP
+                    : Gtk.ArrowType.DOWN;
+            return position === 'top' ? Gtk.ArrowType.DOWN : Gtk.ArrowType.UP;
+        }
+    );
 
     tray.connect('item-added', source => setItems(source.items));
 
     tray.connect('item-removed', source => setItems(source.items));
 
     return (
-        <BarButton direction={icon}>
+        <BarButton direction={direction}>
             <BarPopover
-                onMap={() => setIcon(Gtk.ArrowType.UP)}
-                onUnmap={() => setIcon(Gtk.ArrowType.DOWN)}
+                onMap={() => setOpened(true)}
+                onUnmap={() => setOpened(false)}
             >
                 <With value={items}>
                     {items => {
