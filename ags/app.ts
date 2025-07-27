@@ -1,14 +1,14 @@
 import app from 'ags/gtk4/app';
 import { execAsync } from 'ags/process';
 import Gio from 'gi://Gio';
-import { floatingStyle } from './style';
+import { style } from './style';
 import Bar from './widgets/Bar';
 import NotificationWindow from './widgets/notification/NotificationWindow';
 
 const windows = [Bar, NotificationWindow];
 
 app.start({
-    css: floatingStyle,
+    css: style,
     main() {
         const shutdownAction = new Gio.SimpleAction({ name: 'shutdown' });
         const rebootAction = new Gio.SimpleAction({ name: 'reboot' });
