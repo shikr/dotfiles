@@ -1,5 +1,7 @@
-import { createBinding, createState, With } from 'ags';
+import { createState, With } from 'ags';
+import { monitorFile } from 'ags/file';
 import AstalApps from 'gi://AstalApps';
+import GLib from 'gi://GLib';
 import AppList from './AppList';
 import AppSearch from './AppSearch';
 
@@ -10,6 +12,21 @@ interface Props {
 function Apps({ hide }: Props) {
     const apps = AstalApps.Apps.new();
     const [query, setQuery] = createState('');
+    const [list, setList] = createState(apps.list);
+
+    const paths = [
+        '/usr/share/applications',
+        '/usr/local/share/applications',
+        GLib.build_filenamev([
+            GLib.get_home_dir(),
+            '.local',
+            'share',
+            'applications',
+        ]),
+    ];
+
+    for (const path of paths)
+        monitorFile(path, () => (apps.reload(), setList(apps.list)));
 
     return (
         <>
@@ -30,7 +47,7 @@ function Apps({ hide }: Props) {
                     )
                 }
             >
-                <With value={createBinding(apps, 'list')}>
+                <With value={list}>
                     {(list: AstalApps.Application[]) => (
                         <AppList $type="named" hide={hide} list={list} />
                     )}
