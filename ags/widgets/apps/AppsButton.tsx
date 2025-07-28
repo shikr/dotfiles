@@ -5,6 +5,7 @@ import { Settings } from '../../utils/settings';
 import { getIconType } from '../../utils/theme';
 import BarButton from '../bar/BarButton';
 import BarPopover from '../bar/BarPopover';
+import SettingsButton from '../settings/SettingsButton';
 import UserInfo from '../user/UserInfo';
 import Apps from './Apps';
 
@@ -42,12 +43,14 @@ function AppsButton() {
                             <UserInfo />
                         </box>
                         <box $type="center" />
-                        <menubutton
-                            $type="end"
-                            iconName="system-shutdown-symbolic"
-                            cssClasses={['flat', 'image-button']}
-                            menuModel={menu}
-                        />
+                        <box $type="end" class="horizontal" spacing={6}>
+                            <SettingsButton />
+                            <menubutton
+                                iconName="system-shutdown-symbolic"
+                                cssClasses={['flat', 'image-button']}
+                                menuModel={menu}
+                            />
+                        </box>
                     </centerbox>
                 </box>
             </BarPopover>
