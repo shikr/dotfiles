@@ -9,7 +9,6 @@ import SettingsButton from '../settings/SettingsButton';
 import UserInfo from '../user/UserInfo';
 import Apps from './Apps';
 
-// TODO: use AccountsService for icon/real name
 function AppsButton() {
     const menu = Gio.Menu.new();
     menu.append('Shutdown', 'app.shutdown');
