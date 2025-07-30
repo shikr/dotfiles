@@ -67,6 +67,12 @@ const options = {
       'Install all configurations. If disabled, the script will only do a dry run.',
     default: true
   },
+  scripts: {
+    type: 'boolean',
+    alias: 'B',
+    description: 'Install provided scripts.',
+    default: true
+  },
   ignore: {
     type: 'string',
     alias: 'i',
@@ -89,6 +95,7 @@ const {
   p: zshPlugins,
   symlink,
   backup,
+  scripts,
   i,
   silent,
   help,
@@ -212,26 +219,7 @@ const configs = [
     name: 'waybar',
     configPath: 'waybar',
     dependencies: ['waybar', 'nm-connection-editor', 'yad'],
-    platform: 'linux',
-    async postInstall() {
-      // Copy/Link the bin files to ~/.local/bin
-      const localBin = path.join(os.homedir(), '.local', 'bin')
-      if (!fs.existsSync(localBin)) {
-        fs.mkdirSync(localBin, { recursive: true })
-      }
-
-      await Promise.all(
-        fs
-          .readdirSync(fs.realpathSync('bin'), { withFileTypes: true })
-          .filter((x) => x.isFile())
-          .map((x) => {
-            const source = path.join(fs.realpathSync('bin'), x.name)
-            const destination = path.join(localBin, x.name)
-
-            return copyOrLink(source, destination)
-          })
-      )
-    }
+    platform: 'linux'
   },
   {
     name: 'kitty',
@@ -282,6 +270,26 @@ await Promise.all(
     .filter(({ name }) => selectedList.includes(name))
     .map((config) => installConfig(config))
 )
+
+if (scripts && process.platform === 'linux') {
+  // Copy/Link the bin files to ~/.local/bin
+  const localBin = path.join(os.homedir(), '.local', 'bin')
+  if (!fs.existsSync(localBin)) {
+    fs.mkdirSync(localBin, { recursive: true })
+  }
+
+  await Promise.all(
+    fs
+      .readdirSync(fs.realpathSync('bin'), { withFileTypes: true })
+      .filter((x) => x.isFile())
+      .map((x) => {
+        const source = path.join(x.parentPath, x.name)
+        const destination = path.join(localBin, x.name)
+
+        return copyOrLink(source, destination)
+      })
+  )
+}
 
 /**
  * Parses the command line arguments.
