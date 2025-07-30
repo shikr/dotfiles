@@ -236,6 +236,11 @@ const configs = [
     dependencies: ['nvim', 'node', 'git', 'ripgrep', 'yarn']
   },
   {
+    name: 'superfile',
+    configPath: 'superfile',
+    dependencies: ['spf', 'exiftool']
+  },
+  {
     name: 'ags',
     configPath: path.join('ags', 'shell.js'),
     targetDir: path.join(CONFIG_DIR, 'shell'),
