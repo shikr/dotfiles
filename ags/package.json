@@ -1,5 +1,5 @@
 {
     "dependencies": {
-        "ags": "*"
+        "ags": "/usr/share/ags/js"
     }
 }
