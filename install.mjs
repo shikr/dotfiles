@@ -164,7 +164,6 @@ const configs = [
     configPath: 'niri',
     dependencies: [
       'niri',
-      'waybar',
       'swww',
       'swaybg',
       'swaync',
@@ -183,7 +182,7 @@ const configs = [
           withFileTypes: true
         })
         .filter((x) => x.isFile() && x.name.endsWith('.service'))
-      const systemServices = ['waybar.service']
+      const systemServices = []
 
       if (!fs.existsSync(niriWants)) {
         fs.mkdirSync(niriWants, { recursive: true })
@@ -214,12 +213,6 @@ const configs = [
         'Niri configuration installed. Please run `systemctl --user daemon-reload` to apply the changes.'
       )
     }
-  },
-  {
-    name: 'waybar',
-    configPath: 'waybar',
-    dependencies: ['waybar', 'nm-connection-editor', 'yad'],
-    platform: 'linux'
   },
   {
     name: 'kitty',
