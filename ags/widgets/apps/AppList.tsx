@@ -3,21 +3,26 @@ import AstalApps from 'gi://AstalApps';
 
 // Defined in https://specifications.freedesktop.org/menu-spec/latest/category-registry.html
 const COMMON_CATEGORIES = {
-    AudioVideo: 'multimedia',
-    Audio: 'multimedia',
-    Video: 'multimedia',
+    Utility: 'utilities',
     Development: 'development',
     Education: 'education',
     Game: 'games',
     Graphics: 'graphics',
+    AudioVideo: 'multimedia',
     Network: 'internet',
     Office: 'office',
-    Science: 'science',
     Settings: 'system',
+    Science: 'science',
     System: 'system',
-    Utility: 'utilities',
 
     Other: 'other',
+};
+
+const CATEGORY_OVERRIDE = {
+    Utility: 'Accessories',
+    Game: 'Games',
+    AudioVideo: 'Multimedia',
+    Settings: 'Preferences',
 };
 
 interface Props {
@@ -100,7 +105,13 @@ function AppList({ list, hide }: Props) {
                     />
                     <label
                         halign={Gtk.Align.START}
-                        label={item === 'AudioVideo' ? 'Multimedia' : item}
+                        label={
+                            item in CATEGORY_OVERRIDE
+                                ? CATEGORY_OVERRIDE[
+                                      item as keyof typeof CATEGORY_OVERRIDE
+                                  ]
+                                : item
+                        }
                     />
                 </box>
             ) as Gtk.Widget
