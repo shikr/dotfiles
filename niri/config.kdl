@@ -1,5 +1,4 @@
 spawn-at-startup "xwayland-satellite"
-spawn-at-startup "swaync"
 
 input {
     keyboard {
@@ -185,6 +184,12 @@ binds {
     Mod+J          { focus-window-or-workspace-down; }
     Mod+K          { focus-window-or-workspace-up; }
     Mod+L          { focus-column-right; }
+
+    /// Force Workspace Focus ///
+    Mod+Ctrl+Down { focus-workspace-down; }
+    Mod+Ctrl+Up   { focus-workspace-up; }
+    Mod+Ctrl+J    { focus-workspace-down; }
+    Mod+Ctrl+K    { focus-workspace-up; }
 
     Mod+Home { focus-column-first; }
     Mod+End  { focus-column-last; }
