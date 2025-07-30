@@ -358,6 +358,8 @@ async function installConfig(config) {
       const installPath = targetDir ?? CONFIG_DIR
       const destination = path.join(installPath, path.parse(configPath).base)
 
+      if (!fs.existsSync(installPath)) fs.mkdirSync(installPath, { recursive: true })
+
       await copyOrLink(realpath, destination)
     }
 
