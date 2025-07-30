@@ -166,7 +166,6 @@ const configs = [
       'niri',
       'swww',
       'swaybg',
-      'swaync',
       'wpctl',
       'playerctl',
       'ffmpeg',
@@ -235,6 +234,16 @@ const configs = [
     name: 'nvim',
     configPath: 'nvim',
     dependencies: ['nvim', 'node', 'git', 'ripgrep', 'yarn']
+  },
+  {
+    name: 'ags',
+    configPath: path.join('ags', 'shell.js'),
+    targetDir: path.join(CONFIG_DIR, 'shell'),
+    dependencies: ['esbuild', 'ags'],
+    platform: 'linux',
+    preInstall() {
+      $$`esbuild --bundle ags/app.ts --outfile=ags/shell.js --format=esm --external:gi://* --external:resource://* --external:system --platform=node --loader:.js=ts`
+    }
   },
   {
     name: 'starship',
