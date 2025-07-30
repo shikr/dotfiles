@@ -71,7 +71,7 @@ const options = {
     type: 'string',
     alias: 'i',
     description: 'Ignore configurations. (-i zsh,rofi)',
-    usage: '<OPTIONS>'
+    usage: '<CONFIGS>'
   },
   silent: {
     type: 'boolean',
@@ -85,7 +85,16 @@ const options = {
   }
 }
 
-const { p: zshPlugins, symlink, backup, i, silent, help, install } = parseArgs()
+const {
+  p: zshPlugins,
+  symlink,
+  backup,
+  i,
+  silent,
+  help,
+  install,
+  _: selected
+} = parseArgs()
 
 /**
  * @type {Config[]}
@@ -253,20 +262,24 @@ const configs = [
     dependencies: ['starship']
   }
 ]
-/**
- * @type {string[]}
- * @description The list of ignored files or directories.
- */
-const ignore = i ? i.split(',') : []
 
 if (help) {
   showHelp()
   process.exit(0)
 }
 
+/**
+ * @type {string[]}
+ * @description The list of selected configs to install.
+ */
+const selectedList =
+  selected.length > 0
+    ? selected.filter((config) => !(i ? i.split(',') : []).includes(config))
+    : configs.map(({ name }) => name)
+
 await Promise.all(
   configs
-    .filter(({ name }) => !ignore.includes(name))
+    .filter(({ name }) => selectedList.includes(name))
     .map((config) => installConfig(config))
 )
 
@@ -416,12 +429,12 @@ function showHelp() {
     console.log(`  ${optStr}${padding} ${option.description} ${defaultStr}`)
   }
 
-  console.log(chalk.green('Usage:'), './install.mjs [...OPTIONS]\n')
+  console.log(chalk.green('Usage:'), './install.mjs [OPTIONS] [...CONFIGS]\n')
   console.log(chalk.green('Options:'))
   opts.slice(0, -2).forEach(([key, option]) => printOption(key, option))
   console.log(
     ' '.repeat(maxKeyLength + 2),
-    'OPTIONS:',
+    'CONFIGS:',
     configs.map((c) => c.name).join(', '),
     '\n'
   )
