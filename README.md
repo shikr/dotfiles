@@ -11,7 +11,7 @@
 ## Details
 
 - **Compositor**: [niri](https://github.com/YaLTeR/niri)
-- **Bar**: [Waybar](https://github.com/Alexays/Waybar)
+- **Bar**: [ags](https://github.com/Aylur/ags)
 - **Terminal**: [kitty](https://github.com/kovidgoyal/kitty/)
 - **Shell**: [zsh](https://www.zsh.org/)
 - **Editor**: [neovim](https://github.com/neovim/neovim)
@@ -24,7 +24,7 @@
 ### Required Dependencies
 
 - [swww](https://github.com/LGFae/swww), [swaybg](https://github.com/swaywm/swaybg), [Sway Notification Center](https://github.com/ErikReider/SwayNotificationCenter), [WirePlumber](https://pipewire.pages.freedesktop.org/wireplumber/), [Playerctl](https://github.com/altdesktop/playerctl), [FFmpeg](https://ffmpeg.org/) and [xwayland-satellite](https://github.com/Supreeeme/xwayland-satellite) for niri.
-- [NM Connection Editor](https://gitlab.gnome.org/GNOME/network-manager-applet) and [yad](https://github.com/v1cont/yad) for waybar.
+- [astal](https://aylur.github.io/astal/), [esbuild](https://esbuild.github.io/) and [accountsservice](https://gitlab.freedesktop.org/accountsservice/accountsservice) for ags.
 - [FiraCode NerdFont](https://www.nerdfonts.com/font-downloads), [Inter Font](https://rsms.me/inter/) and [Symbols NerdFont](https://www.nerdfonts.com/font-downloads) for kitty and rofi.
 - [Lua 5.1](https://www.lua.org/download.html), [ripgrep](https://github.com/BurntSushi/ripgrep#installation), [ImageMagick](https://imagemagick.org/script/download.php), [Node.js](https://nodejs.org/es/download), [Yarn](https://classic.yarnpkg.com/lang/en/docs/install/) and [Rust](https://www.rust-lang.org/tools/install) for neovim.
 - [oh my zsh](https://ohmyz.sh/) and [fzf](https://github.com/junegunn/fzf) for zsh.
@@ -53,7 +53,7 @@ pnpm start
 
 ### Customize your installation
 
-Usage: `./install.mjs [OPTIONS...]`
+Usage: `./install.mjs [OPTIONS] [...CONFIGS]`
 
 ```
 Options:
@@ -61,8 +61,9 @@ Options:
   -S, --symlink          Create symlinks instead of copying files. (default: true)
   -b, --backup           Backup existing files. (default: true)
   -I, --install          Install all configurations. If disabled, the script will only do a dry run. (default: true)
-  -i, --ignore <OPTIONS> Ignore configurations. (-i zsh,rofi)
-                         OPTIONS: zsh, niri, waybar, kitty, rofi, spotify_player, nvim, starship
+  -B, --scripts          Install provided scripts. (default: true)
+  -i, --ignore <CONFIGS> Ignore configurations. (-i zsh,rofi)
+                         CONFIGS: zsh, niri, kitty, rofi, spotify_player, nvim, ags, starship
 
   -s, --silent           Suppress output.
   -h, --help             Show this help message.
