@@ -28,9 +28,9 @@ input {
     workspace-auto-back-and-forth
 }
 
-output "HDMI-A-1" {
+output "DP-1" {
     // off
-    mode "1920x1080@119.879"
+    mode "1920x1080@143.855"
     scale 1
     transform "normal"
     position x=0 y=0
