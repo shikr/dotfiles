@@ -2,7 +2,7 @@ local default_on_attach = require('nvchad.configs.lspconfig').on_attach
 local capabilities = require('nvchad.configs.lspconfig').capabilities
 local on_init = require('nvchad.configs.lspconfig').on_init
 
-local lspconfig = require 'lspconfig'
+local lspconfig = vim.lsp.config
 
 capabilities.textDocument.foldingRange = {
   dynamicRegistration = false,
@@ -30,11 +30,12 @@ end
 local function load_servers(servers)
   for _, lsp in ipairs(servers) do
     if type(lsp) == 'string' then
-      lspconfig[lsp].setup {
+      vim.lsp.config[lsp] = {
         on_attach = on_attach,
         capabilities = capabilities,
         on_init = on_init,
       }
+      vim.lsp.enable(lsp)
     else
       local opts = vim.tbl_deep_extend('force', {
         on_attach = on_attach,
@@ -42,7 +43,8 @@ local function load_servers(servers)
         on_init = on_init,
       }, format_opts(lsp.opts))
 
-      lspconfig[lsp[1]].setup(opts)
+      vim.lsp.config[lsp[1]] = opts
+      vim.lsp.enable(lsp[1])
     end
   end
 end
