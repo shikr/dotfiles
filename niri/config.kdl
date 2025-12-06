@@ -1,3 +1,5 @@
+include "dms/config.kdl"
+
 input {
     keyboard {
         xkb {
@@ -35,7 +37,8 @@ output "DP-1" {
 }
 
 layout {
-    gaps 16
+    // gaps 16
+    background-color "transparent"
     center-focused-column "never"
 
     preset-column-widths {
@@ -48,7 +51,7 @@ layout {
     // preset-window-heights { }
     default-column-width { proportion 0.5; }
 
-    focus-ring {
+    /-focus-ring {
         width 1
         active-gradient from="#f00f" to="#0efa" angle=45 in="oklch longer hue"
         inactive-color "#505050"
@@ -57,14 +60,15 @@ layout {
     border {
         off
     }
+
     shadow {
         on
         draw-behind-window true
-        softness 10
+        softness 30
         spread 5
         offset x=0 y=0
-        color "#d047"
-        inactive-color "#0005"
+        // color "#d047"
+        // inactive-color "#0005"
     }
 
     tab-indicator {
@@ -73,15 +77,15 @@ layout {
         place-within-column
         gaps-between-tabs 2
         corner-radius 2
-        active-color "#c041ff"
-        inactive-color "#707070"
+        // active-color "#c041ff"
+        // inactive-color "#707070"
     }
 
-    insert-hint {
+    /-insert-hint {
         gradient from="#f00f" to="#0efa" angle=45 in="oklch longer hue" relative-to="workspace-view"
     }
 
-    struts {
+    /-struts {
         left 0
         right 0
         top -12
@@ -103,6 +107,7 @@ cursor {
 
 overview {
   workspace-shadow {
+    off
     softness 10
     spread 2
     offset x=0 y=0
@@ -111,11 +116,67 @@ overview {
 }
 
 animations {
+    workspace-switch {
+        spring damping-ratio=0.80 stiffness=523 epsilon=0.0001
+    }
+    window-open {
+        duration-ms 150
+        curve "ease-out-expo"
+    }
+    window-close {
+        duration-ms 150
+        curve "ease-out-quad"
+    }
+    horizontal-view-movement {
+        spring damping-ratio=0.85 stiffness=423 epsilon=0.0001
+    }
+    window-movement {
+        spring damping-ratio=0.75 stiffness=323 epsilon=0.0001
+    }
+    window-resize {
+        spring damping-ratio=0.85 stiffness=423 epsilon=0.0001
+    }
+    config-notification-open-close {
+        spring damping-ratio=0.65 stiffness=923 epsilon=0.001
+    }
+    screenshot-ui-open {
+        duration-ms 200
+        curve "ease-out-quad"
+    }
+    overview-open-close {
+        spring damping-ratio=0.85 stiffness=800 epsilon=0.0001
+    }
 }
 
 window-rule {
-    geometry-corner-radius 8
+    match is-active=false
+    opacity 0.9
+}
+
+window-rule {
+    match app-id=r#"^org\.gnome\."#
+
+    draw-border-with-background false
+    geometry-corner-radius 12
     clip-to-geometry true
+}
+
+window-rule {
+    match app-id=r#"^gnome-control-center$"#
+    match app-id=r#"^pavucontrol$"#
+
+    default-column-width { proportion 0.5; }
+    open-floating false
+}
+
+window-rule {
+    match app-id=r#"^org\.wezfurlong\.wezterm$"#
+    match app-id="Alacritty"
+    match app-id="zen"
+    match app-id="com.mitchellh.ghostty"
+    match app-id="kitty"
+
+    draw-border-with-background false
 }
 
 window-rule {
@@ -127,15 +188,19 @@ window-rule {
   open-maximized true
 }
 
-// Open the Firefox picture-in-picture player as floating by default.
 window-rule {
     // This app-id regular expression will work for both:
     // - host Firefox (app-id is "firefox")
     // - Flatpak Firefox (app-id is "org.mozilla.firefox")
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
-    match app-id="nm-connection-editor"
-    match app-id="blueman-manager"
+    match app-id=r#"^gnome-calculator$"#
+    match app-id=r#"^galculator$"#
+    match app-id=r#"^blueman-manager$"#
+    match app-id=r#"^org\.gnome\.Nautilus$"#
+    match app-id=r#"^steam$"#
+    match app-id=r#"^xdg-desktop-portal$"#
     match app-id="yad"
+    match app-id="zoom"
 
     open-floating true
 }
@@ -149,21 +214,25 @@ window-rule {
 
 // Overview wallpaper
 layer-rule {
-  match namespace="^wallpaper$"
+  match namespace="^quickshell$"
   place-within-backdrop true
+}
+
+hotkey-overlay {
+    skip-at-startup
 }
 
 binds {
     Mod+S { show-hotkey-overlay; }
 
-    Mod+Return repeat=false hotkey-overlay-title="Open a Terminal" { spawn "kitty"; }
-    Mod+Space  repeat=false hotkey-overlay-title="Open Rofi" { spawn "rofi" "-show" "drun"; }
+    Mod+Return repeat=false hotkey-overlay-title="Open Terminal" { spawn "kitty"; }
+    // Mod+Space  repeat=false hotkey-overlay-title="Open Rofi" { spawn "rofi" "-show" "drun"; }
 
     /// Audio ///
-    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
-    XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
-    XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+    // XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
+    // XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
+    // XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+    // XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
     XF86AudioPrev        allow-when-locked=true { spawn "playerctl" "previous"; }
     XF86AudioNext        allow-when-locked=true { spawn "playerctl" "next"; }
     XF86AudioPlay        allow-when-locked=true { spawn "playerctl" "play-pause"; }
@@ -339,6 +408,10 @@ binds {
     // Mod+Space       { switch-layout "next"; }
     // Mod+Shift+Space { switch-layout "prev"; }
 
+    XF86Launch1 { screenshot; }
+    Ctrl+XF86Launch1 { screenshot-screen; }
+    Ctrl+Shift+XF86Launch1 { screenshot-window; }
+
     Print { screenshot-screen; }
     Ctrl+Print { screenshot; }
     Ctrl+Shift+Print { screenshot-window; }
@@ -363,6 +436,10 @@ binds {
 }
 
 environment {
+  XDG_CURRENT_DESKTOP "niri"
+  QT_QPA_PLATFORM "wayland"
   ELECTRON_OZONE_PLATFORM_HINT "auto"
   QT_QPA_PLATFORMTHEME "gtk3"
+  QT_QPA_PLATFORMTHEME_QT6 "gtk3"
+  TERMINAL "kitty"
 }
