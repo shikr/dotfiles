@@ -162,56 +162,8 @@ const configs = [
   {
     name: 'niri',
     configPath: 'niri',
-    dependencies: [
-      'niri',
-      'swww',
-      'swaybg',
-      'wpctl',
-      'playerctl',
-      'ffmpeg',
-      'xwayland-satellite'
-    ],
-    platform: 'linux',
-    async postInstall() {
-      const systemd = fs.realpathSync('systemd')
-      const userSystemd = path.join(CONFIG_DIR, 'systemd', 'user')
-      const niriWants = path.join(userSystemd, 'niri.service.wants')
-      const services = fs
-        .readdirSync(systemd, {
-          withFileTypes: true
-        })
-        .filter((x) => x.isFile() && x.name.endsWith('.service'))
-      const systemServices = []
-
-      if (!fs.existsSync(niriWants)) {
-        fs.mkdirSync(niriWants, { recursive: true })
-      }
-
-      // Copy/Link the systemd services to ~/.config/systemd/user
-      const userServices = await Promise.all(
-        services.map(async (x) => {
-          const source = path.join(systemd, x.name)
-          const destination = path.join(userSystemd, x.name)
-
-          await copyOrLink(source, destination)
-          return destination
-        })
-      )
-
-      // Link the services used by niri to the niri.service.wants directory
-      ;[
-        ...systemServices.map((x) => path.join('/usr/lib/systemd/user', x)),
-        ...userServices
-      ].forEach((service) => {
-        const destination = path.join(niriWants, path.parse(service).base)
-        if (!fs.existsSync(destination)) {
-          fs.symlinkSync(service, destination)
-        }
-      })
-      info(
-        'Niri configuration installed. Please run `systemctl --user daemon-reload` to apply the changes.'
-      )
-    }
+    dependencies: ['niri', 'wpctl', 'playerctl', 'xwayland-satellite'],
+    platform: 'linux'
   },
   {
     name: 'kitty',

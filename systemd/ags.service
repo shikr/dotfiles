@@ -1,9 +1,0 @@
-[Unit]
-PartOf=graphical-session.target
-After=graphical-session.target
-Requisite=graphical-session.target
-
-[Service]
-Environment=LD_PRELOAD=/usr/lib/libgtk4-layer-shell.so
-ExecStart=/usr/bin/gjs -m %h/.config/shell/shell.js
-Restart=on-failure
