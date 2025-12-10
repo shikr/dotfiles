@@ -7,8 +7,13 @@ local servers = {
   'pyright',
   'eslint',
   'bashls',
-  'clangd',
   'cmake',
+  {
+    'clangd',
+    opts = {
+      cmd = { 'clangd', '--clang-tidy' },
+    },
+  },
   {
     'rust_analyzer',
     opts = {
