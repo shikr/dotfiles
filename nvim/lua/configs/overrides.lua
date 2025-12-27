@@ -64,6 +64,9 @@ M.mason = {
     'clangd',
     'clang-format',
     'cmake-language-server',
+
+    -- Copilot
+    'copilot-language-server',
   },
 }
 

@@ -62,6 +62,28 @@ return {
           },
         },
       },
+      {
+        'copilotlsp-nvim/copilot-lsp',
+        init = function()
+          vim.g.copilot_nes_debounce = 500
+          vim.lsp.enable 'copilot_ls'
+          vim.keymap.set('n', '<tab>', function()
+            local bufnr = vim.api.nvim_get_current_buf()
+            local state = vim.b[bufnr].nes_state
+            if state then
+              local copilot = require 'copilot-lsp.nes'
+              local _ = copilot.walk_cursor_start_edit()
+                or (copilot.apply_pending_nes() and copilot.walk_cursor_end_edit())
+              return nil
+            end
+
+            return '<C-i>'
+          end, {
+            desc = 'Accept Copilot NES suggestion',
+            expr = true,
+          })
+        end,
+      },
     },
     config = function()
       require('nvchad.configs.lspconfig').defaults()
