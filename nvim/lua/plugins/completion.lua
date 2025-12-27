@@ -7,8 +7,31 @@ return {
     dependencies = {
       {
         'stevearc/conform.nvim',
+        cmd = 'Conform',
         opts = function()
           return require 'configs.conform'
+        end,
+        config = function(_, opts)
+          vim.api.nvim_create_user_command('Conform', function(args)
+            if args.args == 'toggle' then
+              vim.g.disable_autoformat = not vim.g.disable_autoformat
+            elseif args.args == 'enable' then
+              vim.g.disable_autoformat = false
+            elseif args.args == 'disable' then
+              vim.g.disable_autoformat = true
+            end
+          end, {
+            desc = 'Toggle Conform',
+            nargs = 1,
+            complete = function(_, cmdline)
+              local args = vim.split(cmdline, ' +')
+              if #args == 2 then
+                return { 'toggle', 'enable', 'disable' }
+              end
+              return {}
+            end,
+          })
+          require('conform').setup(opts)
         end,
       },
       {
