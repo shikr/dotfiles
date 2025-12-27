@@ -62,34 +62,53 @@ return {
           },
         },
       },
-      {
-        'copilotlsp-nvim/copilot-lsp',
-        init = function()
-          vim.g.copilot_nes_debounce = 500
-          vim.lsp.enable 'copilot_ls'
-          vim.keymap.set('n', '<tab>', function()
-            local bufnr = vim.api.nvim_get_current_buf()
-            local state = vim.b[bufnr].nes_state
-            if state then
-              local copilot = require 'copilot-lsp.nes'
-              local _ = copilot.walk_cursor_start_edit()
-                or (copilot.apply_pending_nes() and copilot.walk_cursor_end_edit())
-              return nil
-            end
-
-            return '<C-i>'
-          end, {
-            desc = 'Accept Copilot NES suggestion',
-            expr = true,
-          })
-        end,
-      },
     },
     config = function()
       require('nvchad.configs.lspconfig').defaults()
       require 'configs.lspload'
     end, -- Override to setup mason-lspconfig
     enabled = not vim.g.vscode,
+  },
+
+  {
+    'zbirenbaum/copilot.lua',
+    dependencies = {
+      {
+        'folke/sidekick.nvim',
+        opts = {},
+      },
+    },
+    cmd = 'Copilot',
+    event = 'InsertEnter',
+    opts = {
+      suggestion = {
+        enabled = true,
+        auto_trigger = true,
+        keymap = {
+          -- handle manual accept to avoid conflicts with tabs
+          accept = false,
+          accept_word = '<C-Right>',
+          accept_line = false,
+          next = '<M-]>',
+          prev = '<M-[>',
+          dismiss = '<C-]>',
+        },
+      },
+    },
+    config = function(_, args)
+      local cmp = require 'cmp'
+
+      cmp.event:on('menu_opened', function()
+        vim.b.copilot_suggestion_hidden = true
+      end)
+
+      cmp.event:on('menu_closed', function()
+        vim.b.copilot_suggestion_hidden = false
+      end)
+
+      require('copilot').setup(args)
+    end,
+    enabled = vim.g.vscode,
   },
 
   {

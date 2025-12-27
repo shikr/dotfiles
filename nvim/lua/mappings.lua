@@ -1,5 +1,7 @@
 require 'nvchad.mappings'
 local bufdelete = require('configs.bufferline').bufdelete
+local copilot = require 'copilot.suggestion'
+local sidekick = require 'sidekick'
 
 -- add yours here
 
@@ -19,6 +21,17 @@ map('c', '<C-c>', '<C-R>+', { desc = 'Paste' })
 map('n', '<leader>fd', function()
   vim.cmd 'Triptych'
 end)
+map('i', '<tab>', function()
+  if not copilot.is_visible() then
+    return '<Tab>'
+  end
+  copilot.accept()
+end, { expr = true, desc = 'Goto/Apply Next Edit Suggestion' })
+map('n', '<tab>', function()
+  if not sidekick.nes_jump_or_apply() then
+    return '<Tab>'
+  end
+end, { expr = true, desc = 'Goto Previous Edit Suggestion' })
 
 -- Terminal
 map({ 'n', 't' }, '<A-i>', function()
