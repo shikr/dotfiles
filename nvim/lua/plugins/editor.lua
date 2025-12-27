@@ -36,20 +36,13 @@ return {
   {
     'numToStr/Comment.nvim',
     keys = {
-      {
-        'gcc',
-        function()
-          require('Comment.api').toggle.linewise.current()
-        end,
-        desc = 'Comment line',
-      },
-      {
-        'gc',
-        function()
-          require('Comment.api').toggle.linewise(vim.fn.visualmode())
-        end,
-        desc = 'Comment line',
-        mode = 'v',
+      { 'gc', mode = { 'n', 'v' } },
+      { 'gb', mode = { 'n', 'v' } },
+    },
+    opts = {
+      mappings = {
+        basic = true,
+        extra = true,
       },
     },
     enabled = not vim.g.vscode,
@@ -193,8 +186,8 @@ return {
           return {
             relculright = true,
             segments = {
-              { text = { builtin.foldfunc },      click = 'v:lua.ScFa' },
-              { text = { '%s' },                  click = 'v:lua.ScSa' },
+              { text = { builtin.foldfunc }, click = 'v:lua.ScFa' },
+              { text = { '%s' }, click = 'v:lua.ScSa' },
               { text = { builtin.lnumfunc, ' ' }, click = 'v:lua.ScLa' },
             },
           }
