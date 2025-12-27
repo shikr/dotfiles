@@ -15,6 +15,15 @@ M.ui = {
   tabufline = {
     enabled = false,
   },
+  cmp = {
+    format_colors = {
+      tailwind = true,
+    },
+  },
+}
+
+M.lsp = {
+  signature = false,
 }
 
 return M

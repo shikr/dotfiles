@@ -64,25 +64,20 @@ local servers = {
   },
   {
     'tailwindcss',
-    opts = function(on_attach, capabilities)
-      local tl_on_attach = function(client, bufnr)
-        on_attach(client, bufnr)
-        if client.server_capabilities.colorProvider then
-          require('document-color').buf_attach(bufnr)
-        end
-      end
-
-      local tl_capabilities = capabilities
-
-      tl_capabilities.textDocument.colorProvider = {
-        dynamicRegistration = true,
-      }
-
-      return {
-        on_attach = tl_on_attach,
-        capabilities = tl_capabilities,
-      }
-    end,
+    opts = {
+      settings = {
+        tailwindCSS = {
+          classFunctions = {
+            'tw',
+            'tw\\.[a-z-]+',
+            'clsx',
+            'tv',
+            'cn',
+            'cx',
+          },
+        },
+      },
+    },
   },
 }
 

@@ -68,14 +68,6 @@ return {
   },
 
   {
-    'mrshmllow/document-color.nvim',
-    opts = {
-      mode = 'background',
-    },
-    enabled = not vim.g.vscode,
-  },
-
-  {
     '3rd/image.nvim',
     opts = {},
     event = 'BufAdd *.{jpeg,jpg,png,webp,gif,avif}',
