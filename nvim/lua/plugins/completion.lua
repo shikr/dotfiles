@@ -26,7 +26,11 @@ return {
             complete = function(_, cmdline)
               local args = vim.split(cmdline, ' +')
               if #args == 2 then
-                return { 'toggle', 'enable', 'disable' }
+                local options = { 'toggle', 'enable', 'disable' }
+
+                return vim.tbl_filter(function(item)
+                  return item:match('^' .. args[2])
+                end, options)
               end
               return {}
             end,
