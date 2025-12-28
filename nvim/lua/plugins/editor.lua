@@ -68,9 +68,9 @@ return {
   },
 
   {
-    '3rd/image.nvim',
+    'skardyy/neo-img',
+    build = ':NeoImg Install',
     opts = {},
-    event = 'BufAdd *.{jpeg,jpg,png,webp,gif,avif}',
     enabled = not vim.g.vscode,
   },
 
