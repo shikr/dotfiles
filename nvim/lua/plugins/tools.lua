@@ -110,26 +110,6 @@ return {
   },
 
   {
-    'ziontee113/color-picker.nvim',
-    cmd = { 'PickColor', 'PickColorInsert' },
-    keys = {
-      { '<leader>cl', '<cmd>PickColor<cr>', desc = 'Pick Color' },
-    },
-    opts = {
-      keymap = {
-        ['<S-Left>'] = '<Plug>ColorPickerSlider10Decrease',
-        ['<S-Right>'] = '<Plug>ColorPickerSlider10Increase',
-        ['<C-Left>'] = '<Plug>ColorPickerSlider5Decrease',
-        ['<C-Right>'] = '<Plug>ColorPickerSlider5Increase',
-        ['<Left>'] = '<Plug>ColorPickerSlider1Decrease',
-        ['<Right>'] = '<Plug>ColorPickerSlider1Increase',
-        ['c'] = '<Plug>ColorPickerChangeOutputType',
-      },
-    },
-    enabled = not vim.g.vscode,
-  },
-
-  {
     'folke/todo-comments.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
     event = 'VeryLazy',
