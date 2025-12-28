@@ -74,13 +74,38 @@ return {
   },
 
   {
-    'ahmedkhalf/project.nvim',
+    'DrKJeff16/project.nvim',
     init = function()
       require('telescope').load_extension 'projects'
     end,
-    config = function()
-      require('project_nvim').setup()
-    end,
+    cmd = {
+      'Project',
+      'ProjectAdd',
+      'ProjectConfig',
+      'ProjectDelete',
+      'ProjectExportJSON',
+      'ProjectImportJSON',
+      'ProjectHealth',
+      'ProjectHistory',
+      'ProjectRecents',
+      'ProjectRoot',
+      'ProjectSession',
+    },
+    opts = {},
+    enabled = not vim.g.vscode,
+  },
+
+  {
+    'gennaro-tedesco/nvim-possession',
+    dependencies = { 'ibhagwan/fzf-lua' },
+    event = 'VeryLazy',
+    opts = {
+      autosave = true,
+      autoload = true,
+      autoswitch = {
+        enable = true,
+      },
+    },
     enabled = not vim.g.vscode,
   },
 
