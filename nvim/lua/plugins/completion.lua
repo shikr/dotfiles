@@ -78,8 +78,10 @@ return {
     'zbirenbaum/copilot.lua',
     dependencies = {
       {
-        'folke/sidekick.nvim',
-        opts = {},
+        'copilotlsp-nvim/copilot-lsp',
+        init = function()
+          vim.g.copilot_nes_debounce = 500
+        end,
       },
     },
     cmd = 'Copilot',
@@ -98,6 +100,15 @@ return {
           dismiss = '<C-]>',
         },
       },
+      nes = {
+        enabled = true,
+        auto_trigger = true,
+        keymap = {
+          accept_and_goto = '<Tab>',
+          accept = false,
+          dismiss = '<Esc>',
+        },
+      },
     },
     config = function(_, args)
       local cmp = require 'cmp'
@@ -112,7 +123,7 @@ return {
 
       require('copilot').setup(args)
     end,
-    enabled = vim.g.vscode,
+    enabled = not vim.g.vscode,
   },
 
   {

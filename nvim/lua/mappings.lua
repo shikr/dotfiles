@@ -1,7 +1,6 @@
 require 'nvchad.mappings'
 local bufdelete = require('configs.bufferline').bufdelete
 local copilot = require 'copilot.suggestion'
-local sidekick = require 'sidekick'
 
 -- add yours here
 
@@ -27,11 +26,6 @@ map('i', '<tab>', function()
   end
   copilot.accept()
 end, { expr = true, desc = 'Goto/Apply Next Edit Suggestion' })
-map('n', '<tab>', function()
-  if not sidekick.nes_jump_or_apply() then
-    return '<Tab>'
-  end
-end, { expr = true, desc = 'Goto Previous Edit Suggestion' })
 
 -- Terminal
 map({ 'n', 't' }, '<A-i>', function()
