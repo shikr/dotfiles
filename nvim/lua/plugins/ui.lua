@@ -54,93 +54,121 @@ return {
           enabled = false,
         },
       },
-      routes = {
-        {
-          filter = {
-            event = 'lsp',
-            kind = 'progress',
-            cond = function(messages)
-              local client = vim.tbl_get(messages.opts, 'progress', 'client')
-              return client == 'null-ls'
-            end,
-          },
-          opts = { skip = true },
-        },
-      },
     },
     enabled = not vim.g.vscode,
   },
 
   {
-    'stevearc/dressing.nvim',
-    event = 'VeryLazy',
-    opts = {
-      input = {
-        relative = 'editor',
-      },
-    },
-    enabled = not vim.g.vscode,
-  },
-
-  {
-    'willothy/veil.nvim',
+    'folke/snacks.nvim',
+    priority = 100,
     lazy = false,
-    config = function()
-      local builtin = require 'veil.builtin'
-
-      require('veil').setup {
-        sections = {
-          builtin.sections.animated(builtin.headers.frames_nvim, {
-            hl = { fg = '#5de4c7' },
-          }),
-          builtin.sections.buttons {
+    opts = {
+      bigfile = {
+        enabled = true,
+      },
+      indent = {
+        enabled = true,
+        indent = {
+          enabled = true,
+          hl = {
+            'SnacksIndent1',
+            'SnacksIndent2',
+            'SnacksIndent3',
+            'SnacksIndent4',
+          },
+        },
+        scope = {
+          enabled = true,
+          hl = 'SnacksIndentScope',
+        },
+      },
+      quickfile = {
+        enabled = true,
+      },
+      scroll = {
+        enabled = true,
+      },
+      statuscolumn = {
+        enabled = true,
+        left = { 'fold', 'mark', 'sign' },
+        right = { 'git' },
+        folds = {
+          open = true,
+        },
+      },
+      dashboard = {
+        enabled = true,
+        preset = {
+          keys = {
             {
-              icon = '',
-              text = 'Find Files',
-              shortcut = 'f',
-              callback = function()
-                require('telescope.builtin').find_files()
-              end,
+              icon = ' ',
+              key = 'f',
+              desc = 'Find files',
+              action = ":lua Snacks.dashboard.pick('files')",
             },
             {
-              icon = '󰉋',
-              text = 'Navigate',
-              shortcut = 'd',
-              callback = function()
-                vim.cmd 'Triptych'
-              end,
+              icon = '󰉋 ',
+              key = 'd',
+              desc = 'File explorer',
+              action = ':Triptych',
             },
             {
-              icon = '',
-              text = 'Find Word',
-              shortcut = 'w',
-              callback = function()
-                require('telescope.builtin').live_grep()
-              end,
+              icon = ' ',
+              key = 's',
+              desc = 'Find text',
+              action = ":lua Snacks.dashboard.pick('live_grep')",
             },
             {
-              icon = '',
-              text = 'Buffers',
-              shortcut = 'b',
-              callback = function()
-                require('telescope.builtin').buffers()
-              end,
+              icon = ' ',
+              key = 'c',
+              desc = 'Configuration',
+              action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
             },
             {
-              icon = '',
-              text = 'Projects',
-              shortcut = 'p',
-              callback = function()
-                require('telescope').extensions.projects.projects()
-              end,
+              icon = '󰒲 ',
+              key = 'L',
+              desc = 'Lazy',
+              action = ':Lazy',
+              enabled = package.loaded.lazy ~= nil,
+            },
+            {
+              icon = ' ',
+              key = 'q',
+              desc = 'Quit Neovim',
+              action = ':qa',
             },
           },
-          builtin.sections.oldfiles(),
         },
-        mappings = {},
-        startup = true,
-        listed = false,
-      }
+        sections = {
+          { section = 'header' },
+          { icon = ' ', title = 'Keys', section = 'keys', indent = 2, padding = 1 },
+          {
+            icon = ' ',
+            title = 'Recent Files',
+            section = 'recent_files',
+            indent = 2,
+            padding = 1,
+          },
+          { section = 'startup' },
+        },
+      },
+    },
+    config = function(_, opts)
+      local prev = { new_name = '', old_name = '' }
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'NvimTreeSetup',
+        callback = function()
+          local events = require('nvim-tree.api').events
+          events.subscribe(events.Event.NodeRenamed, function(data)
+            if prev.new_name ~= data.new_name or prev.old_name ~= data.old_name then
+              data = data
+              Snacks.rename.on_rename_file(data.old_name, data.new_name)
+            end
+          end)
+        end,
+      })
+
+      require('snacks').setup(opts)
     end,
     enabled = not vim.g.vscode,
   },

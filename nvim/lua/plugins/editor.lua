@@ -55,8 +55,7 @@ return {
 
   {
     'lukas-reineke/indent-blankline.nvim',
-    opts = overrides.blankline,
-    enabled = not vim.g.vscode,
+    enabled = false,
   },
 
   {
@@ -156,35 +155,9 @@ return {
   },
 
   {
-    'declancm/cinnamon.nvim',
-    event = 'VeryLazy',
-    opts = {
-      keymaps = {
-        basic = true,
-        extra = true,
-      },
-    },
-    enabled = not vim.g.vscode,
-  },
-
-  {
     'kevinhwang91/nvim-ufo',
     dependencies = {
       'kevinhwang91/promise-async',
-      {
-        'luukvbaal/statuscol.nvim',
-        opts = function()
-          local builtin = require 'statuscol.builtin'
-          return {
-            relculright = true,
-            segments = {
-              { text = { builtin.foldfunc }, click = 'v:lua.ScFa' },
-              { text = { '%s' }, click = 'v:lua.ScSa' },
-              { text = { builtin.lnumfunc, ' ' }, click = 'v:lua.ScLa' },
-            },
-          }
-        end,
-      },
     },
     event = 'VeryLazy',
     opts = true,

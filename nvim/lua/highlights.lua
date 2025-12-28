@@ -12,10 +12,11 @@ M.override = {
 
 M.add = {
   NvimTreeOpenedFolderName = { fg = 'green', bold = true },
-  IndentRainbow1 = { fg = '#ffff40', nocombine = true },
-  IndentRainbow2 = { fg = '#7fff7f', nocombine = true },
-  IndentRainbow3 = { fg = '#ff7fff', nocombine = true },
-  IndentRainbow4 = { fg = '#4fecec', nocombine = true },
+  SnacksIndentScope = { fg = '#6d6d6d', nocombine = true },
+  SnacksIndent1 = { fg = '#ffff40', nocombine = true },
+  SnacksIndent2 = { fg = '#7fff7f', nocombine = true },
+  SnacksIndent3 = { fg = '#ff7fff', nocombine = true },
+  SnacksIndent4 = { fg = '#4fecec', nocombine = true },
   RainbowDelimiter1 = { fg = '#15a8f2', nocombine = true },
   RainbowDelimiter2 = { fg = '#e60707', nocombine = true },
   RainbowDelimiter3 = { fg = '#dce703', nocombine = true },
