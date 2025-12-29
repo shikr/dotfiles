@@ -15,22 +15,7 @@ local formatters = {
       },
     },
   },
-  biome = {
-    'javascript',
-    'javascriptreact',
-    'typescript',
-    'typescriptreact',
-    'json',
-    'jsonc',
-    'css',
-    'graphql',
-    'vue',
-    'astro',
-    'html',
-    'svelte',
-  },
   stylua = { 'lua' },
-  rustfmt = { 'rust' },
 }
 
 local M = {

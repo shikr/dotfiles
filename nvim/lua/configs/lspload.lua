@@ -5,9 +5,9 @@ local servers = {
   'cssls',
   'taplo',
   'pyright',
-  'eslint',
   'bashls',
   'cmake',
+  'biome',
   {
     'clangd',
     opts = {
