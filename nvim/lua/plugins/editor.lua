@@ -81,77 +81,21 @@ return {
   },
 
   {
-    'willothy/moveline.nvim',
-    build = 'make',
-    keys = {
-      {
-        '<M-up>',
-        function()
-          require('moveline').up()
-        end,
-        desc = 'Move line up',
-      },
-      {
-        '<M-down>',
-        function()
-          require('moveline').down()
-        end,
-        desc = 'Move line down',
-      },
-      {
-        '<M-up>',
-        function()
-          require('moveline').block_up()
-        end,
-        mode = 'v',
-        desc = 'Move block up',
-      },
-      {
-        '<M-down>',
-        function()
-          require('moveline').block_down()
-        end,
-        mode = 'v',
-        desc = 'Move block down',
-      },
-    },
+    'nvim-mini/mini.move',
     event = 'VeryLazy',
-    enabled = not vim.g.vscode and not vim.fn.has 'win32',
-  },
-
-  {
-    'fedepujol/move.nvim',
     opts = {
-      word = {
-        enable = false,
+      mappings = {
+        left = '<M-Left>',
+        right = '<M-Right>',
+        down = '<M-Down>',
+        up = '<M-Up>',
+
+        line_left = '<M-Left>',
+        line_right = '<M-Right>',
+        line_down = '<M-Down>',
+        line_up = '<M-Up>',
       },
     },
-    keys = {
-      {
-        '<M-up>',
-        '<cmd>MoveLine(-1)<cr>',
-        desc = 'Move line up',
-      },
-      {
-        '<M-down>',
-        '<cmd>MoveLine(1)<cr>',
-        desc = 'Move line down',
-      },
-      {
-        '<M-up>',
-        ':MoveBlock(-1)<cr>',
-        mode = 'v',
-        desc = 'Move block up',
-      },
-      {
-        '<M-down>',
-        ':MoveBlock(1)<cr>',
-        mode = 'v',
-        desc = 'Move block down',
-      },
-    },
-    event = 'VeryLazy',
-    enabled = not vim.g.vscode and vim.fn.has 'win32',
   },
 
   {
