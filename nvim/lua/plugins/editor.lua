@@ -5,6 +5,7 @@ return {
     'nvim-treesitter/nvim-treesitter',
     opts = overrides.treesitter,
     dependencies = {
+      'JoosepAlviste/nvim-ts-context-commentstring',
       {
         'windwp/nvim-ts-autotag',
         opts = {},
@@ -39,12 +40,15 @@ return {
       { 'gc', mode = { 'n', 'v' } },
       { 'gb', mode = { 'n', 'v' } },
     },
-    opts = {
-      mappings = {
-        basic = true,
-        extra = true,
-      },
-    },
+    opts = function()
+      return {
+        mappings = {
+          basic = true,
+          extra = true,
+        },
+        pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+      }
+    end,
     enabled = not vim.g.vscode,
   },
 
