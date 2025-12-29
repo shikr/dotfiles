@@ -2,16 +2,14 @@ local default_on_attach = require('nvchad.configs.lspconfig').on_attach
 local capabilities = require('nvchad.configs.lspconfig').capabilities
 local on_init = require('nvchad.configs.lspconfig').on_init
 
-local lspconfig = vim.lsp.config
-
 capabilities.textDocument.foldingRange = {
   dynamicRegistration = false,
   lineFoldingOnly = true,
 }
 
 local function on_attach(client, bufnr)
-  local function buf_set_option(...)
-    vim.api.nvim_buf_set_option(bufnr, ...)
+  local function buf_set_option(name, value)
+    vim.api.nvim_set_option_value(name, value, { buf = bufnr })
   end
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
   default_on_attach(client, bufnr)

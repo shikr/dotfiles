@@ -20,9 +20,9 @@ end
 local function bufdelete(bufnr, window)
   local elements = require('bufferline').get_elements().elements
 
-  if vim.api.nvim_buf_get_option(bufnr, 'filetype') ~= 'veil' then
+  if vim.api.nvim_get_option_value('filetype', { buf = bufnr }) ~= 'snacks_dashboard' then
     if #elements == 1 and has_bufnr(elements, bufnr) then
-      vim.cmd 'Veil'
+      Snacks.dashboard()
     end
     close(bufnr, window)
   end
