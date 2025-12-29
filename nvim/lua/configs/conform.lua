@@ -1,3 +1,34 @@
+local formatters = {
+  ['clang-format'] = { 'c', 'cpp' },
+  prettierd = {
+    'javascript',
+    'javascriptreact',
+    'typescript',
+    'typescriptreact',
+    'vue',
+    'css',
+    'scss',
+    'less',
+    'html',
+    'json',
+    'jsonc',
+    'yaml',
+    'markdown',
+    'markdown.mdx',
+    'graphql',
+    'handlebars',
+    opts = {
+      env = {
+        PRETTIERD_DEFAULT_CONFIG = vim.fn.resolve(
+          vim.fn.stdpath 'config' .. '/.prettierrc.json'
+        ),
+      },
+    },
+  },
+  stylua = { 'lua' },
+  rustfmt = { 'rust' },
+}
+
 local M = {
   format_on_save = function(bufnr)
     if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
@@ -10,50 +41,19 @@ local M = {
 
 M.formatters_by_ft = {}
 
-local prettier = {
-  'javascript',
-  'javascriptreact',
-  'typescript',
-  'typescriptreact',
-  'vue',
-  'css',
-  'scss',
-  'less',
-  'html',
-  'json',
-  'jsonc',
-  'yaml',
-  'markdown',
-  'markdown.mdx',
-  'graphql',
-  'handlebars',
-}
-
-local clang_format = {
-  'c',
-  'cpp',
-}
-
-for _, ft in ipairs(prettier) do
-  M.formatters_by_ft[ft] = { 'prettierd' }
+for formatter, filetypes in pairs(formatters) do
+  for _, ft in ipairs(filetypes) do
+    M.formatters_by_ft[ft] = M.formatters_by_ft[ft] or {}
+    table.insert(M.formatters_by_ft[ft], formatter)
+  end
 end
-
-for _, ft in ipairs(clang_format) do
-  M.formatters_by_ft[ft] = { 'clang-format' }
-end
-
-M.formatters_by_ft.lua = { 'stylua' }
-
-M.formatters_by_ft.rust = { 'rustfmt' }
 
 M.formatters = {}
 
-M.formatters.prettierd = {
-  env = {
-    PRETTIERD_DEFAULT_CONFIG = vim.fn.resolve(
-      vim.fn.stdpath 'config' .. '/.prettierrc.json'
-    ),
-  },
-}
+for formatter, filetypes in pairs(formatters) do
+  if filetypes.opts ~= nil then
+    M.formatters[formatter] = filetypes.opts
+  end
+end
 
 return M
