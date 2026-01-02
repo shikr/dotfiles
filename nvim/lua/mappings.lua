@@ -1,6 +1,5 @@
 require 'nvchad.mappings'
 local bufdelete = require('configs.bufferline').bufdelete
-local copilot = require 'copilot.suggestion'
 
 -- add yours here
 
@@ -21,6 +20,7 @@ map('n', '<leader>fd', function()
   vim.cmd 'Triptych'
 end)
 map('i', '<tab>', function()
+  local copilot = require 'copilot.suggestion'
   if not copilot.is_visible() then
     return '<Tab>'
   end
