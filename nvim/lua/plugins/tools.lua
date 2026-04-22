@@ -83,7 +83,7 @@ return {
       'ProjectSession',
     },
     opts = {},
-    enabled = not vim.g.vscode,
+    enabled = false,
   },
 
   {

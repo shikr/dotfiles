@@ -3,6 +3,9 @@ local overrides = require 'configs.overrides'
 return {
   {
     'nvim-treesitter/nvim-treesitter',
+    branch = 'master',
+    lazy = false,
+    build = ':TSUpdate',
     opts = overrides.treesitter,
     dependencies = {
       'JoosepAlviste/nvim-ts-context-commentstring',
