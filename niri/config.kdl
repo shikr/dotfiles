@@ -3,9 +3,12 @@ include "dms/config.kdl"
 input {
     keyboard {
         xkb {
-            layout "latam"
+            layout "latam,us"
+            variant ",intl"
+            options "grp:alt_shift_toggle"
         }
 
+        track-layout "global"
         // numlock
     }
 
@@ -13,8 +16,11 @@ input {
         // off
         tap
         dwt
+        drag true
         natural-scroll
+        click-method "clickfinger"
         scroll-method "two-finger"
+        scroll-factor 0.2
         // disabled-on-external-mouse
     }
 
@@ -28,7 +34,7 @@ input {
     workspace-auto-back-and-forth
 }
 
-output "DP-1" {
+/-output "DP-1" {
     // off
     mode "1920x1080@143.855"
     scale 1
@@ -212,6 +218,17 @@ window-rule {
     block-out-from "screen-capture"
 }
 
+window-rule {
+    match app-id=r#"^steam$"# title=r#"^notificationtoasts_\d+_desktop$"#
+    default-floating-position x=10 y=10 relative-to="bottom-right"
+    open-focused false
+}
+
+window-rule {
+    match app-id=r#"org.quickshell$"#
+    match app-id=r#"com.danklinux.dms$"#
+    open-floating true
+}
 // Overview wallpaper
 layer-rule {
   match namespace="^quickshell$"
@@ -435,11 +452,15 @@ binds {
     Mod+Shift+P { power-off-monitors; }
 }
 
+debug {
+    honor-xdg-activation-with-invalid-serial
+}
+
 environment {
-  XDG_CURRENT_DESKTOP "niri"
-  QT_QPA_PLATFORM "wayland"
-  ELECTRON_OZONE_PLATFORM_HINT "auto"
-  QT_QPA_PLATFORMTHEME "gtk3"
-  QT_QPA_PLATFORMTHEME_QT6 "gtk3"
-  TERMINAL "kitty"
+    XDG_CURRENT_DESKTOP "niri"
+    QT_QPA_PLATFORM "wayland"
+    ELECTRON_OZONE_PLATFORM_HINT "auto"
+    QT_QPA_PLATFORMTHEME "gtk3"
+    QT_QPA_PLATFORMTHEME_QT6 "gtk3"
+    TERMINAL "kitty"
 }
