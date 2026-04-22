@@ -463,4 +463,6 @@ environment {
     QT_QPA_PLATFORMTHEME "gtk3"
     QT_QPA_PLATFORMTHEME_QT6 "gtk3"
     TERMINAL "kitty"
+    XCURSOR_THEME "Banana"
+    XCURSOR_SIZE "32"
 }
