@@ -2,6 +2,5 @@ rofi/images/*
 nvim/lazy-lock.json
 node_modules/
 niri/dms/*
-!niri/dms/config.kdl
 kitty/dank-*.conf
 superfile/theme
