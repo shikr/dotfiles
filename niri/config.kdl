@@ -1,4 +1,4 @@
-include "dms/config.kdl"
+spawn-at-startup "xdg-autostart" "-d" "niri"
 
 input {
     keyboard {
@@ -250,10 +250,10 @@ binds {
     // XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
     // XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
     // XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
-    XF86AudioPrev        allow-when-locked=true { spawn "playerctl" "previous"; }
-    XF86AudioNext        allow-when-locked=true { spawn "playerctl" "next"; }
-    XF86AudioPlay        allow-when-locked=true { spawn "playerctl" "play-pause"; }
-    XF86AudioStop        allow-when-locked=true { spawn "playerctl" "stop"; }
+    // XF86AudioPrev        allow-when-locked=true { spawn "playerctl" "previous"; }
+    // XF86AudioNext        allow-when-locked=true { spawn "playerctl" "next"; }
+    // XF86AudioPlay        allow-when-locked=true { spawn "playerctl" "play-pause"; }
+    // XF86AudioStop        allow-when-locked=true { spawn "playerctl" "stop"; }
 
     Mod+Tab repeat=false { toggle-overview; }
 
@@ -270,52 +270,52 @@ binds {
     Mod+L          { focus-column-right; }
 
     /// Force Workspace Focus ///
-    Mod+Ctrl+Down { focus-workspace-down; }
-    Mod+Ctrl+Up   { focus-workspace-up; }
-    Mod+Ctrl+J    { focus-workspace-down; }
-    Mod+Ctrl+K    { focus-workspace-up; }
+    Mod+Shift+Down { focus-workspace-down; }
+    Mod+Shift+Up   { focus-workspace-up; }
+    Mod+Shift+J    { focus-workspace-down; }
+    Mod+Shift+K    { focus-workspace-up; }
 
     Mod+Home { focus-column-first; }
     Mod+End  { focus-column-last; }
 
     /// Move Columns/Windows ///
-    Mod+Alt+Left  { move-column-left; }
-    Mod+Alt+Down  { move-window-down-or-to-workspace-down; }
-    Mod+Alt+Up    { move-window-up-or-to-workspace-up; }
-    Mod+Alt+Right { move-column-right; }
-    Mod+Alt+H     { move-column-left; }
-    Mod+Alt+J     { move-window-down-or-to-workspace-down; }
-    Mod+Alt+K     { move-window-up-or-to-workspace-up; }
-    Mod+Alt+L     { move-column-right; }
+    Mod+Ctrl+Left  { move-column-left; }
+    Mod+Ctrl+Down  { move-window-down-or-to-workspace-down; }
+    Mod+Ctrl+Up    { move-window-up-or-to-workspace-up; }
+    Mod+Ctrl+Right { move-column-right; }
+    Mod+Ctrl+H     { move-column-left; }
+    Mod+Ctrl+J     { move-window-down-or-to-workspace-down; }
+    Mod+Ctrl+K     { move-window-up-or-to-workspace-up; }
+    Mod+Ctrl+L     { move-column-right; }
 
     /// Force windows to move between workspaces ///
-    Mod+Shift+Alt+Down { move-window-to-workspace-down; }
-    Mod+Shift+Alt+Up { move-window-to-workspace-up; }
-    Mod+Shift+Alt+J { move-window-to-workspace-down; }
-    Mod+Shift+Alt+K { move-window-to-workspace-up; }
+    Mod+Ctrl+Shift+Down { move-window-to-workspace-down; }
+    Mod+Ctrl+Shift+Up   { move-window-to-workspace-up; }
+    Mod+Ctrl+Shift+J    { move-window-to-workspace-down; }
+    Mod+Ctrl+Shift+K    { move-window-to-workspace-up; }
 
-    Mod+Alt+Home  { move-column-to-first; }
-    Mod+Alt+End   { move-column-to-last; }
+    Mod+Ctrl+Home  { move-column-to-first; }
+    Mod+Ctrl+End   { move-column-to-last; }
 
     /// Focus Monitor ///
-    Mod+Shift+Left  { focus-monitor-left; }
-    Mod+Shift+Down  { focus-monitor-down; }
-    Mod+Shift+Up    { focus-monitor-up; }
-    Mod+Shift+Right { focus-monitor-right; }
-    Mod+Shift+H     { focus-monitor-left; }
-    Mod+Shift+J     { focus-monitor-down; }
-    Mod+Shift+K     { focus-monitor-up; }
-    Mod+Shift+L     { focus-monitor-right; }
+    Mod+Alt+Left  { focus-monitor-left; }
+    Mod+Alt+Down  { focus-monitor-down; }
+    Mod+Alt+Up    { focus-monitor-up; }
+    Mod+Alt+Right { focus-monitor-right; }
+    Mod+Alt+H     { focus-monitor-left; }
+    Mod+Alt+J     { focus-monitor-down; }
+    Mod+Alt+K     { focus-monitor-up; }
+    Mod+Alt+L     { focus-monitor-right; }
 
     /// Move Columns to Monitor ///
-    Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
-    Mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }
-    Mod+Shift+Ctrl+Up    { move-column-to-monitor-up; }
-    Mod+Shift+Ctrl+Right { move-column-to-monitor-right; }
-    Mod+Shift+Ctrl+H     { move-column-to-monitor-left; }
-    Mod+Shift+Ctrl+J     { move-column-to-monitor-down; }
-    Mod+Shift+Ctrl+K     { move-column-to-monitor-up; }
-    Mod+Shift+Ctrl+L     { move-column-to-monitor-right; }
+    Mod+Ctrl+Alt+Left  { move-column-to-monitor-left; }
+    Mod+Ctrl+Alt+Down  { move-column-to-monitor-down; }
+    Mod+Ctrl+Alt+Up    { move-column-to-monitor-up; }
+    Mod+Ctrl+Alt+Right { move-column-to-monitor-right; }
+    Mod+Ctrl+Alt+H     { move-column-to-monitor-left; }
+    Mod+Ctrl+Alt+J     { move-column-to-monitor-down; }
+    Mod+Ctrl+Alt+K     { move-column-to-monitor-up; }
+    Mod+Ctrl+Alt+L     { move-column-to-monitor-right; }
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Shift+Ctrl+Left  { move-window-to-monitor-left; }
@@ -324,40 +324,40 @@ binds {
     // Mod+Shift+Ctrl+Left  { move-workspace-to-monitor-left; }
 
     /// More Workspace Focus/Move binds ///
-    Mod+Page_Down          { focus-workspace-down; }
-    Mod+Page_Up            { focus-workspace-up; }
-    Mod+U                  { focus-workspace-down; }
-    Mod+I                  { focus-workspace-up; }
-    Mod+Alt+Ctrl+Page_Down { move-column-to-workspace-down; }
-    Mod+Alt+Ctrl+Page_Up   { move-column-to-workspace-up; }
-    Mod+Alt+Ctrl+U         { move-column-to-workspace-down; }
-    Mod+Alt+Ctrl+I         { move-column-to-workspace-up; }
+    Mod+Page_Down            { focus-workspace-down; }
+    Mod+Page_Up              { focus-workspace-up; }
+    Mod+U                    { focus-workspace-down; }
+    Mod+I                    { focus-workspace-up; }
+    Mod+Ctrl+Shift+Page_Down { move-column-to-workspace-down; }
+    Mod+Ctrl+Shift+Page_Up   { move-column-to-workspace-up; }
+    Mod+Ctrl+Shift+U         { move-column-to-workspace-down; }
+    Mod+Ctrl+Shift+I         { move-column-to-workspace-up; }
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Ctrl+Page_Down { move-window-to-workspace-down; }
     // ...
 
-    Mod+Shift+Page_Down { move-workspace-down; }
-    Mod+Shift+Page_Up   { move-workspace-up; }
-    Mod+Shift+U         { move-workspace-down; }
-    Mod+Shift+I         { move-workspace-up; }
+    Mod+Ctrl+Page_Down { move-workspace-down; }
+    Mod+Ctrl+Page_Up   { move-workspace-up; }
+    Mod+Ctrl+U         { move-workspace-down; }
+    Mod+Ctrl+I         { move-workspace-up; }
 
     /// Scroll ///
-    Mod+WheelScrollDown     { focus-workspace-down; }
-    Mod+WheelScrollUp       { focus-workspace-up; }
-    Mod+Alt+WheelScrollDown { move-column-to-workspace-down; }
-    Mod+Alt+WheelScrollUp   { move-column-to-workspace-up; }
+    Mod+WheelScrollDown            cooldown-ms=150 { focus-workspace-down; }
+    Mod+WheelScrollUp              cooldown-ms=150 { focus-workspace-up; }
+    Mod+Shift+Ctrl+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
+    Mod+Shift+Ctrl+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
 
-    Mod+WheelScrollRight     { focus-column-right; }
-    Mod+WheelScrollLeft      { focus-column-left; }
-    Mod+Alt+WheelScrollRight { move-column-right; }
-    Mod+Alt+WheelScrollLeft  { move-column-left; }
+    Mod+WheelScrollRight      cooldown-ms=150 { focus-column-right; }
+    Mod+WheelScrollLeft       cooldown-ms=150 { focus-column-left; }
+    Mod+Ctrl+WheelScrollRight cooldown-ms=150 { move-column-right; }
+    Mod+Ctrl+WheelScrollLeft  cooldown-ms=150 { move-column-left; }
 
     /// Scroll with shift ///
-    Mod+Shift+WheelScrollDown     { focus-column-right; }
-    Mod+Shift+WheelScrollUp       { focus-column-left; }
-    Mod+Alt+Shift+WheelScrollDown { move-column-right; }
-    Mod+Alt+Shift+WheelScrollUp   { move-column-left; }
+    Mod+Shift+WheelScrollDown      cooldown-ms=150 { focus-column-right; }
+    Mod+Shift+WheelScrollUp        cooldown-ms=150 { focus-column-left; }
+    Mod+Shift+Alt+WheelScrollDown cooldown-ms=150 { move-column-right; }
+    Mod+Shift+Alt+WheelScrollUp   cooldown-ms=150 { move-column-left; }
 
     /// Focus/Move to workspace by index ///
     Mod+1 { focus-workspace 1; }
@@ -369,15 +369,15 @@ binds {
     Mod+7 { focus-workspace 7; }
     Mod+8 { focus-workspace 8; }
     Mod+9 { focus-workspace 9; }
-    Mod+Alt+1 { move-column-to-workspace 1; }
-    Mod+Alt+2 { move-column-to-workspace 2; }
-    Mod+Alt+3 { move-column-to-workspace 3; }
-    Mod+Alt+4 { move-column-to-workspace 4; }
-    Mod+Alt+5 { move-column-to-workspace 5; }
-    Mod+Alt+6 { move-column-to-workspace 6; }
-    Mod+Alt+7 { move-column-to-workspace 7; }
-    Mod+Alt+8 { move-column-to-workspace 8; }
-    Mod+Alt+9 { move-column-to-workspace 9; }
+    Mod+Ctrl+1 { move-column-to-workspace 1; }
+    Mod+Ctrl+2 { move-column-to-workspace 2; }
+    Mod+Ctrl+3 { move-column-to-workspace 3; }
+    Mod+Ctrl+4 { move-column-to-workspace 4; }
+    Mod+Ctrl+5 { move-column-to-workspace 5; }
+    Mod+Ctrl+6 { move-column-to-workspace 6; }
+    Mod+Ctrl+7 { move-column-to-workspace 7; }
+    Mod+Ctrl+8 { move-column-to-workspace 8; }
+    Mod+Ctrl+9 { move-column-to-workspace 9; }
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Ctrl+1 { move-window-to-workspace 1; }
@@ -460,9 +460,17 @@ environment {
     XDG_CURRENT_DESKTOP "niri"
     QT_QPA_PLATFORM "wayland"
     ELECTRON_OZONE_PLATFORM_HINT "auto"
-    QT_QPA_PLATFORMTHEME "gtk3"
-    QT_QPA_PLATFORMTHEME_QT6 "gtk3"
+    QT_QPA_PLATFORMTHEME "qt5ct"
+    QT_QPA_PLATFORMTHEME_QT6 "qt6ct"
     TERMINAL "kitty"
     XCURSOR_THEME "Banana"
     XCURSOR_SIZE "32"
+    PROTON_ENABLE_WAYLAND "1"
 }
+
+include optional=true "dms/colors.kdl"
+include optional=true "dms/layout.kdl"
+include optional=true "dms/alttab.kdl"
+include optional=true "dms/binds.kdl"
+include optional=true "dms/outputs.kdl"
+include optional=true "dms/cursor.kdl"
