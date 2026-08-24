@@ -3,9 +3,9 @@ spawn-at-startup "xdg-autostart" "-d" "niri"
 input {
     keyboard {
         xkb {
-            layout "latam,us"
-            variant ",intl"
-            options "grp:alt_shift_toggle"
+            layout "us"
+            variant "intl"
+            // options "grp:alt_shift_toggle"
         }
 
         track-layout "global"
